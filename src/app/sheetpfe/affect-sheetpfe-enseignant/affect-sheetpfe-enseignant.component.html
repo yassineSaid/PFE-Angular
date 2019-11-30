@@ -1,0 +1,18 @@
+<div class="card">
+  <div class="card-body">
+    <h4 class="card-title">{{ type }}</h4>
+    <button type="button" class="close" aria-label="Close button" aria-describedby="modal-title" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <div class="form-group mb-4">
+      <select class="form-control">
+        <option *ngIf="type == 'Affect Encadreur'">choice encadreur</option>
+        <option *ngIf="type == 'Affect Rapporteur'">choice rapporteur</option>
+        <option *ngIf="type == 'Affect Validator'">choice validator</option>
+      </select>
+    </div>
+    <button type="button"  class="btn btn-primary mr-2" (click)="affect()">Affect</button>
+    <button type="button" class="btn btn-light" (click)="modal.dismiss('cancel click')">Cancel</button>
+  </div>
+</div>
+

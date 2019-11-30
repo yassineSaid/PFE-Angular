@@ -1,11 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule, FormBuilder } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
-
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
@@ -28,6 +27,18 @@ import { CarouselComponent } from './carousel/carousel.component';
 import { TabsComponent } from './tabs/tabs.component';
 import { LoginComponent } from './login/login.component';
 import { HttpClientModule, HttpClient} from '@angular/common/http';
+import { SheetpfeComponent } from './sheetpfe/sheetpfe.component';
+import { ShowSheetpfeComponent } from './sheetpfe/show-sheetpfe/show-sheetpfe.component';
+import { AddSheetpfeComponent } from './sheetpfe/add-sheetpfe/add-sheetpfe.component';
+import { DetailSheetpfeComponent } from './sheetpfe/detail-sheetpfe/detail-sheetpfe.component';
+import { AffectSheetpfeEnseignantComponent } from './sheetpfe/affect-sheetpfe-enseignant/affect-sheetpfe-enseignant.component';
+import { InternshipagreementComponent } from './internshipagreement/internshipagreement.component';
+import { AddInternshipagreementComponent } from './internshipagreement/add-internshipagreement/add-internshipagreement.component';
+import { ShowInternshipagreementComponent } from './internshipagreement/show-internshipagreement/show-internshipagreement.component';
+import { ValidSheetpfeComponent } from './sheetpfe/valid-sheetpfe/valid-sheetpfe.component';
+import { NotifySheetpfeComponent } from './sheetpfe/notify-sheetpfe/notify-sheetpfe.component';
+
+
 
 @NgModule({
   declarations: [
@@ -51,22 +62,37 @@ import { HttpClientModule, HttpClient} from '@angular/common/http';
     TooltipsComponent,
     CarouselComponent,
     TabsComponent,
-    LoginComponent
+    LoginComponent,
+    SheetpfeComponent,
+    ShowSheetpfeComponent,
+    AddSheetpfeComponent,
+    DetailSheetpfeComponent,
+    AffectSheetpfeEnseignantComponent,
+    InternshipagreementComponent,
+    AddInternshipagreementComponent,
+    ShowInternshipagreementComponent,
+    ValidSheetpfeComponent,
+    NotifySheetpfeComponent,
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     RouterModule,
     AppRoutingModule,
     FormsModule,
-    NgbModule.forRoot(),
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbModule,
   ],
   providers: [
     HttpClient,
     FormBuilder
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    AffectSheetpfeEnseignantComponent,
+    ValidSheetpfeComponent
+  ],
 })
 export class AppModule { }

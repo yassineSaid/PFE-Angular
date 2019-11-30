@@ -1,0 +1,25 @@
+<div class="card">
+  <div class="card-body">
+    <h4 class="card-title">
+      <span *ngIf="type == 'accepted'">Confirmation</span>
+      <span *ngIf="type == 'refuse'">Refuse</span>
+      <span *ngIf="type == 'request'">Request</span>
+      <ng-template #req>
+        <span>Request</span>
+      </ng-template>
+    </h4>
+    <button type="button" class="close" aria-label="Close button" aria-describedby="modal-title" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <p class="card-description mb-4" *ngIf="type == 'accepted'">Are you sure you want to accepted this sheet PFE ?</p>
+    <p class="card-description mb-4" *ngIf="type == 'refuse'">Are you sure you want to refuse this sheet PFE ?</p>
+    <div class="form-group mb-4" *ngIf="type == 'request'">
+      <textarea class="form-control" placeholder="Write something ..."></textarea>
+    </div>
+    <button type="button"  class="btn btn-primary mr-2" (click)="valid()"  *ngIf="type == 'accepted'" >Accepted</button>
+    <button type="button"  class="btn btn-danger mr-2" (click)="valid()" *ngIf="type == 'refuse'">Refuse</button>
+    <button type="button"  class="btn btn-primary mr-2" (click)="valid()" *ngIf="type == 'request'">Request</button>
+    <button type="button" class="btn btn-light" (click)="modal.dismiss('cancel click')">Cancel</button>
+  </div>
+</div>
+

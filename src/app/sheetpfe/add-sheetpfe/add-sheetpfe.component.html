@@ -1,0 +1,54 @@
+<div class="card">
+  <div class="card-body">
+    <h4 class="card-title">
+      <span *ngIf="edit; else title_add">Edit Sheet PFE</span>
+      <ng-template #title_add>
+        <span>Add Sheet PFE</span>
+      </ng-template>
+    </h4>
+    <form class="forms-sample ng-untouched ng-pristine ng-valid" novalidate="">
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input class="form-control" id="title" placeholder="Title" type="text">
+      </div>
+      <div  class="form-group">
+        <label for="description">Description</label>
+        <textarea class="form-control" id="description" placeholder="Description"></textarea>
+      </div>
+      <div  class="form-group">
+        <label for="problematic">Problematic</label>
+        <textarea class="form-control" id="problematic" placeholder="Problematic"></textarea>
+      </div>
+      <div  class="form-group">
+        <label for="feature">Feature</label>
+        <textarea class="form-control" id="feature" placeholder="Feature"></textarea>
+      </div>
+      <div  class="form-group">
+        <label for="categorie">Categories</label>
+        <select class="form-control" id="categorie" multiple>
+          <option _ngcontent-ein-c4="">1</option>
+          <option _ngcontent-ein-c4="">2</option>
+          <option _ngcontent-ein-c4="">3</option>
+          <option _ngcontent-ein-c4="">4</option>
+          <option _ngcontent-ein-c4="">5</option>
+        </select>
+      </div>
+      <div  class="form-group">
+        <label for="entreprise">Entreprise</label>
+        <select class="form-control" id="entreprise">
+          <option _ngcontent-ein-c4="">1</option>
+          <option _ngcontent-ein-c4="">2</option>
+          <option _ngcontent-ein-c4="">3</option>
+          <option _ngcontent-ein-c4="">4</option>
+          <option _ngcontent-ein-c4="">5</option>
+        </select>
+      </div>
+      <button class="btn btn-primary mr-2" type="submit" *ngIf="edit; else add">Update</button>
+      <ng-template #add>
+        <button class="btn btn-primary mr-2" type="submit">Submit</button>
+      </ng-template>
+      <button class="btn btn-light">Cancel</button>
+    </form>
+  </div>
+</div>
+
