@@ -10,8 +10,8 @@ export class SheetService {
 
   constructor(private http: HttpClient) { }
 
-  sheet(): Observable<any> {
-    return this.http.get<any>(`${Config.BASE_URL}sheet/etudiant`, {
+  studentSheet(id): Observable<any> {
+    return this.http.get<any>(`${Config.BASE_URL}sheet/etudiant/` + id, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
