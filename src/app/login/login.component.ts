@@ -29,12 +29,13 @@ export class LoginComponent implements OnInit {
   }
 
   login(){
+    console.log(this.Form.email.value)
+    console.log(this.Form.password.value)
     this.authService.login(this.Form.email.value , this.Form.password.value).subscribe(success => {
       if(success) {
         this.router.navigate(['/dashboard'])
       }
     });
-
   }
 
 }

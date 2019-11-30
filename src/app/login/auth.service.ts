@@ -11,7 +11,11 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   login(email: string, password: string): Observable<boolean> {
-    return this.http.post<any>(`${Config.BASE_URL}authentication`, {email,password}.toString(), {
+    let obj = {
+      "email": email,
+      "password":password
+    }
+    return this.http.post<any>(`${Config.BASE_URL}authentication`, obj, {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
     })
