@@ -28,6 +28,7 @@ import { CarouselComponent } from './carousel/carousel.component';
 import { TabsComponent } from './tabs/tabs.component';
 import { LoginComponent } from './login/login.component';
 import { HttpClientModule, HttpClient} from '@angular/common/http';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { HttpClientModule, HttpClient} from '@angular/common/http';
   ],
   providers: [
     HttpClient,
-    FormBuilder
+    FormBuilder,
+    CookieService
   ],
   bootstrap: [AppComponent]
 })

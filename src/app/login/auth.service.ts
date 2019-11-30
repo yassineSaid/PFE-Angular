@@ -13,12 +13,19 @@ export class AuthService {
   login(email: string, password: string): Observable<boolean> {
     let obj = {
       "email": email,
-      "password":password
+      "password": password
     }
     return this.http.post<any>(`${Config.BASE_URL}authentication`, obj, {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json'
-    })
-  });
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      }),withCredentials : true
+    });
+  }
+  listAdmin(): Observable<Object> {
+    return this.http.get<any>(`${Config.BASE_URL}admin`, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      }),withCredentials: true
+    });
   }
 }
