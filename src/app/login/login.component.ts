@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import {LOCAL_STORAGE, WebStorageService} from 'ngx-webstorage-service';
 
 @Component({
   selector: 'app-login',
@@ -12,12 +13,9 @@ import { CookieService } from 'ngx-cookie-service';
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
+  
+  constructor(private formBuilder: FormBuilder , private authService:AuthService , private router:Router, @Inject(LOCAL_STORAGE) private storage: WebStorageService) {}
 
-  constructor(private formBuilder: FormBuilder , private authService:AuthService , private router:Router, private cookieService:CookieService) {
-    
-   }
-
-   
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
       email: ['',],
@@ -37,6 +35,9 @@ export class LoginComponent implements OnInit {
         this.authService.listAdmin().subscribe(response => {
           console.log(response);
         })
+      if (success) {
+        this.storage.set('user', success['user']);
+        this.router.navigate(['/dashboard']);
       }
     });
   }

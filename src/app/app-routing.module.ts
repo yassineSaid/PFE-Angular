@@ -18,6 +18,12 @@ import { TooltipsComponent } from './tooltips/tooltips.component';
 import { CarouselComponent } from './carousel/carousel.component';
 import { TabsComponent } from './tabs/tabs.component';
 import { LoginComponent } from './login/login.component';
+import { SheetpfeComponent } from './sheetpfe/sheetpfe.component';
+import { ShowSheetpfeComponent } from './sheetpfe/show-sheetpfe/show-sheetpfe.component';
+import { InternshipagreementComponent } from './internshipagreement/internshipagreement.component';
+import { NotifySheetpfeComponent } from './sheetpfe/notify-sheetpfe/notify-sheetpfe.component';
+
+
 
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
@@ -37,7 +43,12 @@ const routes: Routes = [
   { path: 'tooltips', component: TooltipsComponent },
   { path: 'carousel', component: CarouselComponent },
   { path: 'tabs', component: TabsComponent },
-  { path: 'login', component: LoginComponent }
+  { path: 'login', component: LoginComponent },
+  { path: 'sheet', component: SheetpfeComponent },
+  { path: 'internship', component: InternshipagreementComponent },
+  { path: 'sheet/notify', component: NotifySheetpfeComponent },
+  { path: 'sheet/:id', component: ShowSheetpfeComponent },
+
 ];
 
 @NgModule({
