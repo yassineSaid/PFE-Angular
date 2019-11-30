@@ -1,12 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { Config } from '../Models/config';
+import { User } from '../Models/user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  user: Subject<User> = new Subject();
+  loggedIn: Subject<boolean> = new Subject();
 
   constructor(private http: HttpClient) { }
 
@@ -18,14 +21,21 @@ export class AuthService {
     return this.http.post<any>(`${Config.BASE_URL}authentication`, obj, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
-      }),withCredentials : true
+      }), withCredentials: true
     });
   }
   listAdmin(): Observable<Object> {
     return this.http.get<any>(`${Config.BASE_URL}admin`, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
-      }),withCredentials: true
+      }), withCredentials: true
     });
   }
+  broadcastLoginChange(user: User) {
+    this.user.next(user);
+  }
+  broadcastLoggedInChange(val: boolean) {
+    this.loggedIn.next(val);
+  }
+  
 }
