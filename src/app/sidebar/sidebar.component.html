@@ -1,5 +1,5 @@
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
-  <ul class="nav">
+  <ul class="nav" >
     <li class="nav-item nav-profile">
       <div class="nav-link">
         <div class="user-wrapper">
@@ -73,6 +73,34 @@
         <span class="menu-title">Sheet PFE</span>
       </a>
     </li>
+    <li class="nav-item">
+      <a class="nav-link" [routerLink]="['/sheet']" [queryParams]="{ q: '_accepted'}">
+        <i class="menu-icon fa fa-file-text-o"></i>
+        <span class="menu-title">Accepted</span>
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link"  [routerLink]="['/sheet']" [queryParams]="{ q: '_encadreur'}">
+        <i class="menu-icon fa fa-file-text-o"></i>
+        <span class="menu-title">Encadreur assignment</span>
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" [routerLink]="['/sheet']" [queryParams]="{ q: '_rapporteur'}">
+        <i class="menu-icon fa fa-file-text-o"></i>
+        <span class="menu-title">Rapporteur assignment</span>
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link"  [routerLink]="['/sheet']" [queryParams]="{ q: '_note'}">
+        <i class="menu-icon fa fa-file-text-o"></i>
+        <span class="menu-title">Note</span>
+      </a>
+    </li>
+
     <li class="nav-item">
       <a class="nav-link" routerLink="/internship" routerLinkActive="active">
         <i class="menu-icon fa fa-address-card-o"></i>
