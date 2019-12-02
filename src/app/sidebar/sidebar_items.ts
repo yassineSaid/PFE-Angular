@@ -1,4 +1,4 @@
-import {Roles} from "../Models/roles"
+import {Roles} from "../Models/roles";
 
 export const items = [
     {
@@ -102,6 +102,12 @@ export const items = [
         title: "Icons",
         icon: "menu-icon mdi mdi-chart-bubble",
         roles: "All"
+    },
+    {
+    path: "/forum",
+    title: "Forum",
+    icon: "menu-icon fa fa-address-card-o",
+    roles: "All"
     },
     {
         path: "/typography",

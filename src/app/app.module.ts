@@ -39,6 +39,7 @@ import { AddInternshipagreementComponent } from './internshipagreement/add-inter
 import { ShowInternshipagreementComponent } from './internshipagreement/show-internshipagreement/show-internshipagreement.component';
 import { ValidSheetpfeComponent } from './sheetpfe/valid-sheetpfe/valid-sheetpfe.component';
 import { NotifySheetpfeComponent } from './sheetpfe/notify-sheetpfe/notify-sheetpfe.component';
+import { ForumComponent } from './forum/forum.component';
 
 
 
@@ -75,6 +76,7 @@ import { NotifySheetpfeComponent } from './sheetpfe/notify-sheetpfe/notify-sheet
     ShowInternshipagreementComponent,
     ValidSheetpfeComponent,
     NotifySheetpfeComponent,
+    ForumComponent,
   ],
   imports: [
     BrowserModule,
