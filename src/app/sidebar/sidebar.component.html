@@ -21,7 +21,7 @@
     </li>
     <span *ngFor="let item of items; let i=index">
       <li class="nav-item" *ngIf="item.roles.indexOf(user.role)!==-1 || item.roles==='All'">
-        <a class="nav-link" routerLink="{{item.path}}" routerLinkActive="active">
+        <a class="nav-link" routerLink="{{item.path}}" routerLinkActive="active" [queryParams]=item.queryParams>
           <i class="{{item.icon}}"></i>
           <span class="menu-title">{{item.title}}</span>
         </a>

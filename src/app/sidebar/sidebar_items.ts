@@ -69,28 +69,28 @@ export const items = [
         title: "Accepted",
         icon: "menu-icon fa fa-file-text-o",
         roles: "All",
-        queryParams: "{ q: '_accepted'}"
+        queryParams: { q: '_accepted'}
     },
     {
         path: "/sheet",
         title: "Encadreur assignment",
         icon: "menu-icon fa fa-file-text-o",
         roles: "All",
-        queryParams: "{ q: '_encadreur'}"
+        queryParams: { q: '_encadreur'}
     },
     {
         path: "/sheet",
         title: "Rapporteur assignment",
         icon: "menu-icon fa fa-file-text-o",
         roles: "All",
-        queryParams: "{ q: '_rapporteur'}"
+        queryParams: { q: '_rapporteur'}
     },
     {
         path: "/sheet",
         title: "Note",
         icon: "menu-icon fa fa-file-text-o",
         roles: "All",
-        queryParams: "{ q: '_note'}"
+        queryParams: { q: '_note'}
     },
     {
         path: "/internship",
