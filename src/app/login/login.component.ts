@@ -13,8 +13,8 @@ import { CookieService } from 'ngx-cookie-service';
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
-  
-  constructor(private cookiesService:CookieService, private formBuilder: FormBuilder , private authService:AuthService , private router:Router, @Inject(LOCAL_STORAGE) private storage: WebStorageService) {
+
+  constructor(private cookiesService: CookieService , private formBuilder: FormBuilder , private authService: AuthService , private router: Router, @Inject(LOCAL_STORAGE) private storage: WebStorageService) {
     if (this.cookiesService.check('token')){
       this.router.navigate(['/dashboard'])
     }
@@ -27,11 +27,11 @@ export class LoginComponent implements OnInit {
     })
   }
 
-  get Form(){
+  get Form() {
     return this.loginForm.controls;
   }
 
-  login(){
+  login() {
     this.authService.login(this.Form.email.value , this.Form.password.value).subscribe(success => {
       if (success) {
         this.storage.set('user', success['user']);
