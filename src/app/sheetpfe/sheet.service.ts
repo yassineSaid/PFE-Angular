@@ -20,6 +20,15 @@ export class SheetService {
       })
     });
   }
+
+  sheets(etat, year, pays, categorie): Observable<any> {
+    return this.http.get<any>(`${Config.BASE_URL}sheet/` + etat + '/' + year + '/' + pays + '/' + categorie, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
+  }
+
   studentSheet(id): Observable<any> {
     return this.http.get<any>(`${Config.BASE_URL}sheet/etudiant/` + id, {
       headers: new HttpHeaders({

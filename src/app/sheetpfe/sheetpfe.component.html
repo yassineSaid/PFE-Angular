@@ -17,24 +17,31 @@
           <div class="nav-filter" *ngIf="user.role === 'DirecteurDesStages'">
             <div class="row grid-margin">
               <div class="col-sm-6 col-md-4 col-lg-3">
-                <select class="form-control">
-                  <option>1</option>
+                <select class="form-control" [(ngModel)]="etat" (change)="getSheetPFEs()">
+                  <option value="ALL">ALL</option>
+                  <option value="DEFAULT">Default</option>
+                  <option value="REFUSE">Refuse</option>
+                  <option value="ACCEPTED">Accepted</option>
+                  <option value="PRE_VALIDATE">Pre_validate</option>
+                  <option value="VALIDATE">Validate</option>
                 </select>
               </div>
               <div class="col-sm-6 col-md-4 col-lg-3">
-                <input type="month" class="form-control"></div>
+                <input type="month" class="form-control" [(ngModel)]="year" (change)="getSheetPFEs()"></div>
               <div class="col-sm-6 col-md-4 col-lg-3">
-                <select class="form-control">
-                  <option>1</option>
+                <select class="form-control"  [(ngModel)]="pays" (change)="getSheetPFEs()">
+                  <option value="ALL">choice entreprise</option>
+                  <option *ngFor="let entreprise of entreprises" [ngValue]="entreprise.pays"> {{ entreprise.nameEntreprise }} </option>
                 </select>
               </div>
               <div class="col-sm-6 col-md-4 col-lg-3">
-                <select class="form-control">
-                  <option>1</option>
+                <select class="form-control" [(ngModel)]="categorie" (change)="getSheetPFEs()">
+                  <option value="0">choice categorie</option>
+                  <option *ngFor="let categorie of categories" [ngValue]="categorie.id"> {{ categorie.name }} </option>
                 </select>
               </div>
             </div>
-            <button class="btn btn-inverse-info btn-fw grid-margin" type="button">Reset</button>
+            <button class="btn btn-inverse-info btn-fw grid-margin" type="button" (click)="reset()">Reset</button>
           </div>
           <div class="table-responsive">
             <table class="table table-striped">
@@ -78,6 +85,11 @@
                     <span *ngIf="param === 'waitRapporter'">Affect Rapporteur</span>
                     <span *ngIf="param === 'waitNote'">Show</span>
                   </button>
+                </td>
+              </tr>
+              <tr *ngIf="sheets.length === 0" class="text-center">
+                <td colspan="5" >
+                  There are no sheets
                 </td>
               </tr>
               </tbody>
