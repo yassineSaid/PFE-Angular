@@ -1,0 +1,59 @@
+<div class="col-lg-12 grid-margin stretch-card">
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title">Liste des questions</h4>
+      <div class="table-responsive ">
+        <table class="table ">
+          <thead>
+          <tr>
+            <th>ID Question</th>
+            <th>Contenu Question</th>
+            <th>Etat</th>
+            <th>Question resolu</th>
+            <th>Supprimer</th>
+          </tr>
+          </thead>
+          <tbody *ngFor="let Q of Questions">
+          <tr>
+            <td>{{Q.id_Question}}</td>
+            <td>{{Q.conetnu_Question}}</td>
+            <td>{{Q.question_resolu}}</td>
+            <td><button class="btn btn-outline-secondary icon-btn" type="button" (click)="mettreajour(Q.id_Question)"><i class="mdi mdi-border-color"></i></button></td>
+            <td><button class="btn btn-info" type="button" (click)="supprimer(Q.id_Question)" routerLink="/forum" routerLinkActive="active" ><i class="mdi mdi-delete"></i>Supprimer</button></td>
+
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<br>
+<div class="col-12 stretch-card">
+  <div class="card">
+    <div class="card-body">
+      <fieldset style="width: 50%">
+
+        <h4 class="card-title">Ajouter Question</h4>
+
+        <form class="forms-sample" [formGroup]="questionf">
+          <div class="form-group"><div>
+            Question :
+            <input type="text" formControlName="contenu">
+            <div *ngIf="Contenu.errors.required"> <div *ngIf="Contenu.invalid  && Contenu.touched"><p style="color: red"> C'est un champ obligatoire </p> </div></div>
+
+            Etat : <select formControlName="etat" [value]="false">
+            <option>false</option>
+          </select> <br>
+          </div>
+          </div>
+          <button type="submit" class="btn btn-success mr-2"   (click)="ajouter()" routerLink="/forum" >Submit</button>
+        </form>
+      </fieldset>
+    </div>
+  </div>
+</div>
+<br>
+<br>
+

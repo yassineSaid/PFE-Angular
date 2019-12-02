@@ -39,7 +39,7 @@ import { AddInternshipagreementComponent } from './internshipagreement/add-inter
 import { ShowInternshipagreementComponent } from './internshipagreement/show-internshipagreement/show-internshipagreement.component';
 import { ValidSheetpfeComponent } from './sheetpfe/valid-sheetpfe/valid-sheetpfe.component';
 import { NotifySheetpfeComponent } from './sheetpfe/notify-sheetpfe/notify-sheetpfe.component';
-import {DatePipe} from '@angular/common';
+import { ForumComponent } from './forum/forum.component';
 
 
 
@@ -76,6 +76,7 @@ import {DatePipe} from '@angular/common';
     ShowInternshipagreementComponent,
     ValidSheetpfeComponent,
     NotifySheetpfeComponent,
+    ForumComponent,
   ],
   imports: [
     BrowserModule,
@@ -92,7 +93,6 @@ import {DatePipe} from '@angular/common';
     HttpClient,
     FormBuilder,
     CookieService,
-    DatePipe
   ],
   bootstrap: [AppComponent],
   entryComponents: [
