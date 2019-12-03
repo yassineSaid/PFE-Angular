@@ -47,6 +47,7 @@ const routes: Routes = [
   { path: 'sheet', component: SheetpfeComponent },
   { path: 'internship', component: InternshipagreementComponent },
   { path: 'sheet/notify', component: NotifySheetpfeComponent },
+  { path: 'sheet/planning', component: ShowSheetpfeComponent },
   { path: 'sheet/:id', component: ShowSheetpfeComponent },
   {path: 'forum' , component: ForumComponent }
 

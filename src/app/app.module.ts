@@ -40,6 +40,7 @@ import { ShowInternshipagreementComponent } from './internshipagreement/show-int
 import { ValidSheetpfeComponent } from './sheetpfe/valid-sheetpfe/valid-sheetpfe.component';
 import { NotifySheetpfeComponent } from './sheetpfe/notify-sheetpfe/notify-sheetpfe.component';
 import { ForumComponent } from './forum/forum.component';
+import {DatePipe} from '@angular/common';
 
 
 
@@ -93,6 +94,7 @@ import { ForumComponent } from './forum/forum.component';
     HttpClient,
     FormBuilder,
     CookieService,
+    DatePipe
   ],
   bootstrap: [AppComponent],
   entryComponents: [

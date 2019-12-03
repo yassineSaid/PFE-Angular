@@ -72,29 +72,38 @@
       </div>
     </div>
     <div class="card-body">
-      <div class="card-info" *ngIf="user.role != 'Enseignant'">
-        <p *ngIf="sheet.etat === 'DEFAULT' || sheet.etat === 'REFUSE';else validate ">The sheet PFE being <span class="text-warning"> checked</span></p>
+      <div class="card-info">
+        <p *ngIf="(sheet.etat === 'DEFAULT' || sheet.etat === 'REFUSE') && user.role != 'DirecteurDesStages' &&  user.role != 'Enseignant';else validate ">The sheet PFE being <span class="text-warning"> checked</span></p>
         <ng-template #validate>
-          <p *ngIf="sheet.etat === 'PRE_VALIDATE';else waiting ">The sheet PFE being <span class="text-warning"> validated</span></p>
+          <p *ngIf="(sheet.etat === 'PRE_VALIDATE' || sheet.etat === 'REQUEST') && user.role != 'Enseignant';else waiting ">The sheet PFE being <span class="text-warning"> validated</span></p>
         </ng-template>
         <ng-template #waiting>
-          <p  *ngIf="exist_v === false;else textecadreur">The sheet PFE waiting assignment of  <span class="text-warning"> validator .</span></p>
+          <p  *ngIf="exist_v === false && sheet.etat === 'ACCEPTED';else textecadreur">The sheet PFE waiting assignment of  <span class="text-warning"> validator .</span></p>
             <ng-template #textecadreur>
-              <p  *ngIf="exist_e === false;else textrapporteur">The sheet PFE waiting assignment of <span class="text-warning"> encadreur .</span></p>
+              <p  *ngIf="exist_e === false && sheet.etat === 'VALIDATE';else textrapporteur">The sheet PFE waiting assignment of <span class="text-warning"> encadreur .</span></p>
             </ng-template>
             <ng-template #textrapporteur>
-              <p *ngIf="exist_r === false">The sheet PFE waiting assignment of<span class="text-warning"> rapporteur .</span></p>
+              <p *ngIf="exist_r === false && sheet.etat === 'VALIDATE'">The sheet PFE waiting assignment of<span class="text-warning"> rapporteur .</span></p>
             </ng-template>
         </ng-template>
+        <p *ngIf="sheet.etat === 'REQUEST' && user.role === 'Enseignant'">Request has been sent : <span class="text-warning"> {{ sheet.note }}</span></p>
+
       </div>
       <div class="form-group"  *ngIf="user.role === 'Etudiant' && sheet.etat != 'PRE_VALIDATE' && exist_r === false">
         <button type="button" class="btn btn-primary mr-2" (click)="update()">Edit</button>
       </div>
-      <div class="form-group"  *ngIf="user.role === 'Enseignant'">
-        <button type="button" class="btn btn-primary mr-2" (click)="valid('accepted')" >Accepted</button>
-        <button type="button" class="btn btn-inverse-danger mr-2" (click)="valid('request')">Request</button>
+      <div class="form-group"  *ngIf=" (user.role === 'Etudiant' || user.role === 'DirecteurDesStages') && exist_e ">
+        <button type="button" class="btn btn-inverse-success mr-2" (click)="update()">Export PDF</button>
       </div>
-      <div class="form-group"  *ngIf="user.role === 'DirecteurDesStages'">
+      <div class="form-group"  *ngIf="user.role === 'Enseignant' && sheet.etat === 'PRE_VALIDATE'">
+        <button type="button" class="btn btn-primary mr-2" (click)="valid('accepted')" >Accepted</button>
+        <button type="button" class="btn btn-primary mr-2" (click)="valid('request')">Request</button>
+      </div>
+      <div class="form-group"  *ngIf="user.role === 'Enseignant' && sheet.etat === 'VALIDATE'">
+        <button type="button" class="btn btn-primary mr-2" (click)="note('encadreur')" *ngIf="verifEnseignant('ENCADREUR')" >Note encadreur</button>
+        <button type="button" class="btn btn-primary mr-2" (click)="note('rapporteur')" *ngIf="verifEnseignant('RAPPORTEUR')">Note rapporteur</button>
+      </div>
+      <div class="form-group"  *ngIf="user.role === 'DirecteurDesStages' && sheet.etat === 'DEFAULT'">
         <button type="button" class="btn btn-primary mr-2" (click)="valid('accepted')">Accepted</button>
         <button type="button" class="btn btn-inverse-danger mr-2" (click)="valid('refuse')">Refuse</button>
       </div>

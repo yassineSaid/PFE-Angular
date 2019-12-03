@@ -150,9 +150,10 @@ export class ShowSheetpfeComponent implements OnInit {
   valid(type) {
     const modalRef = this.modal.open(ValidSheetpfeComponent);
     modalRef.componentInstance.type = type;
-
+    modalRef.componentInstance.sheet = this.sheet;
     modalRef.componentInstance.passEntry.subscribe((receivedEntry) => {
-
+        this.sheet.etat = receivedEntry.etat;
+        this.sheet.note = receivedEntry.note;
     });
 
   }
@@ -188,5 +189,11 @@ export class ShowSheetpfeComponent implements OnInit {
       }
     });
 
+  }
+
+  verifEnseignant(type) {
+    return this.sheet.enseignantsheet.filter( es => es.enseignant.id === this.user.id && es.type === type).length ? true : false;
+  }
+  note(type) {
   }
 }
