@@ -39,6 +39,8 @@ import { AddInternshipagreementComponent } from './internshipagreement/add-inter
 import { ShowInternshipagreementComponent } from './internshipagreement/show-internshipagreement/show-internshipagreement.component';
 import { ValidSheetpfeComponent } from './sheetpfe/valid-sheetpfe/valid-sheetpfe.component';
 import { NotifySheetpfeComponent } from './sheetpfe/notify-sheetpfe/notify-sheetpfe.component';
+import { SoutenanceComponentComponent } from './soutenance-component/soutenance-component.component';
+import { ReclamationComponent } from './soutenance-component/reclamation/reclamation.component';
 
 
 
@@ -75,6 +77,8 @@ import { NotifySheetpfeComponent } from './sheetpfe/notify-sheetpfe/notify-sheet
     ShowInternshipagreementComponent,
     ValidSheetpfeComponent,
     NotifySheetpfeComponent,
+    SoutenanceComponentComponent,
+    ReclamationComponent,
   ],
   imports: [
     BrowserModule,

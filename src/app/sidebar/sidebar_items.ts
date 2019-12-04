@@ -55,6 +55,12 @@ export const items = [
         icon: "menu-icon fa fa-file-text-o",
         roles: "All"
     },
+  {
+    path: "/soutenanceNonNote",
+    title: "soutenance",
+    icon: "menu-icon fa fa-file-text-o",
+    roles: "All"
+  },
     {
         path: "/internship",
         title: "Internship agreement",
