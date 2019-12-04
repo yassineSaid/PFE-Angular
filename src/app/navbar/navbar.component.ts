@@ -4,6 +4,8 @@ import {User} from '../Models/user';
 import {LOCAL_STORAGE, WebStorageService} from 'ngx-webstorage-service';
 import { isDefined } from '@angular/compiler/src/util';
 import { AuthService } from '../login/auth.service';
+import { CookieService } from 'ngx-cookie-service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -23,7 +25,7 @@ export class NavbarComponent implements OnInit,OnDestroy {
       document.querySelector('.sidebar-offcanvas').classList.remove('active');
     }
   }
-  constructor(config: NgbDropdownConfig, @Inject(LOCAL_STORAGE) private storage: WebStorageService, private authService:AuthService) {
+  constructor(config: NgbDropdownConfig, @Inject(LOCAL_STORAGE) private storage: WebStorageService, private authService:AuthService, private cookieService:CookieService, private router:Router) {
     config.placement = 'bottom-right';
     this.authService.user.subscribe((val) => {
       this.user=val;
@@ -56,6 +58,12 @@ export class NavbarComponent implements OnInit,OnDestroy {
 
   private stop(): void {
     window.removeEventListener("storage", this.storageEventListener.bind(this));
+  }
+
+  logout() {
+    this.cookieService.delete('token');
+    this.authService.broadcastLoggedInChange(false);
+    this.router.navigate(['/login']);
   }
 
 }

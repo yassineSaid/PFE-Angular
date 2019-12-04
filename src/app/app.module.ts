@@ -41,6 +41,10 @@ import { NotifySheetpfeComponent } from './sheetpfe/notify-sheetpfe/notify-sheet
 import { ForumComponent } from './forum/forum.component';
 import { CategorieComponent } from './categorie/categorie.component';
 import { ReponseComponent } from './reponse/reponse.component';
+import { AdminsComponent, NgbdModalAdmin } from './admins/admins.component';
+import {DatePipe} from '@angular/common';
+import { SoutenanceComponent } from './soutenance/soutenance.component';
+
 
 
 @NgModule({
@@ -79,6 +83,9 @@ import { ReponseComponent } from './reponse/reponse.component';
     ForumComponent,
     CategorieComponent,
     ReponseComponent,
+    AdminsComponent,
+    NgbdModalAdmin,
+    SoutenanceComponent
   ],
   imports: [
     BrowserModule,
@@ -102,12 +109,14 @@ import { ReponseComponent } from './reponse/reponse.component';
   providers: [
     HttpClient,
     FormBuilder,
-    CookieService
+    CookieService,
+    DatePipe
   ],
   bootstrap: [AppComponent],
   entryComponents: [
     AffectSheetpfeEnseignantComponent,
-    ValidSheetpfeComponent
+    ValidSheetpfeComponent,
+    NgbdModalAdmin
   ],
 })
 export class AppModule { }

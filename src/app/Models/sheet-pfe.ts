@@ -10,6 +10,7 @@ export class SheetPFE {
   problematic: string;
   features: string;
   qrcode: string;
+  note: string
   noteRapporteur: number;
   noteEncadreur: number;
   categories: Categorie[];

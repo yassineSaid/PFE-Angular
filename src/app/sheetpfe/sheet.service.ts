@@ -20,6 +20,24 @@ export class SheetService {
       })
     });
   }
+
+  sheets(etat, year, pays, categorie): Observable<any> {
+    return this.http.get<any>(`${Config.BASE_URL}sheet/` + etat + '/' + year + '/' + pays + '/' + categorie, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
+  }
+
+  enseignantSheets(year, toyear, type): Observable<any> {
+    return this.http.get<any>(`${Config.BASE_URL}sheet/enseignant/`  + year + '/' + toyear + '/'
+      + type + '/' + this.storage.get('user').id, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
+  }
+
   studentSheet(id): Observable<any> {
     return this.http.get<any>(`${Config.BASE_URL}sheet/etudiant/` + id, {
       headers: new HttpHeaders({
@@ -69,6 +87,22 @@ export class SheetService {
 
   updateenseignantsheet(type, sheet_id, enseignant_id): Observable<any> {
     return this.http.put<any>(`${Config.BASE_URL}sheet/` + type + `/` + sheet_id + `/` + enseignant_id + `/` + this.storage.get('user').id , {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
+  }
+
+  validsheetByDirecteur(sheet_id, etat): Observable<any> {
+    return this.http.put<any>(`${Config.BASE_URL}sheet/verification/` + sheet_id + `/` + etat + `/` + this.storage.get('user').id , {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
+  }
+
+  validsheetByEnseignant(sheet_id, etat, note): Observable<any> {
+    return this.http.post<any>(`${Config.BASE_URL}sheet/valid/` + sheet_id + `/` + etat + `/` + note + `/` + this.storage.get('user').id , {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })

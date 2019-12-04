@@ -1,0 +1,69 @@
+<div class="row">
+  <div class="col-lg-10 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Gestion des Soutenances</h4>
+        <p class="card-description">
+         Tous les Soutenances
+        </p>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Titre</th>
+                <th>Description</th>
+                <th>Date</th>
+                <th>Note</th>
+                <th>Salle</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let soutenance of Soutenances">
+                <td>{{soutenance.titre}}</td>
+                <td>{{soutenance.description}}</td>
+                <td>{{soutenance.dateSoutenance}}</td>
+                <td>{{soutenance.noteSoutenance}}</td>
+                <td>{{soutenance.salle}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div  class="col-md-8 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Ajouter une Soutenance</h4>
+        <p class="card-description">
+          Soutenance
+        </p>
+        <form class="forms-sample" [formGroup]="soutenanceform">
+          <div class="form-group">
+            <label for="exampleInputName1">Titre</label>
+            <input type="text" class="form-control" id="exampleInputName1" placeholder="titre">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail3">Description</label>
+            <input type="text" class="form-control" id="exampleInputEmail3" placeholder="description">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword4">Date</label>
+            <input type="date" class="form-control" id="exampleInputPassword4" placeholder="dateSoutenance">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputCity1">Note de Soutenance</label>
+            <input type="number" class="form-control" id="exampleInputCity1" placeholder="noteSoutenance">
+          </div>
+          <div class="form-group">
+            <label for="exampleTextarea1">Salle</label>
+            <input type="text" class="form-control" id="exampleInputCity1" placeholder="Salle">
+          </div>
+          <button type="submit" class="btn btn-success mr-2" (click)="addSoutenance()">Ajouter</button>
+          <button class="btn btn-light">Cancel</button>
+        </form>
+      </div>
+    </div>
+  </div>
