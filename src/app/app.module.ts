@@ -40,7 +40,7 @@ import { ShowInternshipagreementComponent } from './internshipagreement/show-int
 import { ValidSheetpfeComponent } from './sheetpfe/valid-sheetpfe/valid-sheetpfe.component';
 import { NotifySheetpfeComponent } from './sheetpfe/notify-sheetpfe/notify-sheetpfe.component';
 import { ForumComponent } from './forum/forum.component';
-import { AdminsComponent, NgbdModalConfirm } from './admins/admins.component';
+import { AdminsComponent, NgbdModalAdmin } from './admins/admins.component';
 import {DatePipe} from '@angular/common';
 
 
@@ -80,7 +80,7 @@ import {DatePipe} from '@angular/common';
     NotifySheetpfeComponent,
     ForumComponent,
     AdminsComponent,
-    NgbdModalConfirm
+    NgbdModalAdmin
   ],
   imports: [
     BrowserModule,
@@ -103,7 +103,7 @@ import {DatePipe} from '@angular/common';
   entryComponents: [
     AffectSheetpfeEnseignantComponent,
     ValidSheetpfeComponent,
-    NgbdModalConfirm
+    NgbdModalAdmin
   ],
 })
 export class AppModule { }

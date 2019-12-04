@@ -3,6 +3,7 @@ import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Admin } from '../Models/admin';
 import { Config } from '../Models/config';
+import { Error } from '../Models/error';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class AdminsService {
       }), withCredentials: true
     });
   }
-  ajouter(nom:string,prenom:string,email:string,password:string): Observable<any> {
+  ajouter(nom:string,prenom:string,email:string,password:string): Observable<Error> {
     let obj = {
       "nom" : nom,
       "prenom" : prenom,

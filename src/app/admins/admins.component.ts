@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { AdminsService } from './admins.service';
 import { Admin } from '../Models/admin';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { Error } from '../Models/error';
 
 @Component({
   selector: 'app-admins',
@@ -23,7 +24,9 @@ export class AdminsComponent implements OnInit {
   }
 
   openForm() {
-    this.modalService.open(NgbdModalConfirm)
+    const modal = this.modalService.open(NgbdModalAdmin);
+    //modal.componentInstance.update=true;
+
   }
 
 }
@@ -40,34 +43,53 @@ export class AdminsComponent implements OnInit {
     <form class="forms-sample" [formGroup]="adminForm">
     <div class="form-group">
       <label for="exampleInputEmail1">Nom</label>
-      <input type="email" class="form-control is-invalid" id="nom" formControlName="nom" placeholder="Nom">
-      <div class="invalid-feedback">
-        Please provide a valid city.
+      <input type="text" class="form-control" id="nom" formControlName="nom" placeholder="Nom" [ngClass]="{'is-invalid':nomErrors.length>0}">
+      <div class="invalid-feedback" *ngFor="let error of nomErrors;">
+        {{error.errorMessage}}
       </div>
     </div>
     <div class="form-group">
       <label for="exampleInputEmail1">Prenom</label>
-      <input type="email" class="form-control" id="prenom" formControlName="prenom" placeholder="Prenom">
+      <input type="email" class="form-control" id="prenom" formControlName="prenom" placeholder="Prenom" [ngClass]="{'is-invalid':prenomErrors.length>0}">
+      <div class="invalid-feedback" *ngFor="let error of prenomErrors;">
+        {{error.errorMessage}}
+      </div>
     </div>
     <div class="form-group">
       <label for="exampleInputEmail1">Adresse Email</label>
-      <input type="email" class="form-control" id="email" formControlName="email" placeholder="Adresse Email">
+      <input type="email" class="form-control" id="email" formControlName="email" placeholder="Adresse Email" [ngClass]="{'is-invalid':emailErrors.length>0}">
+      <div class="invalid-feedback" *ngFor="let error of emailErrors;">
+        {{error.errorMessage}}
+      </div>
     </div>
       <div class="form-group">
         <label for="exampleInputPassword1">Mot de passe</label>
-        <input type="password" class="form-control" id="password" formControlName="password" placeholder="Mot de passe">
+        <input type="password" class="form-control" id="password" formControlName="password" placeholder="Mot de passe" [ngClass]="{'is-invalid':passwordErrors.length>0}">
+        <div class="invalid-feedback" *ngFor="let error of passwordErrors;">
+          {{error.errorMessage}}
+        </div>
       </div>
     </form>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-danger" (click)="modal.dismiss('cancel click')">Annuler</button>
-    <button type="button" class="btn btn-success" (click)="confirmer()">Confirmer</button>
+    <div class="spinner-border" role="status" *ngIf="loading">
+      <span class="sr-only">Chargement...</span>
+    </div>
+    <button type="button" class="btn btn-danger" (click)="modal.dismiss('cancel click')" [disabled]="loading">Annuler</button>
+    <button type="button" class="btn btn-success" (click)="confirmer()" [disabled]="loading">Confirmer</button>
   </div>
   `
 })
-export class NgbdModalConfirm {
+export class NgbdModalAdmin {
+  //@Input() update:Boolean;
+  //@Input() admin:Admin;
   adminForm: FormGroup;
-  errors;
+  nomErrors:Error[]=[];
+  prenomErrors:Error[]=[];
+  emailErrors:Error[]=[];
+  passwordErrors:Error[]=[];
+  errors:Error[]=[];
+  loading=false;
   constructor(public modal: NgbActiveModal, private formBuilder: FormBuilder, private adminsService: AdminsService) {
     this.initForm();
   }
@@ -95,16 +117,23 @@ export class NgbdModalConfirm {
     return this.adminForm.get("password");
   }
   confirmer() {
+    this.loading=true;
     this.adminsService.ajouter(this.nom.value, this.prenom.value, this.email.value, this.password.value).subscribe(
       success => {
         console.log(success);
+        this.modal.dismiss();
       },
       error => {
         console.log(error);
         this.errors=error.error;
+        this.nomErrors=this.errors.filter(e=>e.propertyPath==="nom");
+        this.prenomErrors=this.errors.filter(e=>e.propertyPath==="prenom");
+        this.emailErrors=this.errors.filter(e=>e.propertyPath==="email");
+        this.passwordErrors=this.errors.filter(e=>e.propertyPath==="plainPassword");
+        this.loading=false;
       },
       () => {
-
+        this.loading=false;
       }
     )
   }

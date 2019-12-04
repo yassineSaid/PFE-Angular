@@ -1,4 +1,4 @@
-import {Roles} from "../Models/roles";
+import { Roles } from "../Models/roles";
 
 export const items = [
     {
@@ -11,7 +11,7 @@ export const items = [
     {
         path: "/admins",
         title: "Administrateurs",
-        icon: "menu-icon mdi mdi-television",
+        icon: "menu-icon fa fa-user-o",
         roles: Roles.SuperAdmin,
         queryParams: ""
     },
@@ -76,35 +76,35 @@ export const items = [
         title: "Accepted",
         icon: "menu-icon fa fa-file-text-o",
         roles: "All",
-        queryParams: { q: '_accepted'}
+        queryParams: { q: '_accepted' }
     },
     {
         path: "/sheet",
         title: "Encadreur assignment",
         icon: "menu-icon fa fa-file-text-o",
         roles: "All",
-        queryParams: { q: '_encadreur'}
+        queryParams: { q: '_encadreur' }
     },
     {
         path: "/sheet",
         title: "Rapporteur assignment",
         icon: "menu-icon fa fa-file-text-o",
         roles: "All",
-        queryParams: { q: '_rapporteur'}
+        queryParams: { q: '_rapporteur' }
     },
     {
         path: "/sheet",
         title: "Note",
         icon: "menu-icon fa fa-file-text-o",
         roles: "All",
-        queryParams: { q: '_note'}
+        queryParams: { q: '_note' }
     },
     {
-      path: "/sheet",
-      title: "Defense planning",
-      icon: "menu-icon fa fa-file-text-o",
-      roles: "All",
-      queryParams: { q: '_planning'}
+        path: "/sheet",
+        title: "Defense planning",
+        icon: "menu-icon fa fa-file-text-o",
+        roles: "All",
+        queryParams: { q: '_planning' }
     },
     {
         path: "/internship",
@@ -163,10 +163,10 @@ export const items = [
         queryParams: ""
     },
     {
-    path: "/forum",
-    title: "Forum",
-    icon: "menu-icon fa fa-address-card-o",
-    roles: "All"
+        path: "/forum",
+        title: "Forum",
+        icon: "menu-icon fa fa-address-card-o",
+        roles: [Roles.Etudiant]
     },
     {
         path: "/typography",
