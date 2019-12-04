@@ -28,7 +28,6 @@ import { TabsComponent } from './tabs/tabs.component';
 import { LoginComponent } from './login/login.component';
 import { HttpClientModule, HttpClient} from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
-
 import { SheetpfeComponent } from './sheetpfe/sheetpfe.component';
 import { ShowSheetpfeComponent } from './sheetpfe/show-sheetpfe/show-sheetpfe.component';
 import { AddSheetpfeComponent } from './sheetpfe/add-sheetpfe/add-sheetpfe.component';
@@ -40,7 +39,8 @@ import { ShowInternshipagreementComponent } from './internshipagreement/show-int
 import { ValidSheetpfeComponent } from './sheetpfe/valid-sheetpfe/valid-sheetpfe.component';
 import { NotifySheetpfeComponent } from './sheetpfe/notify-sheetpfe/notify-sheetpfe.component';
 import { ForumComponent } from './forum/forum.component';
-
+import { CategorieComponent } from './categorie/categorie.component';
+import { ReponseComponent } from './reponse/reponse.component';
 
 
 @NgModule({
@@ -77,6 +77,8 @@ import { ForumComponent } from './forum/forum.component';
     ValidSheetpfeComponent,
     NotifySheetpfeComponent,
     ForumComponent,
+    CategorieComponent,
+    ReponseComponent,
   ],
   imports: [
     BrowserModule,
@@ -88,6 +90,14 @@ import { ForumComponent } from './forum/forum.component';
     HttpClientModule,
     ReactiveFormsModule,
     NgbModule,
+    /*BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    CommonModule,
+    ToastrModule.forRoot({
+      timeOut: 10000,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true, }),*/
   ],
   providers: [
     HttpClient,

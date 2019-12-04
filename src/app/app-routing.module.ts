@@ -23,6 +23,8 @@ import { ShowSheetpfeComponent } from './sheetpfe/show-sheetpfe/show-sheetpfe.co
 import { InternshipagreementComponent } from './internshipagreement/internshipagreement.component';
 import { NotifySheetpfeComponent } from './sheetpfe/notify-sheetpfe/notify-sheetpfe.component';
 import {ForumComponent} from './forum/forum.component';
+import {CategorieComponent} from './categorie/categorie.component';
+import {ReponseComponent} from './reponse/reponse.component';
 
 
 const routes: Routes = [
@@ -48,7 +50,9 @@ const routes: Routes = [
   { path: 'internship', component: InternshipagreementComponent },
   { path: 'sheet/notify', component: NotifySheetpfeComponent },
   { path: 'sheet/:id', component: ShowSheetpfeComponent },
-  {path: 'forum' , component: ForumComponent }
+  {path: 'forum' , component: ForumComponent },
+  {path: 'categorie' , component: CategorieComponent},
+  {path: 'reponse', component: ReponseComponent}
 
 ];
 

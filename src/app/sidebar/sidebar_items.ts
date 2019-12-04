@@ -148,6 +148,12 @@ export const items = [
         roles: "All",
         queryParams: ""
     },
+  {
+    path: "/categorie",
+    title: "Categorie",
+    icon: "menu-icon mdi mdi-content-copy",
+    roles: "All",
+  },
     {
     path: "/forum",
     title: "Forum",
