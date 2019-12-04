@@ -28,6 +28,7 @@
     "ng-bootstrap": "^1.6.3",
     "ngb-modal": "^2.0.3",
     "ngx-cookie-service": "^2.2.0",
+    "ngx-spinner": "^8.0.3",
     "ngx-webstorage-service": "^4.1.0",
     "rxjs": "~6.3.3",
     "rxjs-compat": "^6.5.2",

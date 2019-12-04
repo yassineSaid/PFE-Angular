@@ -39,8 +39,14 @@ import { AddInternshipagreementComponent } from './internshipagreement/add-inter
 import { ShowInternshipagreementComponent } from './internshipagreement/show-internshipagreement/show-internshipagreement.component';
 import { ValidSheetpfeComponent } from './sheetpfe/valid-sheetpfe/valid-sheetpfe.component';
 import { NotifySheetpfeComponent } from './sheetpfe/notify-sheetpfe/notify-sheetpfe.component';
+
 import { SoutenanceComponentComponent } from './soutenance-component/soutenance-component.component';
 import { ReclamationComponent } from './soutenance-component/reclamation/reclamation.component';
+
+import { ForumComponent } from './forum/forum.component';
+import { AdminsComponent, NgbdModalAdmin } from './admins/admins.component';
+import {DatePipe} from '@angular/common';
+
 
 
 
@@ -79,6 +85,9 @@ import { ReclamationComponent } from './soutenance-component/reclamation/reclama
     NotifySheetpfeComponent,
     SoutenanceComponentComponent,
     ReclamationComponent,
+    ForumComponent,
+    AdminsComponent,
+    NgbdModalAdmin
   ],
   imports: [
     BrowserModule,
@@ -94,12 +103,14 @@ import { ReclamationComponent } from './soutenance-component/reclamation/reclama
   providers: [
     HttpClient,
     FormBuilder,
-    CookieService
+    CookieService,
+    DatePipe
   ],
   bootstrap: [AppComponent],
   entryComponents: [
     AffectSheetpfeEnseignantComponent,
-    ValidSheetpfeComponent
+    ValidSheetpfeComponent,
+    NgbdModalAdmin
   ],
 })
 export class AppModule { }

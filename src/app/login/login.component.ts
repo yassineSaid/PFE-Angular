@@ -13,6 +13,7 @@ import { CookieService } from 'ngx-cookie-service';
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
+  error: boolean=false;
 
   constructor(private cookiesService: CookieService , private formBuilder: FormBuilder , private authService: AuthService , private router: Router, @Inject(LOCAL_STORAGE) private storage: WebStorageService) {
     if (this.cookiesService.check('token')){
@@ -34,6 +35,7 @@ export class LoginComponent implements OnInit {
   login() {
     this.authService.login(this.Form.email.value , this.Form.password.value).subscribe(success => {
       if (success) {
+        this.error=false;
         this.storage.set('user', success['user']);
         this.authService.broadcastLoginChange( success['user']);
         this.authService.broadcastLoggedInChange(true);
@@ -42,7 +44,11 @@ export class LoginComponent implements OnInit {
       else {
         this.authService.broadcastLoggedInChange(false);
       }
-    });
+    },
+    error => {
+      this.error=true;
+    }
+    );
   }
 
 }
