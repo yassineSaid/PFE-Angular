@@ -9,6 +9,13 @@ export const items = [
         queryParams: ""
     },
     {
+        path: "/admins",
+        title: "Administrateurs",
+        icon: "menu-icon mdi mdi-television",
+        roles: Roles.SuperAdmin,
+        queryParams: ""
+    },
+    {
         path: "/forms",
         title: "Form elements",
         icon: "menu-icon mdi mdi-notification-clear-all",

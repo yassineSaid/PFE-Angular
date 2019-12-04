@@ -40,6 +40,7 @@ import { ShowInternshipagreementComponent } from './internshipagreement/show-int
 import { ValidSheetpfeComponent } from './sheetpfe/valid-sheetpfe/valid-sheetpfe.component';
 import { NotifySheetpfeComponent } from './sheetpfe/notify-sheetpfe/notify-sheetpfe.component';
 import { ForumComponent } from './forum/forum.component';
+import { AdminsComponent, NgbdModalConfirm } from './admins/admins.component';
 
 
 
@@ -77,6 +78,8 @@ import { ForumComponent } from './forum/forum.component';
     ValidSheetpfeComponent,
     NotifySheetpfeComponent,
     ForumComponent,
+    AdminsComponent,
+    NgbdModalConfirm
   ],
   imports: [
     BrowserModule,
@@ -97,7 +100,8 @@ import { ForumComponent } from './forum/forum.component';
   bootstrap: [AppComponent],
   entryComponents: [
     AffectSheetpfeEnseignantComponent,
-    ValidSheetpfeComponent
+    ValidSheetpfeComponent,
+    NgbdModalConfirm
   ],
 })
 export class AppModule { }
