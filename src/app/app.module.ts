@@ -42,6 +42,7 @@ import { NotifySheetpfeComponent } from './sheetpfe/notify-sheetpfe/notify-sheet
 import { ForumComponent } from './forum/forum.component';
 import { AdminsComponent, NgbdModalAdmin } from './admins/admins.component';
 import {DatePipe} from '@angular/common';
+import { SoutenanceComponent } from './soutenance/soutenance.component';
 
 
 
@@ -80,7 +81,8 @@ import {DatePipe} from '@angular/common';
     NotifySheetpfeComponent,
     ForumComponent,
     AdminsComponent,
-    NgbdModalAdmin
+    NgbdModalAdmin,
+    SoutenanceComponent
   ],
   imports: [
     BrowserModule,

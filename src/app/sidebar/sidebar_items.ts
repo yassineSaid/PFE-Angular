@@ -175,4 +175,11 @@ export const items = [
         roles: "All",
         queryParams: ""
     },
+    {
+        path: "/soutenance",
+        title: "Soutenance",
+        icon: "menu-icon mdi mdi-format-italic",
+        roles: "All",
+        queryParams: ""
+    },
 ]

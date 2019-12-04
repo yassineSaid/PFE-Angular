@@ -24,6 +24,7 @@ import { InternshipagreementComponent } from './internshipagreement/internshipag
 import { NotifySheetpfeComponent } from './sheetpfe/notify-sheetpfe/notify-sheetpfe.component';
 import { ForumComponent } from './forum/forum.component';
 import { AdminsComponent } from './admins/admins.component';
+import { SoutenanceComponent } from './soutenance/soutenance.component';
 
 
 const routes: Routes = [
@@ -51,7 +52,8 @@ const routes: Routes = [
   { path: 'sheet/planning', component: ShowSheetpfeComponent },
   { path: 'sheet/:id', component: ShowSheetpfeComponent },
   { path: 'forum', component: ForumComponent },
-  { path: 'admins', component: AdminsComponent }
+  { path: 'admins', component: AdminsComponent },
+  { path: 'soutenance', component: SoutenanceComponent }
 
 ];
 
