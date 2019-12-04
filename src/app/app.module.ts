@@ -41,6 +41,7 @@ import { ValidSheetpfeComponent } from './sheetpfe/valid-sheetpfe/valid-sheetpfe
 import { NotifySheetpfeComponent } from './sheetpfe/notify-sheetpfe/notify-sheetpfe.component';
 import { ForumComponent } from './forum/forum.component';
 import { AdminsComponent, NgbdModalConfirm } from './admins/admins.component';
+import {DatePipe} from '@angular/common';
 
 
 
@@ -96,6 +97,7 @@ import { AdminsComponent, NgbdModalConfirm } from './admins/admins.component';
     HttpClient,
     FormBuilder,
     CookieService,
+    DatePipe
   ],
   bootstrap: [AppComponent],
   entryComponents: [

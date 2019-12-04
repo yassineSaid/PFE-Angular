@@ -100,6 +100,13 @@ export const items = [
         queryParams: { q: '_note'}
     },
     {
+      path: "/sheet",
+      title: "Defense planning",
+      icon: "menu-icon fa fa-file-text-o",
+      roles: "All",
+      queryParams: { q: '_planning'}
+    },
+    {
         path: "/internship",
         title: "Internship agreement",
         icon: "menu-icon fa fa-address-card-o",

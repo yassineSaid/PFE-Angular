@@ -14,7 +14,7 @@
           <h4 class="card-title">List Sheet PFE</h4>
         </div>
         <div class="card-body">
-          <div class="nav-filter" *ngIf="user.role === 'DirecteurDesStages'">
+          <div class="nav-filter" *ngIf="user.role === 'DirecteurDesStages' && !param">
             <div class="row grid-margin">
               <div class="col-sm-6 col-md-4 col-lg-3">
                 <select class="form-control" [(ngModel)]="etat" (change)="getSheetPFEs()">
@@ -43,10 +43,30 @@
             </div>
             <button class="btn btn-inverse-info btn-fw grid-margin" type="button" (click)="reset()">Reset</button>
           </div>
+          <div class="nav-filter" *ngIf="user.role === 'Enseignant' && !param">
+            <div class="row grid-margin">
+              <div class="col-sm-6 col-md-4 col-lg-3">
+                <select class="form-control" [(ngModel)]="type" (change)="getSheetPFEs()">
+                  <option value="ALL">ALL</option>
+                  <option value="VALIDATEUR">To Validated</option>
+                  <option value="ENCADREUR">To Encadred</option>
+                  <option value="RAPPORTEUR">To reported</option>
+                </select>
+              </div>
+              <div class="col-sm-6 col-md-4 col-lg-3">
+                <input type="month" class="form-control" [(ngModel)]="year" (change)="getSheetPFEs()">
+              </div>
+              <div class="col-sm-6 col-md-4 col-lg-3">
+                <input type="month" class="form-control" [(ngModel)]="toyear" (change)="getSheetPFEs()">
+              </div>
+            </div>
+            <button class="btn btn-inverse-info btn-fw grid-margin" type="button" (click)="reset()">Reset</button>
+          </div>
           <div class="table-responsive">
             <table class="table table-striped">
               <thead>
               <tr>
+                <th *ngIf="user.role === 'Enseignant' && type === 'ALL'"></th>
                 <th>
                   Sheet PFE
                 </th>
@@ -66,6 +86,8 @@
               </thead>
               <tbody>
               <tr *ngFor="let sheet of sheets">
+                <td *ngIf="user.role === 'Enseignant' && type === 'ALL'" class="text-warning" [innerText]="enseignantType(sheet)">
+                </td>
                 <td class="py-1">
                   {{ sheet.title }}
                 </td>
@@ -79,12 +101,13 @@
                   <span class="text-info">{{ sheet.etat }}</span>
                 </td>
                 <td>
-                  <button class="btn btn-primary" [routerLink]="['.',sheet.id]">
+                  <button class="btn btn-primary" [routerLink]="['.',sheet.id]" *ngIf="user.role === 'ChefDeDepartement'">
                     <span *ngIf="param === 'accepted'">Affect Validator </span>
                     <span *ngIf="param === 'waitEncadreur'">Affect Encadreur</span>
                     <span *ngIf="param === 'waitRapporter'">Affect Rapporteur</span>
                     <span *ngIf="param === 'waitNote'">Show</span>
                   </button>
+                  <button class="btn btn-primary" [routerLink]="['.',sheet.id]" *ngIf="user.role === 'DirecteurDesStages' || user.role === 'Enseignant' ">Show</button>
                 </td>
               </tr>
               <tr *ngIf="sheets.length === 0" class="text-center">
