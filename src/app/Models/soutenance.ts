@@ -1,5 +1,5 @@
 export class Soutenance {
-  id: any;
+  id: number;
   description: string;
   heureSoutenance: Date;
   noteSoutenance: number;

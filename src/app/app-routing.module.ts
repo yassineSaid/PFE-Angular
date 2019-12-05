@@ -23,8 +23,9 @@ import { ShowSheetpfeComponent } from './sheetpfe/show-sheetpfe/show-sheetpfe.co
 import { InternshipagreementComponent } from './internshipagreement/internshipagreement.component';
 import { NotifySheetpfeComponent } from './sheetpfe/notify-sheetpfe/notify-sheetpfe.component';
 
-import {SoutenanceComponentComponent} from "./soutenance-component/soutenance-component.component";
-import {ReclamationComponent} from "./soutenance-component/reclamation/reclamation.component";
+import {SoutenanceComponentComponent} from './soutenance-component/soutenance-component.component';
+import {ReclamationComponent} from './soutenance-component/reclamation/reclamation.component';
+import {ReclamationDisplayComponent} from './soutenance-component/reclamation-display/reclamation-display.component';
 
 
 import { ForumComponent } from './forum/forum.component';
@@ -59,6 +60,8 @@ const routes: Routes = [
 
   {path: 'soutenanceNonNote' , component: SoutenanceComponentComponent},
   {path: 'soutenanceNonNote/reclamation' , component: ReclamationComponent},
+  {path: 'soutenanceNonNote/displayReclamation' , component: ReclamationDisplayComponent},
+
   { path: 'forum', component: ForumComponent },
   { path: 'admins', component: AdminsComponent }
 

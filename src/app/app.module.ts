@@ -46,6 +46,7 @@ import { ReclamationComponent } from './soutenance-component/reclamation/reclama
 import { ForumComponent } from './forum/forum.component';
 import { AdminsComponent, NgbdModalAdmin } from './admins/admins.component';
 import {DatePipe} from '@angular/common';
+import { ReclamationDisplayComponent } from './soutenance-component/reclamation-display/reclamation-display.component';
 
 
 
@@ -87,7 +88,8 @@ import {DatePipe} from '@angular/common';
     ReclamationComponent,
     ForumComponent,
     AdminsComponent,
-    NgbdModalAdmin
+    NgbdModalAdmin,
+    ReclamationDisplayComponent
   ],
   imports: [
     BrowserModule,

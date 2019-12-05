@@ -1,65 +1,114 @@
 <div class="card">
-  <div class="card-body grid-padding" *ngFor="let s of soutenance" >
+  <div *ngIf="user.role === 'ChefDeDepartement' ||  user.role === 'DirecteurDesStages' || user.role === 'Admin' || user.role === 'SuperAdmin' || user.role === 'Enseignant' ">
+     <a class="btn btn-inverse-info btn-fw grid-margin" routerLink="displayReclamation">Afficher Reclamation</a>
 
-    <blockquote class="blockquote blockquote-info">
 
-      <h4 class="card-title"><strong>Title:</strong></h4>
-      <p class="card-description">  {{s[0]}} </p>
 
-      <h4 class="card-title"><strong>Description:</strong></h4>
-      <p class="card-description">
-        {{s[1]}}
-      </p>
+    <div class="card-body grid-padding" *ngFor="let s of allsoutenance"  >
+         <div *ngIf="s[5] !== 0">
 
-      <h4 class="card-title"><strong>Salle:</strong></h4>
-      <p class="card-description">
-        {{s[3]}} id {{s[4]}}
-      </p>
+      <blockquote class="blockquote blockquote-info">
+        <h3 class="card-header">Soutenance Noté </h3>
+        <br>
+      <input [value]="s[4]"  hidden  #idSoutenance>
+        <h4 class="card-title"><strong>Title:</strong></h4>
+        <p class="card-description">  {{s[0]}}
+        </p>
 
-      <div *ngIf="user.role === 'ChefDeDepartement' ||  user.role === 'DirecteurDesStages' || user.role === 'Admin' || user.role === 'SuperAdmin' ">
+        <h4 class="card-title"><strong>Description:</strong></h4>
+        <p class="card-description">
+          {{s[1]}}
+        </p>
+        <h4 class="card-title"><strong>Salle:</strong></h4>
+        <p class="card-description">
+          {{s[3]}}
+        </p>
+        <h4 class="card-title"><strong>Note :</strong></h4>
+        <p class="card-description">
+          {{s[5]}}
+        </p>
+      </blockquote>
+    </div>
 
-        <button class="btn btn-inverse-info btn-fw grid-margin" >Notifier Enseignant</button>
+      <div *ngIf="s[5] === 0">
 
-      </div>
+        <blockquote class="blockquote blockquote-info">
+          <h3 class="card-header">Soutenance Non Noté </h3><br>
+          <h4 class="card-title"><strong>Title:</strong></h4>
+          <p class="card-description">  {{s[0]}} </p>
 
-      <div *ngIf="user.role === 'Enseignant'">
-        <button class="btn btn-inverse-info btn-fw grid-margin" (click)="afficherAjoutNote()">Ajouter Note</button>
-        <div *ngIf="submitted && !ajout">
+          <h4 class="card-title"><strong>Description:</strong></h4>
+          <p class="card-description">
+            {{s[1]}}
+          </p>
 
-          <form *ngIf="submitted || ajout">
-            <input type="number" [value]="s[4]" #idS hidden>
-            <label class="card-title"><strong>Note jury 1 :</strong></label>
-          <input type="number" #note>
-            <label class="card-title"><strong>Note jury 2 :</strong></label>
-          <input type="number" #notee>
-          <button class="btn btn-inverse-info btn-fw grid-margin" type="submit"  (click)="ajouterNote(idS,note,notee)">Confirmer</button>
-
-          </form>
+          <h4 class="card-title"><strong>Salle:</strong></h4>
+          <p class="card-description">
+            {{s[3]}}
+          </p>
+          <input [value]="s[4]"  hidden>
+          <div *ngIf="user.role === 'ChefDeDepartement' ||  user.role === 'DirecteurDesStages' || user.role === 'Admin' || user.role === 'SuperAdmin' ">
+            <button class="btn btn-inverse-info btn-fw grid-margin" (click)="ajoutNotif(s[4])" >Notifier Enseignant</button>
           </div>
+          <form [formGroup]="ajoutNotification" hidden>
+          <input type="text" formControlName="etat" #etat>
+            <input type="text" [value]="s[4]"   formControlName="text"  #text>
+            <input type="number" formControlName="idEnseignant" #idEnseignant>
+          </form>
+          <div *ngIf="user.role === 'Enseignant'">
+            <button class="btn btn-inverse-info btn-fw grid-margin" (click)="afficherAjoutNote()">Ajouter Note</button>
+            <div *ngIf="submitted && !ajout">
+
+              <form *ngIf="submitted || ajout">
+                <input type="number" [value]="s[4]" #idS hidden>
+                <label class="card-title"><strong>Note jury 1 :</strong></label>
+                <input type="number" #note>
+                <label class="card-title"><strong>Note jury 2 :</strong></label>
+                <input type="number" #notee>
+                <button class="btn btn-inverse-info btn-fw grid-margin" type="submit"  (click)="ajouterNote(idS,note,notee)">Confirmer</button>
+
+              </form>
+            </div>
 
 
+          </div>
+        </blockquote>
       </div>
-    </blockquote>
-  </div>
-</div>
 
+    </div>
+  </div>
 
 
 <div class="card" *ngIf="user.role === 'Etudiant'" >
   <div class="card-body grid-padding" *ngFor="let t of note" >
 
     <blockquote class="blockquote blockquote-info">
- <div *ngIf="t === 0">
+ <div *ngIf="t=== 0">
       <h4 class="card-title">Note</h4>
       <p class="card-description">  vous n'avez pas encore recu une note </p>
  </div>
       <div *ngIf="t !== 0">
         <h4 class="card-title">Votre Note est :</h4>
         <p class="card-description" ><strong>{{t}}</strong>   </p>
-        <a routerLink="reclamation">reclamation</a>
+       <button class="btn btn-inverse-info btn-fw grid-margin" type="submit" (click)="notify()">Ajouter Reclamation</button>
+        <button class="btn btn-inverse-info btn-fw grid-margin" type="submit" (click)="consulterRec()">Consulter Reclamation</button>
+        <div *ngIf="afiche">
+          <app-reclamation-display>
+
+          </app-reclamation-display>
+
+        </div>
+        <div *ngIf="click">
+          <app-reclamation>
+
+          </app-reclamation>
+        </div>
+
+
       </div>
 
     </blockquote>
   </div>
 </div>
+  </div>
 <router-outlet></router-outlet>
