@@ -28,7 +28,6 @@ import { TabsComponent } from './tabs/tabs.component';
 import { LoginComponent } from './login/login.component';
 import { HttpClientModule, HttpClient} from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
-
 import { SheetpfeComponent } from './sheetpfe/sheetpfe.component';
 import { ShowSheetpfeComponent } from './sheetpfe/show-sheetpfe/show-sheetpfe.component';
 import { AddSheetpfeComponent } from './sheetpfe/add-sheetpfe/add-sheetpfe.component';
@@ -39,10 +38,23 @@ import { AddInternshipagreementComponent } from './internshipagreement/add-inter
 import { ShowInternshipagreementComponent } from './internshipagreement/show-internshipagreement/show-internshipagreement.component';
 import { ValidSheetpfeComponent } from './sheetpfe/valid-sheetpfe/valid-sheetpfe.component';
 import { NotifySheetpfeComponent } from './sheetpfe/notify-sheetpfe/notify-sheetpfe.component';
+
+import { SoutenanceComponentComponent } from './soutenance-component/soutenance-component.component';
+import { ReclamationComponent } from './soutenance-component/reclamation/reclamation.component';
+
 import { ForumComponent } from './forum/forum.component';
+import { CategorieComponent } from './categorie/categorie.component';
+import { ReponseComponent } from './reponse/reponse.component';
+import { AdminsComponent, NgbdModalAdmin } from './admins/admins.component';
 import {DatePipe} from '@angular/common';
 import {AngularMultiSelectModule} from 'angular2-multiselect-dropdown';
 import { NoteSheetpfeComponent } from './sheetpfe/note-sheetpfe/note-sheetpfe.component';
+
+import { ReclamationDisplayComponent } from './soutenance-component/reclamation-display/reclamation-display.component';
+
+
+import { SoutenanceComponent } from './soutenance/soutenance.component';
+
 
 
 
@@ -79,9 +91,19 @@ import { NoteSheetpfeComponent } from './sheetpfe/note-sheetpfe/note-sheetpfe.co
     ShowInternshipagreementComponent,
     ValidSheetpfeComponent,
     NotifySheetpfeComponent,
+    SoutenanceComponentComponent,
+    ReclamationComponent,
     ForumComponent,
     NoteSheetpfeComponent,
-  ],
+    CategorieComponent,
+    ReponseComponent,
+    AdminsComponent,
+    NgbdModalAdmin,
+
+    ReclamationDisplayComponent,
+
+    SoutenanceComponent
+ ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -93,6 +115,14 @@ import { NoteSheetpfeComponent } from './sheetpfe/note-sheetpfe/note-sheetpfe.co
     ReactiveFormsModule,
     NgbModule,
     AngularMultiSelectModule,
+    /*BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    CommonModule,
+    ToastrModule.forRoot({
+      timeOut: 10000,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true, }),*/
   ],
   providers: [
     HttpClient,
@@ -104,7 +134,8 @@ import { NoteSheetpfeComponent } from './sheetpfe/note-sheetpfe/note-sheetpfe.co
   entryComponents: [
     AffectSheetpfeEnseignantComponent,
     ValidSheetpfeComponent,
-    NoteSheetpfeComponent
+    NoteSheetpfeComponent,
+    NgbdModalAdmin
   ],
 })
 export class AppModule { }
