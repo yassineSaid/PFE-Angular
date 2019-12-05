@@ -1,11 +1,11 @@
 import {Component, EventEmitter, Inject, Input, OnInit, Output} from '@angular/core';
-import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {noWhitespaceValidator, removeSpaces} from '../validator';
 import {Entreprise} from '../../Models/entreprise';
-import {Categorie} from '../../Models/categorie';
 import {SheetService} from '../sheet.service';
 import {LOCAL_STORAGE, WebStorageService} from 'ngx-webstorage-service';
 import {User} from '../../Models/user';
+import {SheetPFE} from '../../Models/sheet-pfe';
 
 @Component({
   selector: 'app-add-sheetpfe',
@@ -14,17 +14,23 @@ import {User} from '../../Models/user';
 })
 export class AddSheetpfeComponent implements OnInit {
 
-  @Input() edit
+  @Input() edit;
+  @Input() sheet;
+  @Output() out_sheet;
   @Output() hide = new EventEmitter<any>();
   sheetForm: FormGroup;
   listentreprises: Entreprise[];
-  listcategories: Categorie[];
-  constructor(private formBuilder: FormBuilder, private sheetService: SheetService) { }
+  itemList = [];
+  selectedItems = [];
+  settings = {};
+
+  constructor(private formBuilder: FormBuilder, private sheetService: SheetService) {}
 
   ngOnInit() {
+
     this.sheetService.categories().subscribe(data => {
       if (data) {
-        this.listcategories = data;
+        this.itemList = data;
       }
     });
 
@@ -33,20 +39,36 @@ export class AddSheetpfeComponent implements OnInit {
         this.listentreprises = data;
       }
     });
+
     this.sheetForm =  this.formBuilder.group({
+      id: [],
       title: ['', [ Validators.required, Validators.minLength(10), removeSpaces, noWhitespaceValidator ]],
       description: ['', [ Validators.required, Validators.minLength(30), removeSpaces, noWhitespaceValidator ]],
       problematic: ['', [ Validators.required, Validators.minLength(30), removeSpaces, noWhitespaceValidator ]],
       features: ['', [ Validators.required, Validators.minLength(30), removeSpaces, noWhitespaceValidator ]],
-      categories: this.formBuilder.array([
-             this.formBuilder.group({
-               id: ['', [ Validators.required]]
-            }),
-      ]),
+      categories: [[], Validators.required],
       entreprise: this.formBuilder.group({
         id: ['', [ Validators.required ]]
       }),
+      etat: [],
+      qrcode: [],
+      note: [],
+      noteEncadreur: [],
+      noteRapporteur: []
     });
+
+
+    this.settings = {
+      text: '',
+      classes: 'myclass custom-class',
+      labelKey: 'name',
+      enableCheckAll: false
+    };
+
+    if (this.sheet) {
+      this.sheetForm.patchValue(this.sheet);
+      this.selectedItems = this.sheet.categories;
+    }
   }
 
   get title() {
@@ -71,15 +93,16 @@ export class AddSheetpfeComponent implements OnInit {
   addSheet() {
 
     this.sheetService.addSheet(this.sheetForm.value).subscribe(success => {
-      if (success) {
-        this.hide.emit();
-      }
+      console.log("efefefefef");
+      this.hide.emit();
     });
   }
   editSheet() {
-
+    this.sheetService.updateSheet(this.sheetForm.value).subscribe(success => {
+      this.out_sheet.emit(this.sheetForm.value)
+      this.hide.emit();
+    });
   }
-
   cancel() {
     this.hide.emit();
   }

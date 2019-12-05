@@ -41,6 +41,8 @@ import { ValidSheetpfeComponent } from './sheetpfe/valid-sheetpfe/valid-sheetpfe
 import { NotifySheetpfeComponent } from './sheetpfe/notify-sheetpfe/notify-sheetpfe.component';
 import { ForumComponent } from './forum/forum.component';
 import {DatePipe} from '@angular/common';
+import {AngularMultiSelectModule} from 'angular2-multiselect-dropdown';
+import { NoteSheetpfeComponent } from './sheetpfe/note-sheetpfe/note-sheetpfe.component';
 
 
 
@@ -78,6 +80,7 @@ import {DatePipe} from '@angular/common';
     ValidSheetpfeComponent,
     NotifySheetpfeComponent,
     ForumComponent,
+    NoteSheetpfeComponent,
   ],
   imports: [
     BrowserModule,
@@ -89,6 +92,7 @@ import {DatePipe} from '@angular/common';
     HttpClientModule,
     ReactiveFormsModule,
     NgbModule,
+    AngularMultiSelectModule,
   ],
   providers: [
     HttpClient,
@@ -99,7 +103,8 @@ import {DatePipe} from '@angular/common';
   bootstrap: [AppComponent],
   entryComponents: [
     AffectSheetpfeEnseignantComponent,
-    ValidSheetpfeComponent
+    ValidSheetpfeComponent,
+    NoteSheetpfeComponent
   ],
 })
 export class AppModule { }

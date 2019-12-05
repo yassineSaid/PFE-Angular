@@ -12,6 +12,7 @@ import {ActivatedRoute} from '@angular/router';
 import {error} from 'util';
 import {el} from '@angular/platform-browser/testing/src/browser_util';
 import {Enseignantsheet} from '../../Models/enseignantsheet';
+import {NoteSheetpfeComponent} from '../note-sheetpfe/note-sheetpfe.component';
 
 @Component({
   selector: 'app-show-sheetpfe',
@@ -109,7 +110,18 @@ export class ShowSheetpfeComponent implements OnInit {
     if (this.user.role === 'Enseignant') {
       this.sheetService.sheet(this.sheet_id).subscribe(data => {
         if (data) {
-          data.enseignantsheet.forEach(es => { if (es.enseignant.id === this.user.id ) { this.sheet = data; }});
+          data.enseignantsheet.forEach(es => {
+            if (es.enseignant.id === this.user.id ) {
+              this.sheet = data;
+            }
+            if (es.type === 'ENCADREUR') {
+              this.exist_e = true;
+            } if (es.type === 'RAPPORTEUR') {
+              this.exist_r = true;
+            }  if (es.type === 'VALIDATEUR') {
+              this.exist_v = true;
+            }
+          });
           if (! this.sheet) {
             this.notFound = 'assets/images/404/404.png';
           }
@@ -195,5 +207,18 @@ export class ShowSheetpfeComponent implements OnInit {
     return this.sheet.enseignantsheet.filter( es => es.enseignant.id === this.user.id && es.type === type).length ? true : false;
   }
   note(type) {
+    const modalRef = this.modal.open(NoteSheetpfeComponent);
+    modalRef.componentInstance.type = type;
+    modalRef.componentInstance.sheet = this.sheet;
+    modalRef.componentInstance.passEntry.subscribe((receivedEntry) => {
+      if (type === 'encadreur') {
+        this.sheet.noteEncadreur = receivedEntry;
+      } else {
+        this.sheet.noteRapporteur = receivedEntry;
+      }
+    });
+  }
+  setSheet(sheet) {
+    this.sheet = sheet;
   }
 }

@@ -78,7 +78,8 @@ export class SheetService {
   }
 
   affectenseignantsheet(type, sheet_id, enseignant_id): Observable<any> {
-    return this.http.post<any>(`${Config.BASE_URL}sheet/` + type + `/affect/` + sheet_id + `/` + enseignant_id + `/` + this.storage.get('user').id , {
+    return this.http.post<any>(`${Config.BASE_URL}sheet/` + type + `/affect/` + sheet_id + `/` + enseignant_id + `/`
+      + this.storage.get('user').id , {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
@@ -86,7 +87,8 @@ export class SheetService {
   }
 
   updateenseignantsheet(type, sheet_id, enseignant_id): Observable<any> {
-    return this.http.put<any>(`${Config.BASE_URL}sheet/` + type + `/` + sheet_id + `/` + enseignant_id + `/` + this.storage.get('user').id , {
+    return this.http.put<any>(`${Config.BASE_URL}sheet/` + type + `/` + sheet_id + `/` + enseignant_id + `/`
+      + this.storage.get('user').id , {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
@@ -110,22 +112,26 @@ export class SheetService {
   }
 
   addSheet(sheet): Observable<boolean> {
-    const obj = {
-      'title' : sheet['title'],
-      'description' : sheet['description'],
-      'problematic' : sheet['problematic'],
-      'features' : sheet['features'],
-      'entreprise' : {
-        'id': sheet['entreprise']
-      },
-      'etudiant' : {
-        'id': this.storage.get('user').id
-      },
-      'etat' : 'DEFAULT'
-    }
-    console.log(obj)
+    sheet.etudiant = this.storage.get('user')
+    return this.http.post<any>(`${Config.BASE_URL}sheet`, JSON.stringify(sheet), {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
+  }
 
-    return this.http.post<any>(`${Config.BASE_URL}sheet`, obj, {
+  updateSheet(sheet): Observable<boolean> {
+    sheet.etudiant = this.storage.get('user')
+    console.log(JSON.stringify(sheet))
+    return this.http.put<any>(`${Config.BASE_URL}sheet`, JSON.stringify(sheet), {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
+  }
+
+  noteSheet(type, note, sheet_id): Observable<boolean> {
+    return this.http.post<any>(`${Config.BASE_URL}sheet/` + type + '/' + note + '/' + sheet_id,  {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
