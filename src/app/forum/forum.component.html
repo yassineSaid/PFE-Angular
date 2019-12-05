@@ -9,7 +9,8 @@
             <th>ID Question</th>
             <th>Contenu Question</th>
             <th>Etat</th>
-            <th>Question resolu</th>
+            <th>Changement d'etat</th>
+            <th>Détails</th>
             <th>Supprimer</th>
           </tr>
           </thead>
@@ -18,9 +19,9 @@
             <td>{{Q.id_Question}}</td>
             <td>{{Q.conetnu_Question}}</td>
             <td>{{Q.question_resolu}}</td>
-            <td><button class="btn btn-outline-secondary icon-btn" type="button" (click)="mettreajour(Q.id_Question)"><i class="mdi mdi-border-color"></i></button></td>
-            <td><button class="btn btn-info" type="button" (click)="supprimer(Q.id_Question)" routerLink="/forum" routerLinkActive="active" ><i class="mdi mdi-delete"></i>Supprimer</button></td>
-
+            <td><button class="btn btn-outline-secondary icon-btn" type="button" (click)="mettreajour(Q.id_Question)"> <i class="mdi mdi-border-color"> </i> </button></td>
+            <td><button class="btn btn-outline-secondary icon-btn" type="button" > <i class="fa-keyboard-o" routerLink='/reponse'> </i> </button></td>
+            <td><button *ngIf="Q.etudiant?.id === user.id" class="btn btn-info" type="button" (click)="supprimer(Q.id_Question)"><i class="mdi mdi-delete"></i>Supprimer</button></td>
           </tr>
           </tbody>
         </table>
@@ -34,21 +35,22 @@
   <div class="card">
     <div class="card-body">
       <fieldset style="width: 50%">
-
-        <h4 class="card-title">Ajouter Question</h4>
-
         <form class="forms-sample" [formGroup]="questionf">
-          <div class="form-group"><div>
-            Question :
-            <input type="text" formControlName="contenu">
-            <div *ngIf="Contenu.errors.required"> <div *ngIf="Contenu.invalid  && Contenu.touched"><p style="color: red"> C'est un champ obligatoire </p> </div></div>
-
-            Etat : <select formControlName="etat" [value]="false">
+          <div class="form-group">
+            <div class="form-group">
+              <label for="exampleTextarea1"><h4 class="card-title">Saisir votre Question</h4></label>
+              <textarea class="form-control" id="exampleTextarea1" rows="2" formControlName="contenu"></textarea>
+              <div *ngIf="Contenu.invalid  && Contenu.touched">
+                <div *ngIf="Contenu.errors">
+                  <p> C'est un champ obligatoire </p>
+                </div>
+              </div>
+            </div>
+            <select formControlName="etat" [value]="false"[hidden]="true">
             <option>false</option>
           </select> <br>
           </div>
-          </div>
-          <button type="submit" class="btn btn-success mr-2"   (click)="ajouter()" routerLink="/forum" >Submit</button>
+          <button type="submit" class="btn btn-success mr-2"   (click)="ajouter()"  >Ajouter</button>
         </form>
       </fieldset>
     </div>

@@ -1,6 +1,7 @@
+import {Enseignant} from './enseignant';
+
 export class Categorie {
-  id: number;
-  name: string;
-  image: string;
-  exixtecommemodule: boolean;
+  constructor(public name: string , public image: string , public exixtecommemodule: boolean){}
+  enseignant: Enseignant;
+  public id: number;
 }

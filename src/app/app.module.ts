@@ -28,7 +28,6 @@ import { TabsComponent } from './tabs/tabs.component';
 import { LoginComponent } from './login/login.component';
 import { HttpClientModule, HttpClient} from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
-
 import { SheetpfeComponent } from './sheetpfe/sheetpfe.component';
 import { ShowSheetpfeComponent } from './sheetpfe/show-sheetpfe/show-sheetpfe.component';
 import { AddSheetpfeComponent } from './sheetpfe/add-sheetpfe/add-sheetpfe.component';
@@ -44,9 +43,15 @@ import { SoutenanceComponentComponent } from './soutenance-component/soutenance-
 import { ReclamationComponent } from './soutenance-component/reclamation/reclamation.component';
 
 import { ForumComponent } from './forum/forum.component';
+import { CategorieComponent } from './categorie/categorie.component';
+import { ReponseComponent } from './reponse/reponse.component';
 import { AdminsComponent, NgbdModalAdmin } from './admins/admins.component';
 import {DatePipe} from '@angular/common';
+
 import { ReclamationDisplayComponent } from './soutenance-component/reclamation-display/reclamation-display.component';
+
+
+import { SoutenanceComponent } from './soutenance/soutenance.component';
 
 
 
@@ -87,9 +92,15 @@ import { ReclamationDisplayComponent } from './soutenance-component/reclamation-
     SoutenanceComponentComponent,
     ReclamationComponent,
     ForumComponent,
+    CategorieComponent,
+    ReponseComponent,
     AdminsComponent,
     NgbdModalAdmin,
-    ReclamationDisplayComponent
+
+    ReclamationDisplayComponent,
+
+    SoutenanceComponent
+
   ],
   imports: [
     BrowserModule,
@@ -101,6 +112,14 @@ import { ReclamationDisplayComponent } from './soutenance-component/reclamation-
     HttpClientModule,
     ReactiveFormsModule,
     NgbModule,
+    /*BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    CommonModule,
+    ToastrModule.forRoot({
+      timeOut: 10000,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true, }),*/
   ],
   providers: [
     HttpClient,

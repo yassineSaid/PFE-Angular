@@ -22,14 +22,17 @@ import { SheetpfeComponent } from './sheetpfe/sheetpfe.component';
 import { ShowSheetpfeComponent } from './sheetpfe/show-sheetpfe/show-sheetpfe.component';
 import { InternshipagreementComponent } from './internshipagreement/internshipagreement.component';
 import { NotifySheetpfeComponent } from './sheetpfe/notify-sheetpfe/notify-sheetpfe.component';
-
 import {SoutenanceComponentComponent} from './soutenance-component/soutenance-component.component';
 import {ReclamationComponent} from './soutenance-component/reclamation/reclamation.component';
 import {ReclamationDisplayComponent} from './soutenance-component/reclamation-display/reclamation-display.component';
 
 
-import { ForumComponent } from './forum/forum.component';
+import {ForumComponent} from './forum/forum.component';
+import {CategorieComponent} from './categorie/categorie.component';
+import {ReponseComponent} from './reponse/reponse.component';
+
 import { AdminsComponent } from './admins/admins.component';
+import { SoutenanceComponent } from './soutenance/soutenance.component';
 
 
 
@@ -58,6 +61,7 @@ const routes: Routes = [
   { path: 'sheet/planning', component: ShowSheetpfeComponent },
   { path: 'sheet/:id', component: ShowSheetpfeComponent },
 
+
   {path: 'soutenanceNonNote' , component: SoutenanceComponentComponent},
   {path: 'soutenanceNonNote/reclamation' , component: ReclamationComponent},
   {path: 'soutenanceNonNote/displayReclamation' , component: ReclamationDisplayComponent},
@@ -65,7 +69,11 @@ const routes: Routes = [
   { path: 'forum', component: ForumComponent },
   { path: 'admins', component: AdminsComponent }
 
-
+  {path: 'forum' , component: ForumComponent },
+  {path: 'categorie' , component: CategorieComponent},
+  {path: 'reponse', component: ReponseComponent},
+  { path: 'admins', component: AdminsComponent },
+  { path: 'soutenance', component: SoutenanceComponent }
 ];
 
 @NgModule({

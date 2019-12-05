@@ -168,6 +168,12 @@ export const items = [
         roles: "All",
         queryParams: ""
     },
+  {
+    path: "/categorie",
+    title: "Categorie",
+    icon: "menu-icon mdi mdi-content-copy",
+    roles: "All",
+  },
     {
         path: "/forum",
         title: "Forum",
@@ -177,6 +183,13 @@ export const items = [
     {
         path: "/typography",
         title: "Typography",
+        icon: "menu-icon mdi mdi-format-italic",
+        roles: "All",
+        queryParams: ""
+    },
+    {
+        path: "/soutenance",
+        title: "Soutenance",
         icon: "menu-icon mdi mdi-format-italic",
         roles: "All",
         queryParams: ""
