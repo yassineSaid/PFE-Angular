@@ -25,7 +25,8 @@ export class ShowSheetpfeComponent implements OnInit {
   details: Boolean = false;
   user: User;
   sheet: SheetPFE;
-  notify: PfeNotification[];
+  sheetModify: Boolean = false;
+  notify: PfeNotification[] = [];
   sheet_id: any;
   notFound: any;
   exist_e: Boolean = false;
@@ -36,9 +37,10 @@ export class ShowSheetpfeComponent implements OnInit {
               @Inject(LOCAL_STORAGE) private storage: WebStorageService) { }
 
   ngOnInit() {
-    this.route.params.subscribe(params => { this.sheet_id = +params['id']; });
+    this.route.params.subscribe(params => { this.sheet_id = params['id']; });
     this.user = this.storage.get('user');
     if (this.user.role === 'Etudiant') {
+      console.log(this.sheet_id)
       if (this.sheet_id) {
         this.notFound = 'assets/images/404/404.png';
       } else {
@@ -108,11 +110,17 @@ export class ShowSheetpfeComponent implements OnInit {
     }
 
     if (this.user.role === 'Enseignant') {
+
       this.sheetService.sheet(this.sheet_id).subscribe(data => {
         if (data) {
           data.enseignantsheet.forEach(es => {
             if (es.enseignant.id === this.user.id ) {
               this.sheet = data;
+              data.sheetPFEModifications.forEach(m => {
+                if (m.etat === 'DEFAULT') {
+                  this.sheetModify = true;
+                }
+              });
             }
             if (es.type === 'ENCADREUR') {
               this.exist_e = true;
@@ -176,7 +184,9 @@ export class ShowSheetpfeComponent implements OnInit {
   showDetails() {
    this.details = this.details === true ? false : true ;
   }
-  hide() {
+  hide(sheet) {
+    console.log(sheet)
+    this.sheet = sheet;
     this.edit = false;
   }
   updateEnseignant(type) {
@@ -218,7 +228,5 @@ export class ShowSheetpfeComponent implements OnInit {
       }
     });
   }
-  setSheet(sheet) {
-    this.sheet = sheet;
-  }
+
 }

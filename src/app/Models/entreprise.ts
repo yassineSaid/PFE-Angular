@@ -6,4 +6,5 @@ export class Entreprise {
   siteweb: string;
   emailEntreprise: string;
   nameEntreprise: string;
+  xp: number;
 }

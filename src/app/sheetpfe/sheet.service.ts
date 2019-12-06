@@ -122,7 +122,6 @@ export class SheetService {
 
   updateSheet(sheet): Observable<boolean> {
     sheet.etudiant = this.storage.get('user')
-    console.log(JSON.stringify(sheet))
     return this.http.put<any>(`${Config.BASE_URL}sheet`, JSON.stringify(sheet), {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
