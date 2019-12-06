@@ -5,6 +5,8 @@ import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule, FormBuilder } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {FullCalendarModule} from 'primeng/fullcalendar';
+
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
@@ -28,7 +30,6 @@ import { TabsComponent } from './tabs/tabs.component';
 import { LoginComponent } from './login/login.component';
 import { HttpClientModule, HttpClient} from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
-
 import { SheetpfeComponent } from './sheetpfe/sheetpfe.component';
 import { ShowSheetpfeComponent } from './sheetpfe/show-sheetpfe/show-sheetpfe.component';
 import { AddSheetpfeComponent } from './sheetpfe/add-sheetpfe/add-sheetpfe.component';
@@ -43,6 +44,7 @@ import { ForumComponent } from './forum/forum.component';
 import { AdminsComponent, NgbdModalAdmin } from './admins/admins.component';
 import {DatePipe} from '@angular/common';
 import { SoutenanceComponent } from './soutenance/soutenance.component';
+
 
 
 
@@ -94,6 +96,7 @@ import { SoutenanceComponent } from './soutenance/soutenance.component';
     HttpClientModule,
     ReactiveFormsModule,
     NgbModule,
+    FullCalendarModule
   ],
   providers: [
     HttpClient,
