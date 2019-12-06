@@ -48,8 +48,9 @@
     <div class="card-body">
       <h4 class="card-title">Entreprise</h4>
       <p class="card-description">
-        <a href="" class="text-info"> {{ sheet.entreprise?.nameEntreprise }} </a> , {{ sheet.entreprise?.adresse }}
+        <a href="" class="text-info"> {{ sheet.entreprise?.nameEntreprise }} </a>
       </p>
+      <p>{{ sheet.entreprise?.adresse }} {{ sheet.entreprise?.pays }}</p>
       <p><i class="fa fa-envelope-o"></i> {{ sheet.entreprise?.emailEntreprise }} </p>
       <p><i class="fa fa-phone"></i> {{ sheet.entreprise?.telEntreprise }} </p>
 
@@ -69,6 +70,8 @@
           <a href="" class="text-info"> {{ item.enseignant.prenom }} {{ item.enseignant.nom }} </a>
         </p>
         <p><i class="fa fa-envelope-o"></i> {{ item.enseignant.email }} </p>
+        <p *ngIf="sheet.noteEncadreur > -1 && item.type === 'ENCADREUR'">note : {{ sheet.noteEncadreur }}</p>
+        <p *ngIf="sheet.noteRapporteur > -1  && item.type === 'RAPPORTEUR'">note : {{ sheet.noteRapporteur }}</p>
       </div>
     </div>
     <div class="card-body">
@@ -85,6 +88,16 @@
             <ng-template #textrapporteur>
               <p *ngIf="exist_r === false && sheet.etat === 'VALIDATE'">The sheet PFE waiting assignment of<span class="text-warning"> rapporteur .</span></p>
             </ng-template>
+          <p *ngIf="(exist_e === true || exist_r === true) && sheet.etat === 'VALIDATE' && ( sheet.noteEncadreur < 0 || sheet.noteRapporteur < 0)">
+              The sheet PFE waiting
+              <span class="text-warning" *ngIf=" sheet.noteEncadreur < 0 && exist_e === true "> note encadreur </span>
+              <span *ngIf=" sheet.noteEncadreur < 0 && sheet.noteRapporteur < 0"> and </span>
+              <span class="text-warning" *ngIf="sheet.noteRapporteur < 0 && exist_r === true"> note rapporteur .</span>
+          </p>
+          <p *ngIf="sheet.noteEncadreur > -1 && sheet.noteRapporteur > -1">
+            The sheet PFE waiting <span class="text-warning">planning .</span>
+          </p>
+
         </ng-template>
         <p *ngIf="sheet.etat === 'REQUEST' && user.role === 'Enseignant'">Request has been sent : <span class="text-warning"> {{ sheet.note }}</span></p>
 
@@ -100,8 +113,8 @@
         <button type="button" class="btn btn-primary mr-2" (click)="valid('request')">Request</button>
       </div>
       <div class="form-group"  *ngIf="user.role === 'Enseignant' && sheet.etat === 'VALIDATE'">
-        <button type="button" class="btn btn-primary mr-2" (click)="note('encadreur')" *ngIf="verifEnseignant('ENCADREUR')" >Note encadreur</button>
-        <button type="button" class="btn btn-primary mr-2" (click)="note('rapporteur')" *ngIf="verifEnseignant('RAPPORTEUR')">Note rapporteur</button>
+        <button type="button" class="btn btn-primary mr-2" (click)="note('encadreur')" *ngIf="verifEnseignant('ENCADREUR') && sheet.noteEncadreur < 0" >Note encadreur</button>
+        <button type="button" class="btn btn-primary mr-2" (click)="note('rapporteur')" *ngIf="verifEnseignant('RAPPORTEUR') && sheet.noteRapporteur < 0">Note rapporteur</button>
       </div>
       <div class="form-group"  *ngIf="user.role === 'DirecteurDesStages' && sheet.etat === 'DEFAULT'">
         <button type="button" class="btn btn-primary mr-2" (click)="valid('accepted')">Accepted</button>
@@ -121,7 +134,7 @@
       <p class="text-primary cursor-pointer" *ngIf="user.role === 'ChefDeDepartement'" (click)="showDetails()"><u>show details</u></p>
     </div>
   </div>
-  <app-add-sheetpfe *ngIf="user.role === 'Etudiant' && edit || !sheet" [edit]="edit" (hide)="hide()"></app-add-sheetpfe>
+  <app-add-sheetpfe *ngIf="user.role === 'Etudiant' && edit || !sheet" [sheet]="sheet" [edit]="edit" (hide)="hide()" (sheet)="setSheet($event)"></app-add-sheetpfe>
   <app-detail-sheetpfe *ngIf="details"></app-detail-sheetpfe>
 </ng-template>
 
