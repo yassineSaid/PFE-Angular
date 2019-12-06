@@ -43,23 +43,32 @@
         <form class="forms-sample" [formGroup]="soutenanceform">
           <div class="form-group">
             <label for="exampleInputName1">Titre</label>
-            <input type="text" class="form-control" id="exampleInputName1" placeholder="titre">
+            <input type="text" class="form-control" id="exampleInputName1" placeholder="titre"  formControlName="titre">
+            <div *ngIf="soutenanceform.get('titre').errors?.required && soutenanceform.get('titre').touched ">
+              <p style="color:red">Ajouter Un Titre</p>
+           </div>
           </div>
           <div class="form-group">
             <label for="exampleInputEmail3">Description</label>
-            <input type="text" class="form-control" id="exampleInputEmail3" placeholder="description">
+            <input type="text" class="form-control" required minlength="10" id="exampleInputEmail3" placeholder="description"  formControlName="description">
+            <div *ngIf="soutenanceform.get('description').errors?.minlength && soutenanceform.get('description').touched ">
+              <p style="color:red">La description doit comporter au moins 10 caractères.
+              </p>
+           </div>
           </div>
           <div class="form-group">
             <label for="exampleInputPassword4">Date</label>
-            <input type="date" class="form-control" id="exampleInputPassword4" placeholder="dateSoutenance">
+            <input type="date" class="form-control" id="exampleInputPassword4" placeholder="dateSoutenance"  formControlName="dateSoutenance">
           </div>
           <div class="form-group">
             <label for="exampleInputCity1">Note de Soutenance</label>
-            <input type="number" class="form-control" id="exampleInputCity1" placeholder="noteSoutenance">
+            <input type="number" class="form-control" id="exampleInputCity1" placeholder="noteSoutenance"  formControlName="noteSoutenance">
+            <div *ngIf="soutenanceform.get('noteSoutenance').invalid && soutenanceform.get('noteSoutenance').touched" class="alert alert-danger">
+              </div>
           </div>
           <div class="form-group">
             <label for="exampleTextarea1">Salle</label>
-            <input type="text" class="form-control" id="exampleInputCity1" placeholder="Salle">
+            <input type="text" class="form-control" id="exampleInputCity1" placeholder="Salle"  formControlName="salle">
           </div>
           <button type="submit" class="btn btn-success mr-2" (click)="addSoutenance()">Ajouter</button>
           <button class="btn btn-light">Cancel</button>

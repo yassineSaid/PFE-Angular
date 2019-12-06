@@ -18,7 +18,7 @@ import { Soutenance } from '../entities/Soutenance';
           headers: new HttpHeaders({'Content-Type': 'application/json'})
         }
         return this.httpClient.post<Soutenance>(
-            'http://localhost:9080/4twin3-osp-pfe-web/rest/soutenance'+Soutenance,httpOptions
+            'http://localhost:9080/4twin3-osp-pfe-web/rest/soutenance',Soutenance,httpOptions
           
         )}
   }
