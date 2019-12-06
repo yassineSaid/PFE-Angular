@@ -6,6 +6,7 @@ import {LOCAL_STORAGE, WebStorageService} from 'ngx-webstorage-service';
 import {Observable, observable} from 'rxjs';
 import {Reclamation} from '../Models/Reclamation';
 import {User} from "../Models/user";
+import {Notification} from '../Models/notification';
 
 
 @Injectable({
@@ -47,10 +48,30 @@ export class SoutenanceServiceService {
    return this.http.get<Reclamation[]>(`${Config.BASE_URL}reclamation/getById/`+nom+`/`+prenom);
   }
 
+  getNotificationUser(id: number)
+  {
+    return this.http.get<Notification[]>(`${Config.BASE_URL}notif/getById/`+id);
+  }
+
+  getAllNotification()
+  {
+    return this.http.get<Notification[]>(`${Config.BASE_URL}notif/get`);
+  }
+
   ajouterNote(idS , note , notee)
   {
     const body = {};
     return this.http.put<Soutenance[]>(`${Config.BASE_URL}soutenance/test/`+idS.value+`/`+note.value+`/`+notee.value , body );
+  }
+
+  traiterNotification(idNotification)
+  {
+    const body = {
+      'idNotification' : idNotification,
+      'etat': 'traiter'
+    }
+    console.log(body);
+    return this.http.put<any>(`${Config.BASE_URL}notif/traiter` , body);
   }
 
   ajouterReclamation(Reclamation)
