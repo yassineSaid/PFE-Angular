@@ -52,6 +52,7 @@ import { ReclamationDisplayComponent } from './soutenance-component/reclamation-
 
 
 import { SoutenanceComponent } from './soutenance/soutenance.component';
+import { NotificationRSComponent } from './soutenance-component/notification-rs/notification-rs.component';
 
 
 
@@ -99,7 +100,9 @@ import { SoutenanceComponent } from './soutenance/soutenance.component';
 
     ReclamationDisplayComponent,
 
-    SoutenanceComponent
+    SoutenanceComponent,
+
+    NotificationRSComponent
 
   ],
   imports: [
