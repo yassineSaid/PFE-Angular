@@ -106,12 +106,25 @@ export const items = [
         roles: "All",
         queryParams: { q: '_planning' }
     },
+    {
+      path: "/sheet",
+      title: "Modification majeur",
+      icon: "menu-icon fa fa-file-text-o",
+      roles: "All",
+      queryParams: { q: '_modify' }
+    },
   {
     path: "/soutenanceNonNote",
     title: "soutenance",
     icon: "menu-icon fa fa-file-text-o",
     roles: "All"
   },
+    {
+      path: "etudiant/nosheet",
+      title: "Etudiant sans fiche pfe",
+      icon: "menu-icon fa fa-file-text-o",
+      roles: "All"
+    },
     {
         path: "/internship",
         title: "Internship agreement",

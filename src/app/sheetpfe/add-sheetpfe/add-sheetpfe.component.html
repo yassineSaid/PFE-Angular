@@ -47,10 +47,11 @@
         <label [class.text-danger]="categories.invalid && categories.touched">Categories</label>
         <angular2-multiselect [data]="itemList" [(ngModel)]="selectedItems"
           [settings]="settings"
+          (onDeSelectAll)="onDeSelectAll($event)"
           formControlName="categories">
         </angular2-multiselect>
         <div class="invalid-feedback" *ngIf="categories.invalid && categories.touched">
-          <span *ngIf="categories.errors.required" class="text-small">The categorie is required. </span>
+          <span class="text-small">The categorie is required. </span>
         </div>
       </div>
       <div  class="form-group" formGroupName="entreprise">
@@ -59,7 +60,7 @@
           <option *ngFor="let entreprise of listentreprises" [value]="entreprise.id">{{ entreprise.nameEntreprise }}</option>
         </select>
         <div class="invalid-feedback" *ngIf="entreprise.invalid && entreprise.touched">
-          <span *ngIf="entreprise.errors.required" class="text-small">The entreprise is required. </span>
+          <span class="text-small">The entreprise is required. </span>
         </div>
       </div>
     </form>

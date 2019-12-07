@@ -6,6 +6,7 @@ import {SheetService} from '../sheet.service';
 import {LOCAL_STORAGE, WebStorageService} from 'ngx-webstorage-service';
 import {User} from '../../Models/user';
 import {SheetPFE} from '../../Models/sheet-pfe';
+import {InternshipService} from '../../internshipagreement/internship.service';
 
 @Component({
   selector: 'app-add-sheetpfe',
@@ -16,18 +17,19 @@ export class AddSheetpfeComponent implements OnInit {
 
   @Input() edit;
   @Input() sheet;
-  @Output() out_sheet;
   @Output() hide = new EventEmitter<any>();
+  user: User;
   sheetForm: FormGroup;
   listentreprises: Entreprise[];
   itemList = [];
   selectedItems = [];
   settings = {};
 
-  constructor(private formBuilder: FormBuilder, private sheetService: SheetService) {}
+  constructor(private formBuilder: FormBuilder, private sheetService: SheetService,
+              private internshipService: InternshipService, @Inject(LOCAL_STORAGE) private storage: WebStorageService) {}
 
   ngOnInit() {
-
+    this.user = this.storage.get('user')
     this.sheetService.categories().subscribe(data => {
       if (data) {
         this.itemList = data;
@@ -39,6 +41,14 @@ export class AddSheetpfeComponent implements OnInit {
         this.listentreprises = data;
       }
     });
+
+    if (this.edit === false) {
+      this.internshipService.studentInternship(this.user.id).subscribe(data => {
+        if (data) {
+          this.entreprise.get('id').setValue(data.entreprise.id);
+        }
+      });
+    }
 
     this.sheetForm =  this.formBuilder.group({
       id: [],
@@ -54,7 +64,8 @@ export class AddSheetpfeComponent implements OnInit {
       qrcode: [],
       note: [],
       noteEncadreur: [],
-      noteRapporteur: []
+      noteRapporteur: [],
+      enseignantsheet: []
     });
 
 
@@ -91,19 +102,25 @@ export class AddSheetpfeComponent implements OnInit {
   }
 
   addSheet() {
-
+    this.sheetForm.setErrors({'submit': true});
     this.sheetService.addSheet(this.sheetForm.value).subscribe(success => {
-      console.log("efefefefef");
-      this.hide.emit();
+      this.sheet = this.sheetForm.value;
+      this.sheet.entreprise = this.listentreprises.filter(e => e.id.toString() === this.entreprise.get('id').value.toString())[0];
+      this.hide.emit(this.sheet);
     });
   }
   editSheet() {
+    this.sheetForm.setErrors({'submit': true});
     this.sheetService.updateSheet(this.sheetForm.value).subscribe(success => {
-      this.out_sheet.emit(this.sheetForm.value)
-      this.hide.emit();
+      this.sheet = this.sheetForm.value;
+      this.sheet.entreprise = this.listentreprises.filter(e => e.id.toString() === this.entreprise.get('id').value.toString())[0];
+      this.hide.emit(this.sheet);
     });
   }
   cancel() {
-    this.hide.emit();
+    this.hide.emit(this.sheet);
+  }
+  onDeSelectAll(items: any) {
+    this.categories.setValue(items);
   }
 }

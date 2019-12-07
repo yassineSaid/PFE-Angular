@@ -2,6 +2,7 @@ import {Categorie} from './categorie';
 import {Entreprise} from './entreprise';
 import {Etudiant} from './etudiant';
 import {Enseignantsheet} from './enseignantsheet';
+import {SheetModifiation} from './sheet-modifiation';
 
 export class SheetPFE {
   id: number;
@@ -18,4 +19,5 @@ export class SheetPFE {
   entreprise: Entreprise;
   etudiant: Etudiant;
   enseignantsheet: Enseignantsheet[];
+  sheetPFEModifications: SheetModifiation[];
 }

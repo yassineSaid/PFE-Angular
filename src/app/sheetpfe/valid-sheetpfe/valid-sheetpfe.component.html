@@ -14,7 +14,7 @@
     <p class="card-description mb-4" *ngIf="type == 'accepted'">Are you sure you want to accepted this sheet PFE ?</p>
     <p class="card-description mb-4" *ngIf="type == 'refuse'">Are you sure you want to refuse this sheet PFE ?</p>
     <div class="form-group mb-4" *ngIf="type == 'request'">
-      <textarea class="form-control" placeholder="Write something ..." [(ngModel)]="note" [class.border-danger]="error"> {{ note }}</textarea>
+      <textarea class="form-control" placeholder="Write something ..." [(ngModel)]="note" [class.border-danger]="error" (input)="changeText()"> {{ note }}</textarea>
       <span class="text-small text-danger" *ngIf="error"> {{ error }} </span>
     </div>
     <button type="button"  class="btn btn-primary mr-2" (click)="valid()"  *ngIf="type == 'accepted'" [disabled]="disabled" >Accepted</button>

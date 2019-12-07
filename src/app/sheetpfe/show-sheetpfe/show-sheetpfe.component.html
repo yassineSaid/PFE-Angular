@@ -15,6 +15,8 @@
         </div>
       </div>
 
+      <app-detail-sheetpfe *ngIf="user.role === 'Enseignant' && sheetModify" [sheet]="sheet" [user]="user" (hide)="hideDetails()"></app-detail-sheetpfe>
+
     </div>
 
     <div class="card-body">
@@ -62,7 +64,7 @@
       </p>
       <p><i class="fa fa-envelope-o"></i> {{ sheet.etudiant?.email }} </p>
     </div>
-    <div class="card-body" *ngIf="sheet.enseignantsheet.length">
+    <div class="card-body" *ngIf="sheet.enseignantsheet?.length">
       <h4 class="card-title">Stuff</h4>
       <div class="card-body"  *ngFor="let item of sheet.enseignantsheet.slice().reverse()">
         <h4 class="card-title"> {{ item.type }}</h4>
@@ -106,7 +108,7 @@
         <button type="button" class="btn btn-primary mr-2" (click)="update()">Edit</button>
       </div>
       <div class="form-group"  *ngIf=" (user.role === 'Etudiant' || user.role === 'DirecteurDesStages') && exist_e ">
-        <button type="button" class="btn btn-inverse-success mr-2" (click)="update()">Export PDF</button>
+        <button type="button" class="btn btn-inverse-primary mr-2" (click)="update()">Export PDF</button>
       </div>
       <div class="form-group"  *ngIf="user.role === 'Enseignant' && sheet.etat === 'PRE_VALIDATE'">
         <button type="button" class="btn btn-primary mr-2" (click)="valid('accepted')" >Accepted</button>
@@ -134,7 +136,7 @@
       <p class="text-primary cursor-pointer" *ngIf="user.role === 'ChefDeDepartement'" (click)="showDetails()"><u>show details</u></p>
     </div>
   </div>
-  <app-add-sheetpfe *ngIf="user.role === 'Etudiant' && edit || !sheet" [sheet]="sheet" [edit]="edit" (hide)="hide()" (sheet)="setSheet($event)"></app-add-sheetpfe>
+  <app-add-sheetpfe *ngIf="user.role === 'Etudiant' && edit || !sheet" [sheet]="sheet" [edit]="edit" (hide)="hide($event)"></app-add-sheetpfe>
   <app-detail-sheetpfe *ngIf="details"></app-detail-sheetpfe>
 </ng-template>
 

@@ -111,6 +111,13 @@ export class SheetService {
     });
   }
 
+  acceptesheetModify(sheet_id, etat, note): Observable<any> {
+    return this.http.put<any>(`${Config.BASE_URL}sheet/accptedsheetmodifiy/` + sheet_id + `/` + etat + `/` + note + `/` + this.storage.get('user').id , {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
+  }
   addSheet(sheet): Observable<boolean> {
     sheet.etudiant = this.storage.get('user')
     return this.http.post<any>(`${Config.BASE_URL}sheet`, JSON.stringify(sheet), {
@@ -122,7 +129,6 @@ export class SheetService {
 
   updateSheet(sheet): Observable<boolean> {
     sheet.etudiant = this.storage.get('user')
-    console.log(JSON.stringify(sheet))
     return this.http.put<any>(`${Config.BASE_URL}sheet`, JSON.stringify(sheet), {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
@@ -137,5 +143,22 @@ export class SheetService {
       })
     });
   }
+
+  studentnoSheet(year, toyear): Observable<any> {
+    return this.http.get<any>(`${Config.BASE_URL}sheet/nostudent/` + year + '/' + toyear,  {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
+  }
+
+  sendMail(etudiants): Observable<boolean> {
+    return this.http.post<any>(`${Config.BASE_URL}sheet/reminder`, JSON.stringify(etudiants), {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
+  }
+
 
 }
