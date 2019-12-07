@@ -40,6 +40,7 @@ export class ShowSheetpfeComponent implements OnInit {
     this.route.params.subscribe(params => { this.sheet_id = params['id']; });
     this.user = this.storage.get('user');
     if (this.user.role === 'Etudiant') {
+      console.log(this.sheet_id)
       if (this.sheet_id) {
         this.notFound = 'assets/images/404/404.png';
       } else {
@@ -232,4 +233,5 @@ export class ShowSheetpfeComponent implements OnInit {
   hideDetails() {
     this.sheetModify = false;
   }
+
 }

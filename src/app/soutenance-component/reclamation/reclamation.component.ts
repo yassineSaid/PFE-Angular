@@ -56,7 +56,8 @@ export class ReclamationComponent implements OnInit {
         this.ok = true;
         this.hide.emit();
         window.alert("votre reclamation a ete ajouter avec succés");
-     
+        window.location.reload();
+
       }
     }
   );

@@ -26,6 +26,7 @@ import { NotifySheetpfeComponent } from './sheetpfe/notify-sheetpfe/notify-sheet
 import {SoutenanceComponentComponent} from './soutenance-component/soutenance-component.component';
 import {ReclamationComponent} from './soutenance-component/reclamation/reclamation.component';
 import {ReclamationDisplayComponent} from './soutenance-component/reclamation-display/reclamation-display.component';
+import {NotificationRSComponent} from './soutenance-component/notification-rs/notification-rs.component';
 
 
 import {ForumComponent} from './forum/forum.component';
@@ -36,6 +37,7 @@ import { AdminsComponent } from './admins/admins.component';
 import { SoutenanceComponent } from './soutenance/soutenance.component';
 
 import { EtudiantnosheetComponent } from './sheetpfe/etudiantnosheet/etudiantnosheet.component';
+
 
 
 
@@ -64,13 +66,12 @@ const routes: Routes = [
   { path: 'sheet/notify', component: NotifySheetpfeComponent },
   { path: 'sheet/planning', component: ShowSheetpfeComponent },
   { path: 'sheet/:id', component: ShowSheetpfeComponent },
-
   { path: 'etudiant/nosheet', component: EtudiantnosheetComponent },
 
   {path: 'soutenanceNonNote' , component: SoutenanceComponentComponent},
   {path: 'soutenanceNonNote/reclamation' , component: ReclamationComponent},
-  {path: 'soutenanceNonNote/displayReclamation' , component: ReclamationDisplayComponent},
-
+  {path: 'soutenanceNonNote/displayReclamation/:idNotification' , component: ReclamationDisplayComponent},
+  {path: 'soutenanceNonNote/notificationRS' , component:  NotificationRSComponent},
   { path: 'forum', component: ForumComponent },
   { path: 'admins', component: AdminsComponent },
   {path: 'forum' , component: ForumComponent },

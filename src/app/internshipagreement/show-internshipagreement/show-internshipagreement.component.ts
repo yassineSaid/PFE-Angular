@@ -61,4 +61,5 @@ export class ShowInternshipagreementComponent implements OnInit {
       var file = new Blob([response], {type: 'application/pdf'});
       var fileURL = URL.createObjectURL(file);}));
   }
+
 }

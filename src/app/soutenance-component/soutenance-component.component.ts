@@ -29,11 +29,25 @@ export class SoutenanceComponentComponent implements OnInit {
   notif: Notification = new Notification();
   ajoutNotification: FormGroup;
   @Output() hide = new EventEmitter<any>();
+  notification: Notification[];
+  notifications: Notification[];
 
 
   constructor( private httpService: SoutenanceServiceService ,      @Inject(LOCAL_STORAGE) private storage: WebStorageService , private formBuilder: FormBuilder ) {
 
     this.user = this.storage.get('user');
+    this.httpService.getNotificationUser(this.user.id).subscribe(
+      data => {
+        this.notification = data;
+        console.log(this.notification);
+      }
+    );
+    this.httpService.getAllNotification().subscribe(
+      data => {
+        this.notifications = data;
+        console.log(this.notifications);
+      }
+    );
     if (this.user.role === 'Admin' || this.user.role === 'Enseignant' || this.user.role === 'ChefDeDepartement' || this.user.role === 'DirecteurDesStages') {
       this.httpService.getsoutenanceNonNote().subscribe(data => {
         this.soutenance = data;
@@ -70,6 +84,7 @@ export class SoutenanceComponentComponent implements OnInit {
   notify()
   {
     this.click = true;
+    this.afiche = true;
   }
 
   ajouterNote(idS,notee,note)
@@ -100,7 +115,7 @@ export class SoutenanceComponentComponent implements OnInit {
       window.alert("il y a un conflit dans la note que vous avez ajouté , la direction traitera ce probleme et vous communiquera par mail");
       window.location.replace('/soutenanceNonNote');
 
-    } else{
+    } if (notee.value - note.value < 0) {
       window.alert("la note a ete ajouté avec succés");
       window.location.replace('/soutenanceNonNote');
     }
@@ -136,7 +151,8 @@ export class SoutenanceComponentComponent implements OnInit {
     this.httpService.addNotification(this.ajoutNotification.value,idSoutenance).subscribe(    success => {
       if (success) {
         this.hide.emit();
-        window.alert("aaaa");
+        window.alert("l'enseignant sera notifier");
+        window.location.replace('/soutenanceNonNote');
 
       }
     });

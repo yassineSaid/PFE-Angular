@@ -114,10 +114,10 @@ export const items = [
       queryParams: { q: '_modify' }
     },
   {
-    path: "/soutenanceNonNote",
-    title: "soutenance",
-    icon: "menu-icon fa fa-file-text-o",
-    roles: "All"
+    path: '/soutenanceNonNote',
+    title: 'Suivi',
+    icon: 'menu-icon fa fa-file-text-o',
+    roles: 'All'
   },
     {
       path: "etudiant/nosheet",

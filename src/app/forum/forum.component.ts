@@ -5,7 +5,6 @@ import {ActivatedRoute} from '@angular/router';
 import {QuestionService} from './QuestionService';
 import {ResponseSrvice} from './ResponseSrvice';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import { ToastrService } from 'ngx-toastr';
 import {User} from '../Models/user';
 import {LOCAL_STORAGE, WebStorageService} from 'ngx-webstorage-service';
 

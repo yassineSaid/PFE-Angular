@@ -1,6 +1,5 @@
 import {Entreprise} from './entreprise';
 import {Categorie} from './categorie';
-
 export class SheetModifiation {
   id: number;
   created: string;
