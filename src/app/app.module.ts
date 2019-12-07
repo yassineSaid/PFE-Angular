@@ -47,7 +47,7 @@ import { CategorieComponent } from './categorie/categorie.component';
 import { ReponseComponent } from './reponse/reponse.component';
 import { AdminsComponent, NgbdModalAdmin } from './admins/admins.component';
 import {DatePipe} from '@angular/common';
-import {AngularMultiSelectModule} from 'angular2-multiselect-dropdown';
+
 import { NoteSheetpfeComponent } from './sheetpfe/note-sheetpfe/note-sheetpfe.component';
 
 import { ReclamationDisplayComponent } from './soutenance-component/reclamation-display/reclamation-display.component';
@@ -121,7 +121,6 @@ import { NotificationRSComponent } from './soutenance-component/notification-rs/
     HttpClientModule,
     ReactiveFormsModule,
     NgbModule,
-    AngularMultiSelectModule,
     /*BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,

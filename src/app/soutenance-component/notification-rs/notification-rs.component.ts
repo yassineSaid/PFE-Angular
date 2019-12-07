@@ -41,12 +41,12 @@ export class NotificationRSComponent implements OnInit {
       data => {
         this.n = data;
         console.log(this.n);
-        window.alert("notification Conflit  Traiter");
-
+        window.alert("notification Traiter");
+        window.location.replace('/soutenanceNonNote');
 
       }
     );
-    if (this.user.role === 'Etudiant' || this.user.role === 'Enseignant' || this.user.role === 'Admin')
+    if (this.user.role === 'Etudiant')
     {
       window.location.replace('/soutenanceNonNote');
     }
@@ -59,8 +59,6 @@ export class NotificationRSComponent implements OnInit {
       this.n = data;
       console.log(this.n);
       window.alert("notification Reclamation Traiter");
-
-
     }
   );
 

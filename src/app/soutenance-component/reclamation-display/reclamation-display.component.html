@@ -2,7 +2,12 @@
 <div *ngIf="user.role === 'ChefDeDepartement' ||  user.role === 'DirecteurDesStages' || user.role === 'Admin' || user.role === 'SuperAdmin' || user.role === 'Enseignant' ">
 <div class="card" >
   <div *ngIf="reclamation.length === 0">
-    <h3  class="card-header"> aucune reclamation n'a ete saisie </h3>
+    <div *ngIf=" user.role === 'Admin'">
+    <h3  class="card-header">Cette reclamation à été traiter par l'enseignant</h3>
+    </div>
+    <div *ngIf=" user.role === 'Enseignant'">
+      <h3  class="card-header">Cette reclamation à été traiter par l'administrateur</h3>
+    </div>
   </div>
   <div *ngIf="reclamation.length > 0">
   <div class="card-body grid-padding" *ngFor="let rec of reclamation" >
