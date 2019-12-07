@@ -21,6 +21,7 @@ import { LoginComponent } from './login/login.component';
 import { SheetpfeComponent } from './sheetpfe/sheetpfe.component';
 import { ShowSheetpfeComponent } from './sheetpfe/show-sheetpfe/show-sheetpfe.component';
 import { InternshipagreementComponent } from './internshipagreement/internshipagreement.component';
+import { ShowInternshipagreementComponent } from './internshipagreement/show-internshipagreement/show-internshipagreement.component';
 import { NotifySheetpfeComponent } from './sheetpfe/notify-sheetpfe/notify-sheetpfe.component';
 import {SoutenanceComponentComponent} from './soutenance-component/soutenance-component.component';
 import {ReclamationComponent} from './soutenance-component/reclamation/reclamation.component';
@@ -34,6 +35,8 @@ import {ReponseComponent} from './reponse/reponse.component';
 
 import { AdminsComponent } from './admins/admins.component';
 import { SoutenanceComponent } from './soutenance/soutenance.component';
+
+import { EtudiantnosheetComponent } from './sheetpfe/etudiantnosheet/etudiantnosheet.component';
 
 
 
@@ -59,9 +62,12 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'sheet', component: SheetpfeComponent },
   { path: 'internship', component: InternshipagreementComponent },
+  { path: 'internship/:id', component: ShowInternshipagreementComponent },
   { path: 'sheet/notify', component: NotifySheetpfeComponent },
   { path: 'sheet/planning', component: ShowSheetpfeComponent },
   { path: 'sheet/:id', component: ShowSheetpfeComponent },
+  { path: 'etudiant/nosheet', component: EtudiantnosheetComponent },
+
   {path: 'soutenanceNonNote' , component: SoutenanceComponentComponent},
   {path: 'soutenanceNonNote/reclamation' , component: ReclamationComponent},
   {path: 'soutenanceNonNote/displayReclamation/:idNotification' , component: ReclamationDisplayComponent},

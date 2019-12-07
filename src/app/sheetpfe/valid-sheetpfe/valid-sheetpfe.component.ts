@@ -14,6 +14,7 @@ export class ValidSheetpfeComponent implements OnInit {
   @Output() passEntry: EventEmitter<any> = new EventEmitter();
   @Input() public type;
   @Input() public sheet;
+  sheetM_id: any;
   note: any;
   error: any;
   disabled: Boolean = false;
@@ -23,7 +24,7 @@ export class ValidSheetpfeComponent implements OnInit {
   ngOnInit() {
   }
   valid() {
-    if (! this.error) {
+    if (!this.note && this.type === 'request') {
       this.error = 'The note required ';
     } else {
       this.disabled = true;
@@ -39,19 +40,42 @@ export class ValidSheetpfeComponent implements OnInit {
         if (this.note) {
           note = this.note;
         }
-        if (this.type === 'accepted') {
-          type = 'VALIDATE';
-        }
-        this.sheetService.validsheetByEnseignant(this.sheet.id, type, note).subscribe(success => {
-          const obj = {
-            'etat': type,
-            'note': note
+        if ( this.sheet.etat === 'VALIDATE') {
+          if (this.type === 'accepted') {
+            type = 'ACCEPTED';
           }
-          this.passEntry.emit(obj);
-          this.modal.close();
-        });
+          this.sheet.sheetPFEModifications.forEach(m => {
+            if (m.etat === 'DEFAULT') {
+              this.sheetM_id = m.id;
+            }
+          });
+          this.sheetService.acceptesheetModify(this.sheetM_id, type, note).subscribe(success => {
+            const obj = {
+              'etat': type,
+              'note': note
+            }
+            this.passEntry.emit(obj);
+            this.modal.close();
+          });
+        } else {
+          if (this.type === 'accepted') {
+            type = 'VALIDATE';
+          }
+          this.sheetService.validsheetByEnseignant(this.sheet.id, type, note).subscribe(success => {
+            const obj = {
+              'etat': type,
+              'note': note
+            }
+            this.passEntry.emit(obj);
+            this.modal.close();
+          });
+        }
       }
     }
+  }
+
+  changeText() {
+    this.error = '';
   }
 
 }

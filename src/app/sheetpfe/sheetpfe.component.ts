@@ -102,7 +102,24 @@ export class SheetpfeComponent implements OnInit {
       this.route.queryParams.subscribe((params) => {
         this.param = params.q;
         if ( this.param ) {
-          this.notFound = '';
+          if ( this.param === '_modify') {
+            this.sheets = []
+            this.sheetService.sheets(this.etat, 0, this.pays, this.categorie).subscribe(data => {
+              if (data) {
+                data.forEach(s => {
+                  s.sheetPFEModifications.forEach(m => {
+                    if (m.etat === 'DEFAULT') {
+                        this.sheets.push(s);
+                    }
+                  });
+                });
+                this.sheets =   Array.from(this.sheets.reduce((m , s) => m.set(s.id, s), new Map()).values());
+                this.sheets.reverse();
+              }
+            });
+          } else {
+              this.notFound = 'assets/images/404/404.png';
+          }
         } else {
           this.year = this.datePipe.transform(new Date(),'yyyy-MM');
           this.toyear =  this.datePipe.transform(new Date(),'yyyy-MM');
@@ -140,8 +157,11 @@ export class SheetpfeComponent implements OnInit {
       this.sheetService.enseignantSheets(this.year.substring(0, 4) , this.toyear.substring(0, 4) , this.type).subscribe(data => {
         this.sheets = []
         if (this.type === 'ALL') {
-          this.sheets =   Array.from(data.reduce((m , s) => m.set(s.id, s), new Map()).values());
+            if (data) {
+              this.sheets =   Array.from(data.reduce((m , s) => m.set(s.id, s), new Map()).values());
+            }
         } else {
+          console.log(data)
           this.sheets = data;
         }
       }, error =>  {

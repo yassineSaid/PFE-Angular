@@ -54,6 +54,7 @@ import { ReclamationDisplayComponent } from './soutenance-component/reclamation-
 
 
 import { SoutenanceComponent } from './soutenance/soutenance.component';
+import { EtudiantnosheetComponent } from './sheetpfe/etudiantnosheet/etudiantnosheet.component';
 import { NotificationRSComponent } from './soutenance-component/notification-rs/notification-rs.component';
 
 
@@ -103,13 +104,15 @@ import { NotificationRSComponent } from './soutenance-component/notification-rs/
 
     ReclamationDisplayComponent,
 
+    SoutenanceComponent,
+
+    EtudiantnosheetComponent,
 
     SoutenanceComponent,
 
     NotificationRSComponent
 
   ],
-
 
   imports: [
     BrowserModule,
