@@ -40,14 +40,5 @@ export class SidebarComponent implements OnInit {
         console.log(this.notification);
       }
     );
-    if (this.user.role === 'Admin' || this.user.role === 'Enseignant')
-    {
-      this.httpService.getAllNotification().subscribe(
-        data => {
-          this.notif = data;
-          console.log(this.notif);
-        }
-      );
-    }
   }
 }

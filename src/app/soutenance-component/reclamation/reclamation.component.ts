@@ -3,7 +3,7 @@ import {SoutenanceServiceService} from '../soutenance-service.service';
 import {LOCAL_STORAGE, WebStorageService} from 'ngx-webstorage-service';
 import {Reclamation} from '../../Models/Reclamation';
 import {User} from '../../Models/user';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-reclamation',
@@ -23,7 +23,7 @@ export class ReclamationComponent implements OnInit {
   ngOnInit() {
     this.Reclamation = this.formBuilder.group(
       {
-        textRec: [''],
+        textRec: ['', [ Validators.required, Validators.minLength(15), Validators.maxLength(200)]],
         etudiant: [''],
         soutenance: [''],
         dateAjout: ['']
@@ -31,9 +31,9 @@ export class ReclamationComponent implements OnInit {
     );
   }
 
-  getText()
+  get getText()
   {
-    this.Reclamation.get('textRec');
+     return this.Reclamation.get('textRec');
   }
   getIdEtudiant()
   {

@@ -23,20 +23,23 @@ import { ShowSheetpfeComponent } from './sheetpfe/show-sheetpfe/show-sheetpfe.co
 import { InternshipagreementComponent } from './internshipagreement/internshipagreement.component';
 import { ShowInternshipagreementComponent } from './internshipagreement/show-internshipagreement/show-internshipagreement.component';
 import { NotifySheetpfeComponent } from './sheetpfe/notify-sheetpfe/notify-sheetpfe.component';
-import {SoutenanceComponentComponent} from './soutenance-component/soutenance-component.component';
-import {ReclamationComponent} from './soutenance-component/reclamation/reclamation.component';
-import {ReclamationDisplayComponent} from './soutenance-component/reclamation-display/reclamation-display.component';
-import {NotificationRSComponent} from './soutenance-component/notification-rs/notification-rs.component';
+import { SoutenanceComponentComponent } from './soutenance-component/soutenance-component.component';
+import { ReclamationComponent } from './soutenance-component/reclamation/reclamation.component';
+import { ReclamationDisplayComponent } from './soutenance-component/reclamation-display/reclamation-display.component';
+import { NotificationRSComponent } from './soutenance-component/notification-rs/notification-rs.component';
 
 
-import {ForumComponent} from './forum/forum.component';
-import {CategorieComponent} from './categorie/categorie.component';
-import {ReponseComponent} from './reponse/reponse.component';
+import { ForumComponent } from './forum/forum.component';
+import { CategorieComponent } from './categorie/categorie.component';
+import { ReponseComponent } from './reponse/reponse.component';
 
 import { AdminsComponent } from './admins/admins.component';
 import { SoutenanceComponent } from './soutenance/soutenance.component';
 
 import { EtudiantnosheetComponent } from './sheetpfe/etudiantnosheet/etudiantnosheet.component';
+import { EcoleComponent } from './ecole/ecole.component';
+import { DepartementsComponent } from './departements/departements.component';
+import { SitesComponent } from './sites/sites.component';
 
 
 
@@ -68,17 +71,21 @@ const routes: Routes = [
   { path: 'sheet/:id', component: ShowSheetpfeComponent },
   { path: 'etudiant/nosheet', component: EtudiantnosheetComponent },
 
-  {path: 'soutenanceNonNote' , component: SoutenanceComponentComponent},
-  {path: 'soutenanceNonNote/reclamation' , component: ReclamationComponent},
-  {path: 'soutenanceNonNote/displayReclamation/:idNotification' , component: ReclamationDisplayComponent},
-  {path: 'soutenanceNonNote/notificationRS' , component:  NotificationRSComponent},
+  { path: 'soutenanceNonNote', component: SoutenanceComponentComponent },
+  { path: 'soutenanceNonNote/reclamation', component: ReclamationComponent },
+  { path: 'soutenanceNonNote/displayReclamation/:idNotification', component: ReclamationDisplayComponent },
+  { path: 'soutenanceNonNote/notificationRS', component: NotificationRSComponent },
   { path: 'forum', component: ForumComponent },
   { path: 'admins', component: AdminsComponent },
-  {path: 'forum' , component: ForumComponent },
-  {path: 'categorie' , component: CategorieComponent},
-  {path: 'reponse', component: ReponseComponent},
+  { path: 'forum', component: ForumComponent },
+  { path: 'categorie', component: CategorieComponent },
+  { path: 'reponse', component: ReponseComponent },
   { path: 'admins', component: AdminsComponent },
-  { path: 'soutenance', component: SoutenanceComponent }
+  { path: 'soutenance', component: SoutenanceComponent },
+  { path: 'ecole', component: EcoleComponent },
+  { path: 'departements/:id', component: DepartementsComponent },
+  { path: 'departements', component: DepartementsComponent },
+  { path: 'sites', component: SitesComponent }
 ];
 
 @NgModule({

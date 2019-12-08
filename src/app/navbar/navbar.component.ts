@@ -6,6 +6,8 @@ import { isDefined } from '@angular/compiler/src/util';
 import { AuthService } from '../login/auth.service';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
+import {SoutenanceServiceService} from "../soutenance-component/soutenance-service.service";
+import {Notification} from "../Models/notification";
 
 @Component({
   selector: 'app-navbar',
@@ -16,6 +18,8 @@ import { Router } from '@angular/router';
 export class NavbarComponent implements OnInit,OnDestroy {
   user: User;
   public sidebarOpened = false;
+  notification: Notification[];
+  nombre: Notification[];
   toggleOffcanvas() {
     this.sidebarOpened = !this.sidebarOpened;
     if (this.sidebarOpened) {
@@ -25,19 +29,33 @@ export class NavbarComponent implements OnInit,OnDestroy {
       document.querySelector('.sidebar-offcanvas').classList.remove('active');
     }
   }
-  constructor(config: NgbDropdownConfig, @Inject(LOCAL_STORAGE) private storage: WebStorageService, private authService:AuthService, private cookieService:CookieService, private router:Router) {
+  constructor(config: NgbDropdownConfig, @Inject(LOCAL_STORAGE) private storage: WebStorageService, private authService:AuthService, private cookieService:CookieService, private router:Router , private httpService: SoutenanceServiceService ) {
     config.placement = 'bottom-right';
     this.authService.user.subscribe((val) => {
       this.user=val;
     });
     this.start();
+    this.user = this.storage.get('user');
+
+    this.httpService.getNotificationUser(this.user.id).subscribe(
+      data => {
+        this.notification = data;
+        console.log(this.notification);
+      }
+    );
+    this.httpService.getNombreNotification(this.user.id).subscribe(
+      data => {
+        this.nombre = data;
+        console.log(this.nombre);
+      }
+    );
   }
 
   ngOnInit() {
       this.user = this.storage.get('user');
       console.log(this.user);
   }
-  
+
   ngOnDestroy(): void {
     this.stop();
   }
@@ -51,7 +69,7 @@ export class NavbarComponent implements OnInit,OnDestroy {
       console.log(event)
     }
   }
-  
+
   private start(): void {
     window.addEventListener("storage", this.storageEventListener.bind(this));
   }

@@ -26,7 +26,7 @@ import { TooltipsComponent } from './tooltips/tooltips.component';
 import { CarouselComponent } from './carousel/carousel.component';
 import { TabsComponent } from './tabs/tabs.component';
 import { LoginComponent } from './login/login.component';
-import { HttpClientModule, HttpClient} from '@angular/common/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { SheetpfeComponent } from './sheetpfe/sheetpfe.component';
 import { ShowSheetpfeComponent } from './sheetpfe/show-sheetpfe/show-sheetpfe.component';
@@ -46,8 +46,8 @@ import { ForumComponent } from './forum/forum.component';
 import { CategorieComponent } from './categorie/categorie.component';
 import { ReponseComponent } from './reponse/reponse.component';
 import { AdminsComponent, NgbdModalAdmin } from './admins/admins.component';
-import {DatePipe} from '@angular/common';
-import {AngularMultiSelectModule} from 'angular2-multiselect-dropdown';
+import { DatePipe } from '@angular/common';
+
 import { NoteSheetpfeComponent } from './sheetpfe/note-sheetpfe/note-sheetpfe.component';
 
 import { ReclamationDisplayComponent } from './soutenance-component/reclamation-display/reclamation-display.component';
@@ -58,6 +58,11 @@ import { EtudiantnosheetComponent } from './sheetpfe/etudiantnosheet/etudiantnos
 import { NotificationRSComponent } from './soutenance-component/notification-rs/notification-rs.component';
 import { ModifySheetpfeComponent } from './sheetpfe/modify-sheetpfe/modify-sheetpfe.component';
 import {ChartsModule} from 'ng2-charts';
+import { EcoleComponent } from './ecole/ecole.component';
+import { DepartementsComponent, NgbdModalDepartement } from './departements/departements.component';
+import { SitesComponent, NgbdModalSite } from './sites/sites.component';
+import { SpecialitesComponent } from './specialites/specialites.component';
+import {AngularMultiSelectModule} from 'angular2-multiselect-dropdown';
 
 
 
@@ -103,6 +108,8 @@ import {ChartsModule} from 'ng2-charts';
     ReponseComponent,
     AdminsComponent,
     NgbdModalAdmin,
+    NgbdModalSite,
+    NgbdModalDepartement,
 
     ReclamationDisplayComponent,
 
@@ -114,7 +121,15 @@ import {ChartsModule} from 'ng2-charts';
 
     NotificationRSComponent,
 
-    ModifySheetpfeComponent
+    ModifySheetpfeComponent,
+
+    EcoleComponent,
+
+    DepartementsComponent,
+
+    SitesComponent,
+
+    SpecialitesComponent
 
   ],
 
@@ -129,7 +144,8 @@ import {ChartsModule} from 'ng2-charts';
     ReactiveFormsModule,
     NgbModule,
     AngularMultiSelectModule,
-    ChartsModule
+    ChartsModule,
+
     /*BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -150,7 +166,9 @@ import {ChartsModule} from 'ng2-charts';
     AffectSheetpfeEnseignantComponent,
     ValidSheetpfeComponent,
     NoteSheetpfeComponent,
-    NgbdModalAdmin
+    NgbdModalAdmin,
+    NgbdModalSite,
+    NgbdModalDepartement,
   ],
 })
 export class AppModule { }

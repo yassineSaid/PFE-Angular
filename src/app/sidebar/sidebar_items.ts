@@ -12,8 +12,35 @@ export const items = [
         path: "/admins",
         title: "Administrateurs",
         icon: "menu-icon fa fa-user-o",
-        roles: Roles.SuperAdmin,
+        roles: [Roles.SuperAdmin],
         queryParams: ""
+    },
+    {
+        path: "/ecole",
+        title: "Ecole",
+        icon: "menu-icon fa fa-institution",
+        roles: [Roles.Admin],
+        queryParams: ""
+    },
+    {
+        path: "/sites",
+        title: "Sites",
+        icon: "menu-icon fa fa-institution",
+        roles: [Roles.Admin],
+        queryParams: ""
+    },
+    {
+        path: "/departements",
+        title: "Départements",
+        icon: "menu-icon fa fa-institution",
+        roles: [Roles.Admin],
+        queryParams: ""
+    },
+    {
+        path: '/soutenanceNonNote',
+        title: 'Suivi',
+        icon: 'menu-icon fa fa-file-text-o',
+        roles: 'All'
     },
     {
         path: "/forms",
@@ -106,38 +133,27 @@ export const items = [
         roles: "All",
         queryParams: { q: '_planning' }
     },
+
     {
-      path: "/sheet",
-      title: "Modification majeur",
-      icon: "menu-icon fa fa-file-text-o",
-      roles: "All",
-      queryParams: { q: '_modify' }
+        path: "/sheet",
+        title: "Modification majeur",
+        icon: "menu-icon fa fa-file-text-o",
+        roles: "All",
+        queryParams: { q: '_modify' }
     },
-    {
-      path: "/sheet",
-      title: "Modification majeur",
-      icon: "menu-icon fa fa-file-text-o",
-      roles: "All",
-      queryParams: { q: '_modify' }
-    },
-    {
-      path: "/sheet",
-      title: "Notification",
-      icon: "menu-icon fa fa-file-text-o",
-      roles: "All",
-      queryParams: { q: '_modify' }
-    },
+
     {
       path: '/soutenanceNonNote',
       title: 'Suivi',
       icon: 'menu-icon fa fa-file-text-o',
       roles: 'All'
     },
+
     {
-      path: "etudiant/nosheet",
-      title: "Etudiant sans fiche pfe",
-      icon: "menu-icon fa fa-file-text-o",
-      roles: "All"
+        path: "etudiant/nosheet",
+        title: "Etudiant sans fiche pfe",
+        icon: "menu-icon fa fa-file-text-o",
+        roles: "All"
     },
     {
         path: "/internship",
@@ -195,12 +211,12 @@ export const items = [
         roles: "All",
         queryParams: ""
     },
-  {
-    path: "/categorie",
-    title: "Categorie",
-    icon: "menu-icon mdi mdi-content-copy",
-    roles: "All",
-  },
+    {
+        path: "/categorie",
+        title: "Categorie",
+        icon: "menu-icon mdi mdi-content-copy",
+        roles: "All",
+    },
     {
         path: "/forum",
         title: "Forum",
