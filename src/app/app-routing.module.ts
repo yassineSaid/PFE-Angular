@@ -83,6 +83,7 @@ const routes: Routes = [
   { path: 'admins', component: AdminsComponent },
   { path: 'soutenance', component: SoutenanceComponent },
   { path: 'ecole', component: EcoleComponent },
+  { path: 'departements/:id', component: DepartementsComponent },
   { path: 'departements', component: DepartementsComponent },
   { path: 'sites', component: SitesComponent }
 ];

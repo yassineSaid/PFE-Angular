@@ -57,8 +57,9 @@ import { SoutenanceComponent } from './soutenance/soutenance.component';
 import { EtudiantnosheetComponent } from './sheetpfe/etudiantnosheet/etudiantnosheet.component';
 import { NotificationRSComponent } from './soutenance-component/notification-rs/notification-rs.component';
 import { EcoleComponent } from './ecole/ecole.component';
-import { DepartementsComponent } from './departements/departements.component';
+import { DepartementsComponent, NgbdModalDepartement } from './departements/departements.component';
 import { SitesComponent, NgbdModalSite } from './sites/sites.component';
+import { SpecialitesComponent } from './specialites/specialites.component';
 
 
 
@@ -105,6 +106,7 @@ import { SitesComponent, NgbdModalSite } from './sites/sites.component';
     AdminsComponent,
     NgbdModalAdmin,
     NgbdModalSite,
+    NgbdModalDepartement,
 
     ReclamationDisplayComponent,
 
@@ -120,7 +122,9 @@ import { SitesComponent, NgbdModalSite } from './sites/sites.component';
 
     DepartementsComponent,
 
-    SitesComponent
+    SitesComponent,
+
+    SpecialitesComponent
 
   ],
 
@@ -156,6 +160,7 @@ import { SitesComponent, NgbdModalSite } from './sites/sites.component';
     NoteSheetpfeComponent,
     NgbdModalAdmin,
     NgbdModalSite,
+    NgbdModalDepartement,
   ],
 })
 export class AppModule { }

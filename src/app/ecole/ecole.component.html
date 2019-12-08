@@ -7,7 +7,7 @@
           <div class="form-group">
             <label for="exampleInputEmail1">Nom</label>
             <input type="text" class="form-control" id="nom" formControlName="nom" placeholder="Nom"
-              [ngClass]="{'is-invalid':nomErrors.length>0}" value="{{nom}}">
+              [ngClass]="{'is-invalid':nomErrors.length>0}" value="{{nom.value}}">
             <div class="invalid-feedback" *ngFor="let error of nomErrors;">
               {{error.errorMessage}}
             </div>
@@ -15,7 +15,7 @@
           <div class="form-group">
             <label for="exampleInputEmail1">Adresse</label>
             <input type="text" class="form-control" id="adresse" formControlName="adresse" placeholder="Adresse"
-            [ngClass]="{'is-invalid':adresseErrors.length>0}" value="{{adresse}}">
+            [ngClass]="{'is-invalid':adresseErrors.length>0}" value="{{adresse.value}}">
             <div class="invalid-feedback" *ngFor="let error of adresseErrors;">
               {{error.errorMessage}}
             </div>

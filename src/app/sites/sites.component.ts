@@ -6,6 +6,7 @@ import { AdminsService } from '../admins/admins.service';
 import { Error } from '../Models/error';
 import { LOCAL_STORAGE, WebStorageService } from 'ngx-webstorage-service';
 import { Site } from '../Models/site';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sites',
@@ -13,34 +14,38 @@ import { Site } from '../Models/site';
   styleUrls: ['./sites.component.scss']
 })
 export class SitesComponent implements OnInit {
-  loading=true;
-  sites:Site[]=[];
-  hasEcole=true;
+  loading = true;
+  sites: Site[] = [];
+  hasEcole = true;
 
-  constructor(private sitesService: SitesService, private modalService: NgbModal,@Inject(LOCAL_STORAGE) private storage: WebStorageService) { 
-    if (storage.get("user").ecole!==null){
+  constructor(private sitesService: SitesService, private router: Router, private modalService: NgbModal, @Inject(LOCAL_STORAGE) private storage: WebStorageService) {
+    if (storage.get("user").ecole !== null) {
       sitesService.getAll(storage.get("user").ecole.id).subscribe((success) => {
-        this.sites=success;
-        this.loading=false;
+        this.sites = success;
+        this.loading = false;
       })
     }
     else {
-      this.hasEcole=false;
-      this.loading=false;
+      this.hasEcole = false;
+      this.loading = false;
     }
   }
 
-  supprimer(site:Site){
-    this.sitesService.supprimer(site.id).subscribe((success)=> {
+  supprimer(site: Site) {
+    this.sitesService.supprimer(site.id).subscribe((success) => {
       this.sitesService.getAll(this.storage.get("user").ecole.id).subscribe(success => {
         this.sites = success;
       })
     })
   }
 
+  details(site: Site) {
+    this.router.navigate(['/departements/'+site.id]);
+  }
+
   openForm() {
     const modal = this.modalService.open(NgbdModalSite);
-    modal.componentInstance.update=false;
+    modal.componentInstance.update = false;
     modal.result.then((added) => {
       if (added === "added") {
         this.loading = true;
@@ -52,11 +57,11 @@ export class SitesComponent implements OnInit {
     })
   }
 
-  openFormUpdate(site:Site) {
+  openFormUpdate(site: Site) {
     console.log(site)
     const modal = this.modalService.open(NgbdModalSite);
-    modal.componentInstance.update=true;
-    modal.componentInstance.site=site;
+    modal.componentInstance.update = true;
+    modal.componentInstance.site = site;
     modal.result.then((added) => {
       if (added === "added") {
         this.loading = true;
@@ -122,7 +127,7 @@ export class NgbdModalSite implements OnInit {
   constructor(public modal: NgbActiveModal, private formBuilder: FormBuilder, private sitesService: SitesService) {
   }
   initForm() {
-    if (this.update){
+    if (this.update) {
       console.log(this.site);
       this.siteForm = this.formBuilder.group({
         nom: [this.site.nom],
@@ -147,8 +152,8 @@ export class NgbdModalSite implements OnInit {
   }
   confirmer() {
     this.loading = true;
-    if (this.update){
-      this.sitesService.modifier(this.nom.value, this.adresse.value,this.site.id).subscribe(
+    if (this.update) {
+      this.sitesService.modifier(this.nom.value, this.adresse.value, this.site.id).subscribe(
         success => {
           console.log(success);
           this.modal.close("added");
@@ -184,6 +189,6 @@ export class NgbdModalSite implements OnInit {
         }
       )
     }
-    
+
   }
 }
