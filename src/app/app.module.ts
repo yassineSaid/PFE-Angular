@@ -26,7 +26,7 @@ import { TooltipsComponent } from './tooltips/tooltips.component';
 import { CarouselComponent } from './carousel/carousel.component';
 import { TabsComponent } from './tabs/tabs.component';
 import { LoginComponent } from './login/login.component';
-import { HttpClientModule, HttpClient} from '@angular/common/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { SheetpfeComponent } from './sheetpfe/sheetpfe.component';
 import { ShowSheetpfeComponent } from './sheetpfe/show-sheetpfe/show-sheetpfe.component';
@@ -46,7 +46,7 @@ import { ForumComponent } from './forum/forum.component';
 import { CategorieComponent } from './categorie/categorie.component';
 import { ReponseComponent } from './reponse/reponse.component';
 import { AdminsComponent, NgbdModalAdmin } from './admins/admins.component';
-import {DatePipe} from '@angular/common';
+import { DatePipe } from '@angular/common';
 
 import { NoteSheetpfeComponent } from './sheetpfe/note-sheetpfe/note-sheetpfe.component';
 
@@ -57,6 +57,8 @@ import { SoutenanceComponent } from './soutenance/soutenance.component';
 import { EtudiantnosheetComponent } from './sheetpfe/etudiantnosheet/etudiantnosheet.component';
 import { NotificationRSComponent } from './soutenance-component/notification-rs/notification-rs.component';
 import { EcoleComponent } from './ecole/ecole.component';
+import { DepartementsComponent } from './departements/departements.component';
+import { SitesComponent, NgbdModalSite } from './sites/sites.component';
 
 
 
@@ -102,6 +104,7 @@ import { EcoleComponent } from './ecole/ecole.component';
     ReponseComponent,
     AdminsComponent,
     NgbdModalAdmin,
+    NgbdModalSite,
 
     ReclamationDisplayComponent,
 
@@ -113,7 +116,11 @@ import { EcoleComponent } from './ecole/ecole.component';
 
     NotificationRSComponent,
 
-    EcoleComponent
+    EcoleComponent,
+
+    DepartementsComponent,
+
+    SitesComponent
 
   ],
 
@@ -147,7 +154,8 @@ import { EcoleComponent } from './ecole/ecole.component';
     AffectSheetpfeEnseignantComponent,
     ValidSheetpfeComponent,
     NoteSheetpfeComponent,
-    NgbdModalAdmin
+    NgbdModalAdmin,
+    NgbdModalSite,
   ],
 })
 export class AppModule { }
