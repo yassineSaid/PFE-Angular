@@ -55,6 +55,7 @@ import { ReclamationDisplayComponent } from './soutenance-component/reclamation-
 
 import { SoutenanceComponent } from './soutenance/soutenance.component';
 import { NotificationRSComponent } from './soutenance-component/notification-rs/notification-rs.component';
+import { EcoleComponent } from './ecole/ecole.component';
 
 
 
@@ -106,7 +107,9 @@ import { NotificationRSComponent } from './soutenance-component/notification-rs/
 
     SoutenanceComponent,
 
-    NotificationRSComponent
+    NotificationRSComponent,
+
+    EcoleComponent
 
   ],
 
