@@ -66,42 +66,42 @@ export const items = [
     },
     {
         path: "/sheet",
-        title: "Sheet PFE",
+        title: "Fiche PFE",
         icon: "menu-icon fa fa-file-text-o",
         roles: "All",
         queryParams: ""
     },
     {
         path: "/sheet",
-        title: "Accepted",
+        title: "Fiche accepter",
         icon: "menu-icon fa fa-file-text-o",
         roles: "All",
         queryParams: { q: '_accepted' }
     },
     {
         path: "/sheet",
-        title: "Encadreur assignment",
+        title: "Fiche en attente d'encadreur",
         icon: "menu-icon fa fa-file-text-o",
         roles: "All",
         queryParams: { q: '_encadreur' }
     },
     {
         path: "/sheet",
-        title: "Rapporteur assignment",
+        title: "Fiche en attente de rapporteur",
         icon: "menu-icon fa fa-file-text-o",
         roles: "All",
         queryParams: { q: '_rapporteur' }
     },
     {
         path: "/sheet",
-        title: "Note",
+        title: "Fiche en attente de note",
         icon: "menu-icon fa fa-file-text-o",
         roles: "All",
         queryParams: { q: '_note' }
     },
     {
         path: "/sheet",
-        title: "Defense planning",
+        title: "Fiche en attente de planification",
         icon: "menu-icon fa fa-file-text-o",
         roles: "All",
         queryParams: { q: '_planning' }
@@ -113,12 +113,26 @@ export const items = [
       roles: "All",
       queryParams: { q: '_modify' }
     },
-  {
-    path: '/soutenanceNonNote',
-    title: 'Suivi',
-    icon: 'menu-icon fa fa-file-text-o',
-    roles: 'All'
-  },
+    {
+      path: "/sheet",
+      title: "Modification majeur",
+      icon: "menu-icon fa fa-file-text-o",
+      roles: "All",
+      queryParams: { q: '_modify' }
+    },
+    {
+      path: "/sheet",
+      title: "Notification",
+      icon: "menu-icon fa fa-file-text-o",
+      roles: "All",
+      queryParams: { q: '_modify' }
+    },
+    {
+      path: '/soutenanceNonNote',
+      title: 'Suivi',
+      icon: 'menu-icon fa fa-file-text-o',
+      roles: 'All'
+    },
     {
       path: "etudiant/nosheet",
       title: "Etudiant sans fiche pfe",
@@ -127,7 +141,7 @@ export const items = [
     },
     {
         path: "/internship",
-        title: "Internship agreement",
+        title: "Convention de stage",
         icon: "menu-icon fa fa-address-card-o",
         roles: "All",
         queryParams: ""

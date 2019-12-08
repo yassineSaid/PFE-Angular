@@ -103,18 +103,18 @@ export class AddSheetpfeComponent implements OnInit {
 
   addSheet() {
     this.sheetForm.setErrors({'submit': true});
-    this.sheetService.addSheet(this.sheetForm.value).subscribe(success => {
-      this.sheet = this.sheetForm.value;
-      this.sheet.entreprise = this.listentreprises.filter(e => e.id.toString() === this.entreprise.get('id').value.toString())[0];
-      this.hide.emit(this.sheet);
+    this.sheetService.addSheet(this.sheetForm.value).subscribe(data => {
+      if (data) {
+        this.hide.emit(data);
+      }
     });
   }
   editSheet() {
     this.sheetForm.setErrors({'submit': true});
-    this.sheetService.updateSheet(this.sheetForm.value).subscribe(success => {
-      this.sheet = this.sheetForm.value;
-      this.sheet.entreprise = this.listentreprises.filter(e => e.id.toString() === this.entreprise.get('id').value.toString())[0];
-      this.hide.emit(this.sheet);
+    this.sheetService.updateSheet(this.sheetForm.value).subscribe(data => {
+      if (data) {
+        this.hide.emit(data);
+      }
     });
   }
   cancel() {

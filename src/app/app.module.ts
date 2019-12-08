@@ -56,6 +56,8 @@ import { ReclamationDisplayComponent } from './soutenance-component/reclamation-
 import { SoutenanceComponent } from './soutenance/soutenance.component';
 import { EtudiantnosheetComponent } from './sheetpfe/etudiantnosheet/etudiantnosheet.component';
 import { NotificationRSComponent } from './soutenance-component/notification-rs/notification-rs.component';
+import { ModifySheetpfeComponent } from './sheetpfe/modify-sheetpfe/modify-sheetpfe.component';
+import {ChartsModule} from 'ng2-charts';
 
 
 
@@ -110,7 +112,9 @@ import { NotificationRSComponent } from './soutenance-component/notification-rs/
 
     SoutenanceComponent,
 
-    NotificationRSComponent
+    NotificationRSComponent,
+
+    ModifySheetpfeComponent
 
   ],
 
@@ -125,6 +129,7 @@ import { NotificationRSComponent } from './soutenance-component/notification-rs/
     ReactiveFormsModule,
     NgbModule,
     AngularMultiSelectModule,
+    ChartsModule
     /*BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,

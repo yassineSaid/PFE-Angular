@@ -40,13 +40,17 @@ export class ShowSheetpfeComponent implements OnInit {
     this.route.params.subscribe(params => { this.sheet_id = params['id']; });
     this.user = this.storage.get('user');
     if (this.user.role === 'Etudiant') {
-      console.log(this.sheet_id)
       if (this.sheet_id) {
         this.notFound = 'assets/images/404/404.png';
       } else {
         this.sheetService.studentSheet(this.user.id).subscribe(data => {
           if (data) {
             this.sheet = data;
+            data.sheetPFEModifications.forEach(m => {
+              if (m.etat === 'DEFAULT') {
+                this.sheetModify = true;
+              }
+            });
             this.sheet.enseignantsheet.forEach(es => {
               if (es.type === 'ENCADREUR') {
                 this.exist_e = true;
@@ -59,11 +63,12 @@ export class ShowSheetpfeComponent implements OnInit {
           }
         });
       }
-      this.sheetService.notifySheet(this.user.id).subscribe(data => {
+      this.sheetService.notifySheet('notificationetudiant', this.user.id).subscribe(data => {
         if (data) {
-          this.notify = Array.from(data.filter(n => n.vu === 0).values());
+          this.notify = Array.from(data.filter(n => n.sendby !== 'Etudiant' && n.vu === 0).values());
         }
       });
+      this.sheetService.changeVu().subscribe();
     }
     if (this.user.role === 'ChefDeDepartement') {
         this.sheetService.sheet(this.sheet_id).subscribe(data => {
@@ -86,6 +91,13 @@ export class ShowSheetpfeComponent implements OnInit {
             this.notFound = 'assets/images/404/404.png';
           }
         } );
+        this.sheetService.notifySheet('notificationenseignant', this.user.id).subscribe(data => {
+          if (data) {
+            this.notify = Array.from(data.filter(n => n.sendby === 'Etudiant' && n.vu === 0).values());
+          }
+        });
+        this.sheetService.changeVu().subscribe();
+
     }
 
     if (this.user.role === 'DirecteurDesStages') {
@@ -107,6 +119,13 @@ export class ShowSheetpfeComponent implements OnInit {
           this.notFound = 'assets/images/404/404.png';
         }
        });
+        this.sheetService.notifySheet('notificationenseignant', this.user.id).subscribe(data => {
+          if (data) {
+            this.notify = Array.from(data.filter(n => n.sendby === 'Etudiant' && n.vu === 0).values());
+          }
+        });
+        this.sheetService.changeVu().subscribe();
+
     }
 
     if (this.user.role === 'Enseignant') {
@@ -139,6 +158,12 @@ export class ShowSheetpfeComponent implements OnInit {
            this.notFound = 'assets/images/404/404.png';
          }
       });
+      this.sheetService.notifySheet('notificationenseignant', this.user.id).subscribe(data => {
+        if (data) {
+          this.notify = Array.from(data.filter(n => n.sendby === 'Etudiant' && n.vu === 0).values());
+        }
+      });
+      this.sheetService.changeVu().subscribe();
     }
   }
 
@@ -185,8 +210,15 @@ export class ShowSheetpfeComponent implements OnInit {
    this.details = this.details === true ? false : true ;
   }
   hide(sheet) {
-    console.log(sheet)
-    this.sheet = sheet;
+    sheet.sheetPFEModifications.forEach(m => {
+      if (m.etat === 'DEFAULT') {
+        this.sheetModify = true;
+      }
+    });
+    if ( this.sheetModify === false) {
+      this.sheet = sheet;
+    }
+    this.notify = [];
     this.edit = false;
   }
   updateEnseignant(type) {
