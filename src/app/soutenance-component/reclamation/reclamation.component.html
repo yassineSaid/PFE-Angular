@@ -1,14 +1,20 @@
 <div class="card">
 <div *ngIf="!ok">
           <form [formGroup]="Reclamation" >
-            <label class="card-title" ><strong>Text Reclamation : </strong></label>
+            <label class="card-title"><strong >Text Reclamation : </strong></label>
             <br>
-           <textarea id="textRec"  formControlName="textRec"></textarea>
+           <textarea id="textRec" placeholder="Add Reclamation here" [class.border-danger]="getText.invalid" formControlName="textRec"></textarea>
+            <label class="text-small" >{{ getText.value.length}}</label>
+            <div class="invalid-feedback" *ngIf="getText.invalid">
+              <h4 *ngIf="getText.errors.required" >The title is required. </h4>
+              <h4 *ngIf="getText.errors.minlength" >The title must be at least 10 characters. </h4>
+              <h4 *ngIf="getText.errors.maxlength" >The title must have at least 200 characters </h4>
+            </div>
             <br>
             <input  id="etudiant"   formControlName="etudiant" hidden>
             <input  id="soutenance"  formControlName="soutenance" hidden >
             <input  id="dateAjout" type="Date"  formControlName="dateAjout"  hidden>
-            <button  class="btn btn-inverse-info btn-fw grid-margin" type="submit" (click)="addReclamation()" >Ajouter</button>
+            <button  class="btn btn-inverse-info btn-fw grid-margin" type="submit" (click)="addReclamation()" [disabled]="Reclamation.invalid" >Ajouter</button>
           </form>
 </div>
 

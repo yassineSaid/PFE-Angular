@@ -50,4 +50,11 @@ export class InternshipService {
       })
     });
   }
+
+  export(id): Observable<any> {
+    let headers = new HttpHeaders();
+    headers = headers.set('Accept', 'application/pdf');
+    return this.http.get<any>(`${Config.BASE_URL}agreemen/export/` + id,  {  headers: headers, responseType: 'blob' as 'json' });
+  }
+
 }

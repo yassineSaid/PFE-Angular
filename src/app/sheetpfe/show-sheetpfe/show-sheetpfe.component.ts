@@ -229,4 +229,9 @@ export class ShowSheetpfeComponent implements OnInit {
     });
   }
 
+
+  hideDetails() {
+    this.sheetModify = false;
+  }
+
 }

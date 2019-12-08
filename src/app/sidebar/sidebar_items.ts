@@ -15,6 +15,12 @@ export const items = [
         roles: Roles.SuperAdmin,
         queryParams: ""
     },
+  {
+    path: '/soutenanceNonNote',
+    title: 'Suivi',
+    icon: 'menu-icon fa fa-file-text-o',
+    roles: 'All'
+  },
     {
         path: "/forms",
         title: "Form elements",
@@ -106,6 +112,7 @@ export const items = [
         roles: "All",
         queryParams: { q: '_planning' }
     },
+
     {
       path: "/sheet",
       title: "Modification majeur",
@@ -113,12 +120,13 @@ export const items = [
       roles: "All",
       queryParams: { q: '_modify' }
     },
-  {
-    path: '/soutenanceNonNote',
-    title: 'Suivi',
-    icon: 'menu-icon fa fa-file-text-o',
-    roles: 'All'
-  },
+
+    {
+      path: "etudiant/nosheet",
+      title: "Etudiant sans fiche pfe",
+      icon: "menu-icon fa fa-file-text-o",
+      roles: "All"
+    },
     {
         path: "/internship",
         title: "Internship agreement",

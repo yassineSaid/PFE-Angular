@@ -54,4 +54,12 @@ export class ShowInternshipagreementComponent implements OnInit {
     this.internship = internship;
     this.edit = false;
   }
+
+  export() {
+    this.internshipService.export(this.internship.id).subscribe((function (response) {
+      console.log("kkk")
+      var file = new Blob([response], {type: 'application/pdf'});
+      var fileURL = URL.createObjectURL(file);}));
+  }
+
 }

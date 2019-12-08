@@ -53,6 +53,11 @@ export class SoutenanceServiceService {
     return this.http.get<Notification[]>(`${Config.BASE_URL}notif/getById/`+id);
   }
 
+  getNombreNotification(id: number)
+  {
+    return this.http.get<Notification[]>(`${Config.BASE_URL}notif/getNombre/`+id);
+  }
+
   getAllNotification()
   {
     return this.http.get<Notification[]>(`${Config.BASE_URL}notif/get`);

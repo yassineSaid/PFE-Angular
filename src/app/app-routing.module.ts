@@ -36,6 +36,8 @@ import {ReponseComponent} from './reponse/reponse.component';
 import { AdminsComponent } from './admins/admins.component';
 import { SoutenanceComponent } from './soutenance/soutenance.component';
 
+import { EtudiantnosheetComponent } from './sheetpfe/etudiantnosheet/etudiantnosheet.component';
+
 
 
 
@@ -64,6 +66,8 @@ const routes: Routes = [
   { path: 'sheet/notify', component: NotifySheetpfeComponent },
   { path: 'sheet/planning', component: ShowSheetpfeComponent },
   { path: 'sheet/:id', component: ShowSheetpfeComponent },
+  { path: 'etudiant/nosheet', component: EtudiantnosheetComponent },
+
   {path: 'soutenanceNonNote' , component: SoutenanceComponentComponent},
   {path: 'soutenanceNonNote/reclamation' , component: ReclamationComponent},
   {path: 'soutenanceNonNote/displayReclamation/:idNotification' , component: ReclamationDisplayComponent},

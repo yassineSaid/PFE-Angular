@@ -47,13 +47,14 @@ import { CategorieComponent } from './categorie/categorie.component';
 import { ReponseComponent } from './reponse/reponse.component';
 import { AdminsComponent, NgbdModalAdmin } from './admins/admins.component';
 import {DatePipe} from '@angular/common';
-import {AngularMultiSelectModule} from 'angular2-multiselect-dropdown';
+
 import { NoteSheetpfeComponent } from './sheetpfe/note-sheetpfe/note-sheetpfe.component';
 
 import { ReclamationDisplayComponent } from './soutenance-component/reclamation-display/reclamation-display.component';
 
 
 import { SoutenanceComponent } from './soutenance/soutenance.component';
+import { EtudiantnosheetComponent } from './sheetpfe/etudiantnosheet/etudiantnosheet.component';
 import { NotificationRSComponent } from './soutenance-component/notification-rs/notification-rs.component';
 import { EcoleComponent } from './ecole/ecole.component';
 
@@ -104,6 +105,9 @@ import { EcoleComponent } from './ecole/ecole.component';
 
     ReclamationDisplayComponent,
 
+    SoutenanceComponent,
+
+    EtudiantnosheetComponent,
 
     SoutenanceComponent,
 
@@ -112,7 +116,6 @@ import { EcoleComponent } from './ecole/ecole.component';
     EcoleComponent
 
   ],
-
 
   imports: [
     BrowserModule,
@@ -124,7 +127,6 @@ import { EcoleComponent } from './ecole/ecole.component';
     HttpClientModule,
     ReactiveFormsModule,
     NgbModule,
-    AngularMultiSelectModule,
     /*BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,

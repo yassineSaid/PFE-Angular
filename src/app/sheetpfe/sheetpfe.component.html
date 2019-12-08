@@ -111,9 +111,14 @@
                 </td>
               </tr>
               <tr *ngIf="sheets.length === 0" class="text-center">
-                <td colspan="5" >
+                <td colspan="6" *ngIf="user.role === 'Enseignant' && type === 'ALL' && param != '_modify'; else cols5" >
                   There are no sheets
                 </td>
+                <ng-template #cols5>
+                  <td colspan="5">
+                    There are no sheets
+                  </td>
+                </ng-template>
               </tr>
               </tbody>
             </table>

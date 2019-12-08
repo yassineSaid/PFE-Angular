@@ -15,7 +15,7 @@
         </div>
       </div>
 
-      <app-detail-sheetpfe *ngIf="user.role === 'Enseignant' && sheetModify" [sheet]="sheet" ></app-detail-sheetpfe>
+      <app-detail-sheetpfe *ngIf="user.role === 'Enseignant' && sheetModify" [sheet]="sheet" [user]="user" (hide)="hideDetails()"></app-detail-sheetpfe>
 
     </div>
 
@@ -136,8 +136,6 @@
       <p class="text-primary cursor-pointer" *ngIf="user.role === 'ChefDeDepartement'" (click)="showDetails()"><u>show details</u></p>
     </div>
   </div>
-  <app-add-sheetpfe *ngIf="user.role === 'Etudiant' && edit || !sheet" [sheet]="sheet" [edit]="edit" (hide)="hide($event)"></app-add-sheetpfe>
-  <app-detail-sheetpfe *ngIf="details"></app-detail-sheetpfe>
 </ng-template>
 
 

@@ -4,7 +4,7 @@ import {Soutenance} from '../Models/soutenance';
 import {User} from '../Models/user';
 import {Notification} from '../Models/notification';
 import {LOCAL_STORAGE, WebStorageService} from 'ngx-webstorage-service';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 
 @Component({
@@ -28,6 +28,7 @@ export class SoutenanceComponentComponent implements OnInit {
   s: Soutenance = new Soutenance();
   notif: Notification = new Notification();
   ajoutNotification: FormGroup;
+  AddNote: FormGroup;
   @Output() hide = new EventEmitter<any>();
   notification: Notification[];
   notifications: Notification[];
@@ -111,13 +112,16 @@ export class SoutenanceComponentComponent implements OnInit {
     );
     this.ajout = true;
     this.submitted = true;
-    if ( (notee.value - note.value) > 0) {
-      window.alert("il y a un conflit dans la note que vous avez ajouté , la direction traitera ce probleme et vous communiquera par mail");
-      window.location.replace('/soutenanceNonNote');
+    if ( this.AddNote.valid) {
+      if ((notee.value - note.value) > 3 ){
+        window.alert("il y a un conflit dans la note que vous avez ajouté , la direction traitera ce probleme et vous communiquera par mail");
+        window.location.replace('/soutenanceNonNote');
 
-    } if (notee.value - note.value < 0) {
-      window.alert("la note a ete ajouté avec succés");
-      window.location.replace('/soutenanceNonNote');
+      }
+      if (notee.value - note.value <= 3 ) {
+        window.alert("la note a ete ajouté avec succés");
+        window.location.replace('/soutenanceNonNote');
+      }
     }
 
   }
@@ -132,7 +136,24 @@ export class SoutenanceComponentComponent implements OnInit {
         idEnseignant: ['']
       }
     );
+
+    this.AddNote = this.formBuilder.group(
+      {
+         ids: [''],
+        note1: ['', [ Validators.required , Validators.max(20) , Validators.min(0) ] ],
+        note2: ['', [ Validators.required , Validators.max(20) , Validators.min(0) ] ]
+      }
+    );
   }
+  get note1()
+  {
+    return this.AddNote.get('note1');
+  }
+  get note2()
+  {
+    return this.AddNote.get('note2');
+  }
+
   getEtat()
   {
     this.ajoutNotification.get('etat');

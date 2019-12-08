@@ -32,13 +32,13 @@
             <button class="btn btn-inverse-info btn-fw grid-margin" (click)="afficherAjoutNote()">Ajouter Note</button>
             <div *ngIf="submitted && !ajout">
 
-              <form *ngIf="submitted || ajout">
-                <input type="number" [value]="s[4]" #idS hidden>
+              <form [formGroup]="AddNote" *ngIf="submitted || ajout">
+                <input type="number" [value]="s[4]" formControlName="ids" #idS hidden>
                 <label class="card-title"><strong>Note jury 1 :</strong></label>
-                <input type="number" #note>
+                <input type="number" formControlName="note1" #note>
                 <label class="card-title"><strong>Note jury 2 :</strong></label>
-                <input type="number" #notee>
-                <button class="btn btn-inverse-info btn-fw grid-margin" type="submit"  (click)="ajouterNote(idS,note,notee)">Confirmer</button>
+                <input type="number" formControlName="note2" #notee>
+                <button class="btn btn-inverse-info btn-fw grid-margin" type="submit"  (click)="ajouterNote(idS,note,notee)" [disabled]="AddNote.invalid">Confirmer</button>
 
               </form>
             </div>
