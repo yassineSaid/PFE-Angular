@@ -14,6 +14,9 @@
           <h4 class="card-title">List Fiches PFE</h4>
         </div>
         <div class="card-body">
+          <div class="alert alert-fill-success mb-5" role="alert" *ngIf="alert"><i class="mdi mdi-alert-circle"></i> Fichier import avec success. </div>
+
+          <button (click)="upload()" class="btn btn-primary mb-4" >Import Excel</button>
           <div class="nav-filter" *ngIf="user.role === 'DirecteurDesStages' && !param">
             <div class="row grid-margin">
               <div class="col-sm-6 col-md-4 col-lg-3">

@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 import {Config} from '../Models/config';
 import {PfeNotification} from '../Models/pfe-notification';
 import {error} from 'util';
+import {map} from 'rxjs/operators';
 import {LOCAL_STORAGE, WebStorageService} from 'ngx-webstorage-service';
 
 @Injectable({
@@ -167,4 +168,20 @@ export class SheetService {
       })
     });
   }
+
+  postFile(fileToUpload: File): Observable<boolean> {
+    const endpoint = `${Config.BASE_URL}sheet/uploadfile`;
+    const formData: FormData = new FormData();
+    formData.append('uploadedFile', fileToUpload);
+    return this.http
+      .post(endpoint, formData).pipe(
+        map(() => true));
+  }
+
+  export(id): Observable<Blob> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', responseType : 'blob'});
+    return this.http.get<Blob>(`${Config.BASE_URL}sheet/export/` + id,  { headers : headers,responseType :
+        'blob' as 'json'});
+  }
+
 }

@@ -63,6 +63,7 @@ import { DepartementsComponent, NgbdModalDepartement } from './departements/depa
 import { SitesComponent, NgbdModalSite } from './sites/sites.component';
 import { SpecialitesComponent } from './specialites/specialites.component';
 import {AngularMultiSelectModule} from 'angular2-multiselect-dropdown';
+import { UploadSheetpfeComponent } from './sheetpfe/upload-sheetpfe/upload-sheetpfe.component';
 
 
 
@@ -129,7 +130,9 @@ import {AngularMultiSelectModule} from 'angular2-multiselect-dropdown';
 
     SitesComponent,
 
-    SpecialitesComponent
+    SpecialitesComponent,
+
+    UploadSheetpfeComponent
 
   ],
 
@@ -145,7 +148,6 @@ import {AngularMultiSelectModule} from 'angular2-multiselect-dropdown';
     NgbModule,
     AngularMultiSelectModule,
     ChartsModule,
-
     /*BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -169,6 +171,7 @@ import {AngularMultiSelectModule} from 'angular2-multiselect-dropdown';
     NgbdModalAdmin,
     NgbdModalSite,
     NgbdModalDepartement,
+    UploadSheetpfeComponent,
   ],
 })
 export class AppModule { }

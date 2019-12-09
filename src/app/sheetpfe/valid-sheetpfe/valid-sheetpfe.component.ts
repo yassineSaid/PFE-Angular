@@ -30,7 +30,14 @@ export class ValidSheetpfeComponent implements OnInit {
       this.disabled = true;
       if (this.storage.get('user').role === 'DirecteurDesStages') {
         this.sheetService.validsheetByDirecteur(this.sheet.id, this.type.toUpperCase()).subscribe(success => {
-          this.passEntry.emit(this.type.toUpperCase());
+          let type = 'REFUSE';
+          if (this.type === 'accepted') {
+            type = 'ACCEPTED';
+          }
+          const obj = {
+            'etat': type
+          }
+          this.passEntry.emit(obj);
           this.modal.close();
         });
       }

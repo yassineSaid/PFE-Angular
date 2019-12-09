@@ -56,10 +56,22 @@ export class ShowInternshipagreementComponent implements OnInit {
   }
 
   export() {
-    this.internshipService.export(this.internship.id).subscribe((function (response) {
-      console.log("kkk")
-      var file = new Blob([response], {type: 'application/pdf'});
-      var fileURL = URL.createObjectURL(file);}));
+    this.internshipService.export(this.internship.id).subscribe(
+        (data: Blob) => {
+          const file = new Blob([data], {type: 'application/pdf'})
+          const fileURL = URL.createObjectURL(file);
+          window.open(fileURL);
+          const a         = document.createElement('a');
+          a.href        = fileURL;
+          a.target      = '_blank';
+          a.download    = 'Convention.pdf';
+          document.body.appendChild(a);
+          a.click();
+        },
+      (error) => {
+        console.log('getPDF error: ',error);
+        }
+      );
   }
 
 }

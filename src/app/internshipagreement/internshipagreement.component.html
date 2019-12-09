@@ -39,7 +39,7 @@
               </tr>
               </thead>
               <tbody>
-              <tr *ngFor="let internship of internships" [class.bg-light]="internship.pdf === null">
+              <tr *ngFor="let internship of internships" [class.bg-secondary]="internship.pdf === null">
                 <td>
                   {{ internship.etudiant.prenom }} {{ internship.etudiant.nom }}
                 </td>

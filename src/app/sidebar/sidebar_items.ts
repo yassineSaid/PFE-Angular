@@ -107,28 +107,28 @@ export const items = [
     },
     {
         path: "/sheet",
-        title: "Fiche en attente d'encadreur",
+        title: "Attente d'encadreur",
         icon: "menu-icon fa fa-file-text-o",
         roles: "All",
         queryParams: { q: '_encadreur' }
     },
     {
         path: "/sheet",
-        title: "Fiche en attente de rapporteur",
+        title: "Attente de rapporteur",
         icon: "menu-icon fa fa-file-text-o",
         roles: "All",
         queryParams: { q: '_rapporteur' }
     },
     {
         path: "/sheet",
-        title: "Fiche en attente de note",
+        title: "Attente de note",
         icon: "menu-icon fa fa-file-text-o",
         roles: "All",
         queryParams: { q: '_note' }
     },
     {
         path: "/sheet",
-        title: "Fiche en attente de planification",
+        title: "Attente de planification",
         icon: "menu-icon fa fa-file-text-o",
         roles: "All",
         queryParams: { q: '_planning' }

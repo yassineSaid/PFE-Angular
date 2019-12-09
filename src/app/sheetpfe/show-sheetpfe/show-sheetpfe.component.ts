@@ -197,8 +197,9 @@ export class ShowSheetpfeComponent implements OnInit {
     modalRef.componentInstance.type = type;
     modalRef.componentInstance.sheet = this.sheet;
     modalRef.componentInstance.passEntry.subscribe((receivedEntry) => {
-        this.sheet.etat = receivedEntry.etat;
-        this.sheet.note = receivedEntry.note;
+      this.notify = [];
+      this.sheet.etat = receivedEntry.etat;
+      this.sheet.note = receivedEntry.note;
     });
 
   }
@@ -264,6 +265,24 @@ export class ShowSheetpfeComponent implements OnInit {
 
   hideDetails() {
     this.sheetModify = false;
+  }
+  export() {
+    this.sheetService.export(this.sheet.id).subscribe(
+      (data: Blob) => {
+        const file = new Blob([data], {type: 'application/pdf'})
+        const fileURL = URL.createObjectURL(file);
+        window.open(fileURL);
+        const a         = document.createElement('a');
+        a.href        = fileURL;
+        a.target      = '_blank';
+        a.download    = 'FichePFE.pdf';
+        document.body.appendChild(a);
+        a.click();
+      },
+      (error) => {
+        console.log('getPDF error: ',error);
+      }
+    );
   }
 
 }

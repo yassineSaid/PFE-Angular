@@ -80,7 +80,7 @@
       <div class="card-info mb-4">
         <p *ngIf="user.role === 'Etudiant' &&  sheetModify; else checked " class="text-info">Votre modification attend l'acceptation de l'encadreur.</p>
         <ng-template #checked>
-          <p *ngIf="(sheet.etat === 'DEFAULT' || sheet.etat === 'REFUSE') && user.role != 'DirecteurDesStages' &&  user.role != 'Enseignant';else validate "><span class="text-warning"> vérification</span></p>
+          <p *ngIf="(sheet.etat === 'DEFAULT' || sheet.etat === 'REFUSE') && user.role != 'DirecteurDesStages' &&  user.role != 'Enseignant';else validate ">La fiche PFE en cours de <span class="text-warning"> vérification</span></p>
         </ng-template>
         <ng-template #validate>
           <p *ngIf="(sheet.etat === 'PRE_VALIDATE' || sheet.etat === 'REQUEST') && user.role != 'Enseignant';else waiting ">La fiche PFE en cours de <span class="text-warning"> validation</span></p>
@@ -93,7 +93,7 @@
             <ng-template #textrapporteur>
               <p *ngIf="exist_r === false && sheet.etat === 'VALIDATE'">La fiche PFE en attente d’affectation du <span class="text-warning"> rapporteur .</span></p>
             </ng-template>
-          <p *ngIf="(exist_e === true || exist_r === true) && sheet.etat === 'VALIDATE' && ( sheet.noteEncadreur < 0 || sheet.noteRapporteur < 0)">
+          <p *ngIf="((exist_e === true &&  sheet.noteEncadreur < 0) || (exist_r === true && sheet.noteRapporteur < 0)) && sheet.etat === 'VALIDATE'">
             La fiche PFE en attente
             <span class="text-warning" *ngIf=" sheet.noteEncadreur < 0 && exist_e === true "> note encadreur </span>
               <span *ngIf=" sheet.noteEncadreur < 0 && sheet.noteRapporteur < 0 && exist_r === true"> and </span>
@@ -109,7 +109,7 @@
       </div>
       <div class="form-group" *ngIf="sheet.etat != 'PRE_VALIDATE'">
         <button type="button"  *ngIf="user.role === 'Etudiant' && (( sheet.etat === 'VALIDATE' && exist_e && sheet.noteEncadreur < 0) || sheet.etat === 'DEFAULT' || sheet.etat === 'REFUSE' || sheet.etat === 'REQUEST') && exist_r === false && sheetModify === false" class="btn btn-primary mr-2" (click)="update()">Modifier</button>
-        <button type="button"  *ngIf=" (user.role === 'Etudiant' || user.role === 'DirecteurDesStages') && exist_e && sheetModify === false " class="btn btn-inverse-primary mr-2" (click)="update()">Export PDF</button>
+        <button type="button"  *ngIf=" (user.role === 'Etudiant' || user.role === 'DirecteurDesStages') && exist_e && sheetModify === false " class="btn btn-inverse-primary mr-2" (click)="export()">Export PDF</button>
       </div>
 
       <div class="form-group"  *ngIf="user.role === 'Enseignant' && sheet.etat === 'PRE_VALIDATE'">

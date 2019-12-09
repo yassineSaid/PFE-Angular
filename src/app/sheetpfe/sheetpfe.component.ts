@@ -7,6 +7,9 @@ import {ActivatedRoute} from '@angular/router';
 import {DatePipe} from '@angular/common';
 import {Categorie} from '../Models/categorie';
 import {Entreprise} from '../Models/entreprise';
+import {AffectSheetpfeEnseignantComponent} from './affect-sheetpfe-enseignant/affect-sheetpfe-enseignant.component';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {UploadSheetpfeComponent} from './upload-sheetpfe/upload-sheetpfe.component';
 
 @Component({
   selector: 'app-sheetpfe',
@@ -26,7 +29,9 @@ export class SheetpfeComponent implements OnInit {
   categorie: Number = 0;
   categories: Categorie[];
   entreprises: Entreprise[];
-  constructor(private route: ActivatedRoute, private sheetService: SheetService,
+  alert: Boolean = false;
+
+  constructor(private route: ActivatedRoute, private sheetService: SheetService, private modal: NgbModal,
               @Inject(LOCAL_STORAGE) private storage: WebStorageService, private datePipe: DatePipe) { }
   ngOnInit() {
 
@@ -47,9 +52,12 @@ export class SheetpfeComponent implements OnInit {
           } else {
             this.notFound = 'assets/images/404/404.png';
           }
+          this.sheets = [];
           this.sheetService.sheet(this.param).subscribe(data => {
             this.sheets = [];
             if (data) {
+              console.log(this.param)
+              console.log(data)
               this.sheets = data;
             }
           }, error =>  {
@@ -155,7 +163,6 @@ export class SheetpfeComponent implements OnInit {
     if (this.user.role === 'Enseignant') {
       this.sheets = []
       this.sheetService.enseignantSheets(this.year.substring(0, 4) , this.toyear.substring(0, 4) , this.type).subscribe(data => {
-        this.sheets = []
         if (this.type === 'ALL') {
             if (data) {
               this.sheets =   Array.from(data.reduce((m , s) => m.set(s.id, s), new Map()).values());
@@ -189,5 +196,12 @@ export class SheetpfeComponent implements OnInit {
       }
     });
     return enseignantSheets;
+  }
+
+  upload() {
+    const modalRef = this.modal.open(UploadSheetpfeComponent);
+    modalRef.componentInstance.passEntry.subscribe((receivedEntry) => {
+        this.alert = true;
+    });
   }
 }
