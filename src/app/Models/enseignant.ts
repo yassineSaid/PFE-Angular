@@ -3,4 +3,8 @@ export class Enseignant {
   nom: string;
   prenom: string;
   email: string;
+  enabled: boolean;
+  role: string;
+  directeurDesStages: any;
+  
 }

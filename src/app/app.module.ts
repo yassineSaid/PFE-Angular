@@ -26,7 +26,7 @@ import { TooltipsComponent } from './tooltips/tooltips.component';
 import { CarouselComponent } from './carousel/carousel.component';
 import { TabsComponent } from './tabs/tabs.component';
 import { LoginComponent } from './login/login.component';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { SheetpfeComponent } from './sheetpfe/sheetpfe.component';
 import { ShowSheetpfeComponent } from './sheetpfe/show-sheetpfe/show-sheetpfe.component';
@@ -59,7 +59,10 @@ import { NotificationRSComponent } from './soutenance-component/notification-rs/
 import { EcoleComponent } from './ecole/ecole.component';
 import { DepartementsComponent, NgbdModalDepartement } from './departements/departements.component';
 import { SitesComponent, NgbdModalSite } from './sites/sites.component';
-import { SpecialitesComponent } from './specialites/specialites.component';
+import { SpecialitesComponent, NgbdModalSpecialite } from './specialites/specialites.component';
+import { TokenInterceptor } from './login/TokenInterceptor';
+import { ClassesComponent } from './classes/classes.component';
+import { EnseignantsComponent, NgbdModalEnseignant, NgbdModalDirecteur } from './enseignants/enseignants.component';
 
 
 
@@ -107,6 +110,9 @@ import { SpecialitesComponent } from './specialites/specialites.component';
     NgbdModalAdmin,
     NgbdModalSite,
     NgbdModalDepartement,
+    NgbdModalSpecialite,
+    NgbdModalEnseignant,
+    NgbdModalDirecteur,
 
     ReclamationDisplayComponent,
 
@@ -124,7 +130,11 @@ import { SpecialitesComponent } from './specialites/specialites.component';
 
     SitesComponent,
 
-    SpecialitesComponent
+    SpecialitesComponent,
+
+    ClassesComponent,
+
+    EnseignantsComponent
 
   ],
 
@@ -151,7 +161,12 @@ import { SpecialitesComponent } from './specialites/specialites.component';
     HttpClient,
     FormBuilder,
     CookieService,
-    DatePipe
+    DatePipe,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent],
   entryComponents: [
@@ -161,6 +176,9 @@ import { SpecialitesComponent } from './specialites/specialites.component';
     NgbdModalAdmin,
     NgbdModalSite,
     NgbdModalDepartement,
+    NgbdModalSpecialite,
+    NgbdModalEnseignant,
+    NgbdModalDirecteur,
   ],
 })
 export class AppModule { }
