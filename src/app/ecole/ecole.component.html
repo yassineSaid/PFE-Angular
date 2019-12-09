@@ -15,15 +15,32 @@
           <div class="form-group">
             <label for="exampleInputEmail1">Adresse</label>
             <input type="text" class="form-control" id="adresse" formControlName="adresse" placeholder="Adresse"
-            [ngClass]="{'is-invalid':adresseErrors.length>0}" value="{{adresse.value}}">
+              [ngClass]="{'is-invalid':adresseErrors.length>0}" value="{{adresse.value}}">
             <div class="invalid-feedback" *ngFor="let error of adresseErrors;">
               {{error.errorMessage}}
             </div>
           </div>
-          <button type="submit" class="btn btn-success mr-2" (click)="confirmer()" [disabled]="loading">Modifier</button>
+          <button type="submit" class="btn btn-success mr-2" (click)="confirmer()"
+            [disabled]="loading">Modifier</button>
           <div class="spinner-border" role="status" *ngIf="loading">
             <span class="sr-only">Chargement...</span>
           </div>
+        </form>
+        <form class="forms-sample" *ngIf="hasEcole" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <label for="exampleInputEmail1">Logo</label>
+            <input type="file" class="form-control" name="image" accept="image/x-png,image/jpeg" (change)="fileProgress($event)">
+          </div>
+          <button type="submit" class="btn btn-success mr-2"
+          [disabled]="loading">Enregistrer</button>
+        </form>
+        <form class="forms-sample" (ngSubmit)="onSubmitDonnees()">
+          <div class="form-group">
+            <label for="exampleInputEmail1">Données de l'école</label>
+            <input type="file" class="form-control" name="image" accept="file/xlsx" (change)="fileProgressDonnees($event)">
+          </div>
+          <button type="submit" class="btn btn-success mr-2"
+          [disabled]="loading">Importer</button>
         </form>
       </div>
     </div>

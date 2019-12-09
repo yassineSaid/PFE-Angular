@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Site } from '../Models/site';
 import { Departement } from '../Models/departement';
 import { ActivatedRoute, Router } from '@angular/router';
 import { isUndefined } from 'util';
@@ -7,6 +6,7 @@ import { DepartementsService } from './departements.service';
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Error } from '../Models/error';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-departements',
@@ -18,12 +18,15 @@ export class DepartementsComponent implements OnInit {
   departements:Departement[]=[];
   siteId:number;
   hasEcole=true;
-  constructor(private route: ActivatedRoute, private router: Router,private departementsService: DepartementsService, private modalService: NgbModal) { 
+  constructor(private location: Location,private route: ActivatedRoute, private router: Router,private departementsService: DepartementsService, private modalService: NgbModal) { 
     this.route.params.subscribe(params => { 
       this.siteId = params['id']; 
       if (isUndefined(this.siteId)) router.navigate(['/sites']);
     });
   }
+  goBack() {
+    this.location.back();
+  } 
 
   ngOnInit() {
     console.log(this.siteId);

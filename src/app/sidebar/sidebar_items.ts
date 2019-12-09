@@ -30,9 +30,9 @@ export const items = [
         queryParams: ""
     },
     {
-        path: "/departements",
-        title: "Départements",
-        icon: "menu-icon fa fa-institution",
+        path: "/enseignants",
+        title: "Enseignants",
+        icon: "menu-icon fa fa-user-o",
         roles: [Roles.Admin],
         queryParams: ""
     },

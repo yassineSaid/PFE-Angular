@@ -49,6 +49,11 @@ export class LoginComponent implements OnInit {
     },
     error => {
       this.error=true;
+    },
+    ()=>{
+      this.authService.getImage().subscribe(success => {
+        this.authService.broadcastImageChange(success);
+      })
     }
     );
   }

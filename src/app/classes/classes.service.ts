@@ -1,27 +1,24 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Specialite } from '../Models/specialite';
+import { Classe } from '../Models/classe';
 import { Config } from '../Models/config';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
-export class SpecialitesService {
+export class ClassesService {
 
   constructor(private http: HttpClient) { }
-  getAll(id:number): Observable<Specialite[]> {
-    return this.http.get<any>(`${Config.BASE_URL}specialite/list/`+id, {
+  getAll(id:number): Observable<any[]> {
+    return this.http.get<any>(`${Config.BASE_URL}classe/list/`+id, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       }), withCredentials: true
     });
   }
-  ajouter(nom:string,id:number): Observable<Error> {
-    let obj = {
-      "nom" : nom
-    }
-    return this.http.post<any>(`${Config.BASE_URL}specialite/`+id,obj,{
+  ajouter(id:number): Observable<Error> {
+    return this.http.post<any>(`${Config.BASE_URL}classe/`+id,null,{
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       }), withCredentials: true
@@ -31,14 +28,14 @@ export class SpecialitesService {
     let obj = {
       "nom" : nom
     }
-    return this.http.put<any>(`${Config.BASE_URL}specialite/`+id,obj,{
+    return this.http.put<any>(`${Config.BASE_URL}classe/`+id,obj,{
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       }), withCredentials: true
     });
   }
   supprimer(id:number): Observable<Error> {
-    return this.http.delete<any>(`${Config.BASE_URL}specialite/`+id,{
+    return this.http.delete<any>(`${Config.BASE_URL}classe/`+id,{
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       }), withCredentials: true

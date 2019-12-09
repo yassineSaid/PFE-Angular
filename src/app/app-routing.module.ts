@@ -40,6 +40,9 @@ import { EtudiantnosheetComponent } from './sheetpfe/etudiantnosheet/etudiantnos
 import { EcoleComponent } from './ecole/ecole.component';
 import { DepartementsComponent } from './departements/departements.component';
 import { SitesComponent } from './sites/sites.component';
+import { SpecialitesComponent } from './specialites/specialites.component';
+import { ClassesComponent } from './classes/classes.component';
+import { EnseignantsComponent } from './enseignants/enseignants.component';
 
 
 
@@ -85,7 +88,12 @@ const routes: Routes = [
   { path: 'ecole', component: EcoleComponent },
   { path: 'departements/:id', component: DepartementsComponent },
   { path: 'departements', component: DepartementsComponent },
-  { path: 'sites', component: SitesComponent }
+  { path: 'specialites/:id', component: SpecialitesComponent },
+  { path: 'specialites', component: SpecialitesComponent },
+  { path: 'classes/:id', component: ClassesComponent },
+  { path: 'classes', component: ClassesComponent },
+  { path: 'sites', component: SitesComponent },
+  { path: 'enseignants', component: EnseignantsComponent }
 ];
 
 @NgModule({

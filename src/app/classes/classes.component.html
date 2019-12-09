@@ -1,0 +1,38 @@
+<div class="row">
+    <div class="col-lg-12 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Classes</h4>
+          <p class="card-description">
+            Liste des classes
+          </p>
+          <div class="spinner-border" role="status" *ngIf="loading">
+            <span class="sr-only">Loading...</span>
+          </div>
+          <div class="table-responsive" *ngIf="!loading">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Numero</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let classe of classes;">
+                  <td>{{classe.numero}}</td>
+                  <td align="right">
+                    <button class="btn btn-success btn-fw" type="button" (click)=(details(classe))>Détails</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div id="ajouter">
+            <button class="btn btn-primary btn-fw" type="button" (click)=(openForm()) [disabled]="loading">Ajouter une classe</button>
+            <button class="btn btn-danger btn-fw" type="button" (click)=(supprimer(departementId))>Supprimer une classer</button>
+            <button type="button" class="btn btn-danger" (click)=(goBack())><i class="fa fa-arrow-left"></i>Retour</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

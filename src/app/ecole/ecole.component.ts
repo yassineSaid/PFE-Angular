@@ -6,6 +6,9 @@ import { User } from '../Models/user';
 import { Admin } from '../Models/admin';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Error } from '../Models/error';
+import { HttpClient } from '@angular/common/http';
+import { Config } from '../Models/config';
+import { AuthService } from '../login/auth.service';
 
 @Component({
   selector: 'app-ecole',
@@ -20,8 +23,11 @@ export class EcoleComponent implements OnInit {
   adresseErrors: Error[] = [];
   errors: Error[] = [];
   ecoleForm: FormGroup;
+  imageForm: FormGroup;
   hasEcole = true;
-  constructor(private ecoleService: EcoleService, @Inject(LOCAL_STORAGE) private storage: WebStorageService, private formBuilder: FormBuilder) {
+  fileData: File = null;
+  fileDataDonnees: File = null;
+  constructor(private authService: AuthService, private ecoleService: EcoleService, @Inject(LOCAL_STORAGE) private storage: WebStorageService, private formBuilder: FormBuilder) {
     this.user = this.storage.get('user');
     if (this.user.ecole === null) {
       this.hasEcole = false;
@@ -46,16 +52,40 @@ export class EcoleComponent implements OnInit {
   get adresse() {
     return this.ecoleForm.get("adresse");
   }
+  fileProgress(fileInput: any) {
+    this.fileData = <File>fileInput.target.files[0];
+  }
+  onSubmit() {
+    this.loading = true;
+    this.ecoleService.ajouterImage(this.fileData).subscribe((success) => {
+      console.log(success);
+      this.authService.getImage().subscribe(success => {
+        this.authService.broadcastImageChange(success);
+      })
+      this.loading = false;
+    });
+  }
+  fileProgressDonnees(fileInput: any) {
+    this.fileDataDonnees = <File>fileInput.target.files[0];
+  }
+  onSubmitDonnees() {
+    this.loading = true;
+    this.ecoleService.ajouterDonnees(this.fileDataDonnees,this.adresse.value,this.nom.value).subscribe((success) => {
+      console.log(success);
+      this.storage.set("user", success);
+      this.loading = false;
+    });
+  }
   confirmer() {
     this.loading = true;
     if (this.hasEcole) {
       this.ecoleService.modifier(this.nom.value, this.adresse.value, this.ecole.id).subscribe(
         success => {
           console.log(success);
-          this.storage.set("user",success);
-          this.errors=[];
-          this.nomErrors=[];
-          this.adresseErrors=[];
+          this.storage.set("user", success);
+          this.errors = [];
+          this.nomErrors = [];
+          this.adresseErrors = [];
         },
         error => {
           console.log(error);
@@ -73,10 +103,10 @@ export class EcoleComponent implements OnInit {
       this.ecoleService.ajouter(this.nom.value, this.adresse.value).subscribe(
         success => {
           console.log(success);
-          this.storage.set("user",success);
-          this.errors=[];
-          this.nomErrors=[];
-          this.adresseErrors=[];
+          this.storage.set("user", success);
+          this.errors = [];
+          this.nomErrors = [];
+          this.adresseErrors = [];
         },
         error => {
           console.log(error);
@@ -88,7 +118,8 @@ export class EcoleComponent implements OnInit {
         () => {
           this.loading = false;
         }
-      )}
+      )
+    }
   }
 
   ngOnInit() {

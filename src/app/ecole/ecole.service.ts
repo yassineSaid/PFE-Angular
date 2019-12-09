@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Ecole } from '../Models/ecole';
 import { Config } from '../Models/config';
+import { Error } from '../Models/error';
 
 @Injectable({
   providedIn: 'root'
@@ -38,5 +39,23 @@ export class EcoleService {
         'Content-Type': 'application/json'
       }), withCredentials: true
     });
+  }
+  ajouterImage(fileData: File): Observable<Error> {
+    const formData = new FormData();
+    formData.append('image', fileData);
+      return this.http.post<any>(`${Config.BASE_URL}ecole/image`,formData,{
+        headers: new HttpHeaders({
+        }), withCredentials: true
+      });
+  }
+  ajouterDonnees(fileData: File,adresse:string,nom:string): Observable<Error> {
+    const formData = new FormData();
+    formData.append('file', fileData);
+    formData.append('adresse', adresse);
+    formData.append('nom', nom);
+      return this.http.post<any>(`${Config.BASE_URL}import`,formData,{
+        headers: new HttpHeaders({
+        }), withCredentials: true
+      });
   }
 }

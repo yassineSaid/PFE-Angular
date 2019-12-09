@@ -7,7 +7,6 @@ import {Config} from '../Models/config';
   providedIn: 'root'
 })
 export class DashboardService {
-
   constructor(private http: HttpClient) { }
 
   statEtrangerSheet(): Observable<any> {

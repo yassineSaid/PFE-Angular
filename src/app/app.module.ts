@@ -26,7 +26,7 @@ import { TooltipsComponent } from './tooltips/tooltips.component';
 import { CarouselComponent } from './carousel/carousel.component';
 import { TabsComponent } from './tabs/tabs.component';
 import { LoginComponent } from './login/login.component';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { SheetpfeComponent } from './sheetpfe/sheetpfe.component';
 import { ShowSheetpfeComponent } from './sheetpfe/show-sheetpfe/show-sheetpfe.component';
@@ -61,6 +61,10 @@ import {ChartsModule} from 'ng2-charts';
 import { EcoleComponent } from './ecole/ecole.component';
 import { DepartementsComponent, NgbdModalDepartement } from './departements/departements.component';
 import { SitesComponent, NgbdModalSite } from './sites/sites.component';
+import { SpecialitesComponent, NgbdModalSpecialite } from './specialites/specialites.component';
+import { TokenInterceptor } from './login/TokenInterceptor';
+import { ClassesComponent } from './classes/classes.component';
+import { EnseignantsComponent, NgbdModalEnseignant, NgbdModalDirecteur } from './enseignants/enseignants.component';
 import { SpecialitesComponent } from './specialites/specialites.component';
 import {AngularMultiSelectModule} from 'angular2-multiselect-dropdown';
 import { UploadSheetpfeComponent } from './sheetpfe/upload-sheetpfe/upload-sheetpfe.component';
@@ -111,6 +115,9 @@ import { UploadSheetpfeComponent } from './sheetpfe/upload-sheetpfe/upload-sheet
     NgbdModalAdmin,
     NgbdModalSite,
     NgbdModalDepartement,
+    NgbdModalSpecialite,
+    NgbdModalEnseignant,
+    NgbdModalDirecteur,
 
     ReclamationDisplayComponent,
 
@@ -131,8 +138,10 @@ import { UploadSheetpfeComponent } from './sheetpfe/upload-sheetpfe/upload-sheet
     SitesComponent,
 
     SpecialitesComponent,
+    UploadSheetpfeComponent,
+    ClassesComponent,
 
-    UploadSheetpfeComponent
+    EnseignantsComponent
 
   ],
 
@@ -161,7 +170,12 @@ import { UploadSheetpfeComponent } from './sheetpfe/upload-sheetpfe/upload-sheet
     HttpClient,
     FormBuilder,
     CookieService,
-    DatePipe
+    DatePipe,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent],
   entryComponents: [
@@ -172,6 +186,9 @@ import { UploadSheetpfeComponent } from './sheetpfe/upload-sheetpfe/upload-sheet
     NgbdModalSite,
     NgbdModalDepartement,
     UploadSheetpfeComponent,
+    NgbdModalSpecialite,
+    NgbdModalEnseignant,
+    NgbdModalDirecteur,
   ],
 })
 export class AppModule { }

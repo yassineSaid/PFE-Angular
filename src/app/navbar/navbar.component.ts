@@ -8,6 +8,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 import {SoutenanceServiceService} from "../soutenance-component/soutenance-service.service";
 import {Notification} from "../Models/notification";
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-navbar',
@@ -20,6 +21,7 @@ export class NavbarComponent implements OnInit,OnDestroy {
   public sidebarOpened = false;
   notification: Notification[];
   nombre: Notification[];
+  image:any=null;
   toggleOffcanvas() {
     this.sidebarOpened = !this.sidebarOpened;
     if (this.sidebarOpened) {
@@ -29,11 +31,18 @@ export class NavbarComponent implements OnInit,OnDestroy {
       document.querySelector('.sidebar-offcanvas').classList.remove('active');
     }
   }
-  constructor(config: NgbDropdownConfig, @Inject(LOCAL_STORAGE) private storage: WebStorageService, private authService:AuthService, private cookieService:CookieService, private router:Router , private httpService: SoutenanceServiceService ) {
+  constructor(private sanitizer:DomSanitizer,config: NgbDropdownConfig, @Inject(LOCAL_STORAGE) private storage: WebStorageService, private authService:AuthService, private cookieService:CookieService, private router:Router , private httpService: SoutenanceServiceService ) {
     config.placement = 'bottom-right';
     this.authService.user.subscribe((val) => {
       this.user=val;
     });
+    this.authService.image.subscribe((image) => {
+      this.createImageFromBlob(image);
+    })
+    this.authService.getImage().subscribe((success)=>{
+      console.log(success);
+      this.createImageFromBlob(success);
+    })
     this.start();
     this.user = this.storage.get('user');
 
@@ -49,6 +58,19 @@ export class NavbarComponent implements OnInit,OnDestroy {
         console.log(this.nombre);
       }
     );
+  }
+  createImageFromBlob(image: Blob) {
+    let reader = new FileReader();
+    reader.addEventListener("load", () => {
+      this.image = reader.result.toString();
+      console.log(this.image)
+    }, false);
+  if (image) {
+      reader.readAsDataURL(image);
+    }
+  }
+  show(){
+    return this.sanitizer.bypassSecurityTrustUrl(this.image);
   }
 
   ngOnInit() {
