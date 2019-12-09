@@ -56,6 +56,8 @@ import { ReclamationDisplayComponent } from './soutenance-component/reclamation-
 import { SoutenanceComponent } from './soutenance/soutenance.component';
 import { EtudiantnosheetComponent } from './sheetpfe/etudiantnosheet/etudiantnosheet.component';
 import { NotificationRSComponent } from './soutenance-component/notification-rs/notification-rs.component';
+import { ModifySheetpfeComponent } from './sheetpfe/modify-sheetpfe/modify-sheetpfe.component';
+import {ChartsModule} from 'ng2-charts';
 import { EcoleComponent } from './ecole/ecole.component';
 import { DepartementsComponent, NgbdModalDepartement } from './departements/departements.component';
 import { SitesComponent, NgbdModalSite } from './sites/sites.component';
@@ -63,6 +65,8 @@ import { SpecialitesComponent, NgbdModalSpecialite } from './specialites/special
 import { TokenInterceptor } from './login/TokenInterceptor';
 import { ClassesComponent } from './classes/classes.component';
 import { EnseignantsComponent, NgbdModalEnseignant, NgbdModalDirecteur } from './enseignants/enseignants.component';
+import { SpecialitesComponent } from './specialites/specialites.component';
+import {AngularMultiSelectModule} from 'angular2-multiselect-dropdown';
 
 
 
@@ -124,6 +128,8 @@ import { EnseignantsComponent, NgbdModalEnseignant, NgbdModalDirecteur } from '.
 
     NotificationRSComponent,
 
+    ModifySheetpfeComponent,
+
     EcoleComponent,
 
     DepartementsComponent,
@@ -148,6 +154,9 @@ import { EnseignantsComponent, NgbdModalEnseignant, NgbdModalDirecteur } from '.
     HttpClientModule,
     ReactiveFormsModule,
     NgbModule,
+    AngularMultiSelectModule,
+    ChartsModule,
+
     /*BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,

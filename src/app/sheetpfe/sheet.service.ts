@@ -45,8 +45,8 @@ export class SheetService {
       })
     });
   }
-  notifySheet(id): Observable<any> {
-    return this.http.get<any>(`${Config.BASE_URL}sheet/notificationetudiant/` + id, {
+  notifySheet(type, id): Observable<any> {
+    return this.http.get<any>(`${Config.BASE_URL}sheet/` + type + '/' + id, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
@@ -118,7 +118,7 @@ export class SheetService {
       })
     });
   }
-  addSheet(sheet): Observable<boolean> {
+  addSheet(sheet): Observable<any> {
     sheet.etudiant = this.storage.get('user')
     return this.http.post<any>(`${Config.BASE_URL}sheet`, JSON.stringify(sheet), {
       headers: new HttpHeaders({
@@ -127,7 +127,7 @@ export class SheetService {
     });
   }
 
-  updateSheet(sheet): Observable<boolean> {
+  updateSheet(sheet): Observable<any> {
     sheet.etudiant = this.storage.get('user')
     return this.http.put<any>(`${Config.BASE_URL}sheet`, JSON.stringify(sheet), {
       headers: new HttpHeaders({
@@ -160,5 +160,11 @@ export class SheetService {
     });
   }
 
-
+  changeVu(): Observable<boolean> {
+    return this.http.post<any>(`${Config.BASE_URL}sheet/vu/` + this.storage.get('user').id + '/' + this.storage.get('user').role, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
+  }
 }

@@ -3,12 +3,12 @@
     <h4 class="card-title">
       <span *ngIf="edit; else title_add">Edit Sheet PFE</span>
       <ng-template #title_add>
-        <span>Add Sheet PFE</span>
+        <span>Ajouter fiche PFE</span>
       </ng-template>
     </h4>
     <form class="forms-sample ng-untouched ng-pristine ng-valid" [formGroup]="sheetForm">
       <div class="form-group">
-        <label for="title" [class.text-danger]="title.invalid && title.touched">Title</label>
+        <label for="title" [class.text-danger]="title.invalid && title.touched">Titre</label>
         <input class="form-control" id="title" placeholder="Title"  [class.border-danger]="title.invalid && title.touched" type="text" formControlName="title">
         <div class="invalid-feedback" *ngIf="title.invalid && title.touched">
           <span *ngIf="title.errors.required" class="text-small">The title is required. </span>
@@ -26,7 +26,7 @@
         </div>
       </div>
       <div  class="form-group">
-        <label for="problematic" [class.text-danger]="problematic.invalid && problematic.touched">Problematic</label>
+        <label for="problematic" [class.text-danger]="problematic.invalid && problematic.touched">Problématique</label>
         <textarea class="form-control" id="problematic" placeholder="Problematic" [class.border-danger]="problematic.invalid && problematic.touched" formControlName="problematic"></textarea>
         <div class="invalid-feedback" *ngIf="problematic.invalid && problematic.touched">
           <span *ngIf="problematic.errors.required" class="text-small">The problematic is required. </span>
@@ -35,7 +35,7 @@
         </div>
       </div>
       <div  class="form-group">
-        <label for="feature" [class.text-danger]="features.invalid && features.touched">Feature</label>
+        <label for="feature" [class.text-danger]="features.invalid && features.touched">Fonctionnalités</label>
         <textarea class="form-control" id="feature" placeholder="Feature"  [class.border-danger]="features.invalid && features.touched" formControlName="features"></textarea>
         <div class="invalid-feedback" *ngIf="features.invalid && features.touched">
           <span *ngIf="features.errors.required" class="text-small">The features is required. </span>
@@ -44,7 +44,12 @@
         </div>
       </div>
       <div class="form-group">
-        <label [class.text-danger]="categories.invalid && categories.touched">Categories</label>
+        <label [class.text-danger]="categories.invalid && categories.touched">Catégories</label>
+        <angular2-multiselect [data]="itemList" [(ngModel)]="selectedItems"
+          [settings]="settings"
+          (onDeSelectAll)="onDeSelectAll($event)"
+          formControlName="categories">
+        </angular2-multiselect>
         <div class="invalid-feedback" *ngIf="categories.invalid && categories.touched">
           <span class="text-small">The categorie is required. </span>
         </div>
@@ -59,11 +64,10 @@
         </div>
       </div>
     </form>
-      <button class="btn btn-primary mr-2" type="submit" *ngIf="edit; else add" (click)="editSheet()" [disabled]="sheetForm.invalid">Update</button>
-      <button class="btn btn-light" (click)="cancel()" *ngIf="edit" >Cancel</button>
-
-      <ng-template #add>
-        <button class="btn btn-primary mr-2" type="submit" (click)="addSheet()" [disabled]="sheetForm.invalid">Submit</button>
+      <button class="btn btn-primary mr-2" type="submit" *ngIf="edit; else add" (click)="editSheet()" [disabled]="sheetForm.invalid">Enregistrer</button>
+      <button class="btn btn-light" (click)="cancel()" *ngIf="edit" >Annuler</button>
+     <ng-template #add>
+        <button class="btn btn-primary mr-2" type="submit" (click)="addSheet()" [disabled]="sheetForm.invalid">Ajouter</button>
       </ng-template>
   </div>
 </div>
