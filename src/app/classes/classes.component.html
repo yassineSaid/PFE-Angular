@@ -13,13 +13,13 @@
             <table class="table table-hover">
               <thead>
                 <tr>
-                  <th>Numero</th>
+                  <th>Classe</th>
                   <th></th>
                 </tr>
               </thead>
               <tbody>
                 <tr *ngFor="let classe of classes;">
-                  <td>{{classe.numero}}</td>
+                  <td>5{{classe.specialite.nom}}{{classe.numero}}</td>
                   <td align="right">
                     <button class="btn btn-success btn-fw" type="button" (click)=(details(classe))>Détails</button>
                   </td>

@@ -23,4 +23,11 @@ export class DashboardService {
       })
     });
   }
+  getStats(id:number): Observable<any[]> {
+    return this.http.get<any>(`${Config.BASE_URL}ecole/statistiques/`+id, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      }), withCredentials: true
+    });
+  }
 }
