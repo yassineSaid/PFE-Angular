@@ -39,7 +39,7 @@ import { SoutenanceComponent } from './soutenance/soutenance.component';
 import { EtudiantnosheetComponent } from './sheetpfe/etudiantnosheet/etudiantnosheet.component';
 import { EcoleComponent } from './ecole/ecole.component';
 import { DepartementsComponent } from './departements/departements.component';
-import { SitesComponent } from './sites/sites.component';
+import { SitesComponent } from './siteModule/sites/sites.component';
 import { SpecialitesComponent } from './specialites/specialites.component';
 import { ClassesComponent } from './classes/classes.component';
 import { EnseignantsComponent } from './enseignants/enseignants.component';
@@ -52,7 +52,7 @@ const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'forms', component: FormsComponent },
-  { path: 'buttons', component: ButtonsComponent },
+  { path: 'buttons', component: ButtonsComponent }, 
   { path: 'tables', component: TablesComponent },
   { path: 'icons', component: IconsComponent },
   { path: 'typography', component: TypographyComponent },
@@ -95,7 +95,7 @@ const routes: Routes = [
   { path: 'classes', component: ClassesComponent },
   { path: 'etudiants/:id', component: EtudiantsComponent },
   { path: 'etudiants', component: EtudiantsComponent },
-  { path: 'sites', component: SitesComponent },
+  { path: 'sites', loadChildren: './siteModule/siteModule.module#SiteModule' },
   { path: 'enseignants', component: EnseignantsComponent }
 ];
 

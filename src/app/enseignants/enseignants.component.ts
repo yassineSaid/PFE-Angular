@@ -7,7 +7,7 @@ import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Error } from '../Models/error';
 import { Location } from '@angular/common';
-import { SitesService } from '../sites/sites.service';
+import { SitesService } from '../siteModule/sites/sites.service';
 import { LOCAL_STORAGE, WebStorageService } from 'ngx-webstorage-service';
 import { Site } from '../Models/site';
 

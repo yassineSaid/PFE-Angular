@@ -2,10 +2,10 @@ import { Component, OnInit, Inject, Input } from '@angular/core';
 import { SitesService } from './sites.service';
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { AdminsService } from '../admins/admins.service';
-import { Error } from '../Models/error';
+import { AdminsService } from '../../admins/admins.service';
+import { Error } from '../../Models/error';
 import { LOCAL_STORAGE, WebStorageService } from 'ngx-webstorage-service';
-import { Site } from '../Models/site';
+import { Site } from '../../Models/site';
 import { Router } from '@angular/router';
 
 @Component({

@@ -60,7 +60,6 @@ import { ModifySheetpfeComponent } from './sheetpfe/modify-sheetpfe/modify-sheet
 import { ChartsModule } from 'ng2-charts';
 import { EcoleComponent } from './ecole/ecole.component';
 import { DepartementsComponent, NgbdModalDepartement } from './departements/departements.component';
-import { SitesComponent, NgbdModalSite } from './sites/sites.component';
 import { SpecialitesComponent, NgbdModalSpecialite } from './specialites/specialites.component';
 import { TokenInterceptor } from './login/TokenInterceptor';
 import { ClassesComponent } from './classes/classes.component';
@@ -68,6 +67,8 @@ import { EnseignantsComponent, NgbdModalEnseignant, NgbdModalDirecteur } from '.
 import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
 import { UploadSheetpfeComponent } from './sheetpfe/upload-sheetpfe/upload-sheetpfe.component';
 import { EtudiantsComponent, NgbdModalEtudiant } from './etudiants/etudiants.component';
+import { SiteModule } from './siteModule/siteModule.module';
+import { NgbdModalSite } from './siteModule/sites/sites.component';
 
 
 
@@ -113,7 +114,6 @@ import { EtudiantsComponent, NgbdModalEtudiant } from './etudiants/etudiants.com
     ReponseComponent,
     AdminsComponent,
     NgbdModalAdmin,
-    NgbdModalSite,
     NgbdModalDepartement,
     NgbdModalSpecialite,
     NgbdModalEnseignant,
@@ -136,15 +136,14 @@ import { EtudiantsComponent, NgbdModalEtudiant } from './etudiants/etudiants.com
 
     DepartementsComponent,
 
-    SitesComponent,
-
     SpecialitesComponent,
     UploadSheetpfeComponent,
     ClassesComponent,
 
     EnseignantsComponent,
 
-    EtudiantsComponent
+    EtudiantsComponent,
+    NgbdModalSite
 
   ],
 
@@ -186,13 +185,13 @@ import { EtudiantsComponent, NgbdModalEtudiant } from './etudiants/etudiants.com
     ValidSheetpfeComponent,
     NoteSheetpfeComponent,
     NgbdModalAdmin,
-    NgbdModalSite,
     NgbdModalDepartement,
     UploadSheetpfeComponent,
     NgbdModalSpecialite,
     NgbdModalEnseignant,
     NgbdModalDirecteur,
     NgbdModalEtudiant,
+    NgbdModalSite
   ],
 })
 export class AppModule { }

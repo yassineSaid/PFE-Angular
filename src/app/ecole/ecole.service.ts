@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Ecole } from '../Models/ecole';
 import { Config } from '../Models/config';
@@ -58,4 +58,10 @@ export class EcoleService {
         }), withCredentials: true
       });
   }
+  downloadFile(): Observable<Blob>{		
+		return this.http.get<Blob>(`${Config.BASE_URL}import/export`, {
+      headers: new HttpHeaders({
+      }), withCredentials: true,responseType: "blob" as "json"
+    });
+   }
 }
