@@ -7,7 +7,7 @@ import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Error } from '../Models/error';
 import { Location } from '@angular/common';
-import { SitesService } from '../sites/sites.service';
+import { SitesService } from '../siteModule/sites/sites.service';
 import { LOCAL_STORAGE, WebStorageService } from 'ngx-webstorage-service';
 import { Site } from '../Models/site';
 
@@ -127,12 +127,6 @@ export class EnseignantsComponent implements OnInit {
         {{error.errorMessage}}
       </div>
     </div>
-    <div class="form-group">
-      <label for="exampleInputPassword1">Site</label>
-      <select class="form-control" id="site" formControlName="site">
-        <option *ngFor="let site of sites;" [ngValue]="site">{{site.nom}}</option>
-      </select>
-    </div>
     </form>
   </div>
   <div class="modal-footer">
@@ -202,7 +196,7 @@ export class NgbdModalEnseignant implements OnInit {
     if (this.update) {
     }
     else {
-      this.enseignantsService.ajouter(this.nom.value, this.prenom.value, this.email.value, this.password.value, this.site.value.id).subscribe(
+      this.enseignantsService.ajouter(this.nom.value, this.prenom.value, this.email.value, this.site.value.id).subscribe(
         success => {
           console.log(success);
           this.modal.close("added");
@@ -213,7 +207,6 @@ export class NgbdModalEnseignant implements OnInit {
           this.nomErrors = this.errors.filter(e => e.propertyPath === "nom");
           this.prenomErrors = this.errors.filter(e => e.propertyPath === "prenom");
           this.emailErrors = this.errors.filter(e => e.propertyPath === "email");
-          this.passwordErrors = this.errors.filter(e => e.propertyPath === "plainPassword");
           this.loading = false;
         },
         () => {

@@ -19,29 +19,36 @@ export class SpecialitesComponent implements OnInit {
   siteId:number;
   hasEcole=true;
   constructor(private location: Location,private route: ActivatedRoute, private router: Router,private specialitesService: SpecialitesService, private modalService: NgbModal) { 
-    this.route.params.subscribe(params => { 
-      this.siteId = params['id']; 
-      if (isUndefined(this.siteId)) router.navigate(['/sites']);
-    });
+    
   }
   goBack() {
     this.location.back();
   } 
-
-  ngOnInit() {
-    console.log(this.siteId);
-    if (isUndefined(this.siteId)) this.router.navigate(['/sites']);
-    this.loading=true
-    this.specialitesService.getAll(this.siteId).subscribe((success) => {
+  getSpecialites(){
+    this.loading = true;
+    this.specialitesService.getAll(this.siteId).subscribe(success => {
       this.specialites = success;
       this.loading = false;
+      this.specialites.sort((a,b) => {
+        if (a.id>b.id) return 1;
+        else if (a.id<b.id) return -1;
+        else return 0;
+      })
     })
+  }
+
+  ngOnInit() {
+    this.route.params.subscribe(params => { 
+      this.siteId = params['id']; 
+      if (isUndefined(this.siteId)) this.router.navigate(['/sites']);
+    });
+    console.log(this.siteId);
+    if (isUndefined(this.siteId)) this.router.navigate(['/sites']);
+    this.getSpecialites();
   }
   supprimer(specialite: Specialite) {
     this.specialitesService.supprimer(specialite.id).subscribe((success) => {
-      this.specialitesService.getAll(this.siteId).subscribe(success => {
-        this.specialites = success;
-      })
+      this.getSpecialites();
     })
   }
 
@@ -55,11 +62,7 @@ export class SpecialitesComponent implements OnInit {
     modal.componentInstance.siteId = this.siteId;
     modal.result.then((added) => {
       if (added === "added") {
-        this.loading = true;
-        this.specialitesService.getAll(this.siteId).subscribe(success => {
-          this.specialites = success;
-          this.loading = false;
-        })
+        this.getSpecialites();
       }
     })
   }
@@ -70,11 +73,7 @@ export class SpecialitesComponent implements OnInit {
     modal.componentInstance.specialite = specialite;
     modal.result.then((added) => {
       if (added === "added") {
-        this.loading = true;
-        this.specialitesService.getAll(this.siteId).subscribe(success => {
-          this.specialites = success;
-          this.loading = false;
-        })
+        this.getSpecialites();
       }
     })
   }

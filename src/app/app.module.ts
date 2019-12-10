@@ -57,10 +57,9 @@ import { SoutenanceComponent } from './soutenance/soutenance.component';
 import { EtudiantnosheetComponent } from './sheetpfe/etudiantnosheet/etudiantnosheet.component';
 import { NotificationRSComponent } from './soutenance-component/notification-rs/notification-rs.component';
 import { ModifySheetpfeComponent } from './sheetpfe/modify-sheetpfe/modify-sheetpfe.component';
-import {ChartsModule} from 'ng2-charts';
+import { ChartsModule } from 'ng2-charts';
 import { EcoleComponent } from './ecole/ecole.component';
 import { DepartementsComponent, NgbdModalDepartement } from './departements/departements.component';
-import { SitesComponent, NgbdModalSite } from './sites/sites.component';
 import { SpecialitesComponent, NgbdModalSpecialite } from './specialites/specialites.component';
 import { TokenInterceptor } from './login/TokenInterceptor';
 import { ClassesComponent } from './classes/classes.component';
@@ -70,6 +69,12 @@ import { UploadSheetpfeComponent } from './sheetpfe/upload-sheetpfe/upload-sheet
 import {AngularPaginatorModule} from 'angular-paginator';
 import {NgxSpinnerModule} from 'ngx-spinner';
 
+import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
+import { UploadSheetpfeComponent } from './sheetpfe/upload-sheetpfe/upload-sheetpfe.component';
+import { EtudiantsComponent, NgbdModalEtudiant } from './etudiants/etudiants.component';
+import { SiteModule } from './siteModule/siteModule.module';
+import { NgbdModalSite } from './siteModule/sites/sites.component';
+import { MatTableModule } from '@angular/material';
 
 
 
@@ -115,11 +120,11 @@ import {NgxSpinnerModule} from 'ngx-spinner';
     ReponseComponent,
     AdminsComponent,
     NgbdModalAdmin,
-    NgbdModalSite,
     NgbdModalDepartement,
     NgbdModalSpecialite,
     NgbdModalEnseignant,
     NgbdModalDirecteur,
+    NgbdModalEtudiant,
 
     ReclamationDisplayComponent,
 
@@ -137,13 +142,14 @@ import {NgxSpinnerModule} from 'ngx-spinner';
 
     DepartementsComponent,
 
-    SitesComponent,
-
     SpecialitesComponent,
     UploadSheetpfeComponent,
     ClassesComponent,
 
-    EnseignantsComponent
+    EnseignantsComponent,
+
+    EtudiantsComponent,
+    NgbdModalSite
 
   ],
 
@@ -160,7 +166,8 @@ import {NgxSpinnerModule} from 'ngx-spinner';
     AngularMultiSelectModule,
     ChartsModule,
     AngularPaginatorModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    MatTableModule
     /*BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -187,12 +194,13 @@ import {NgxSpinnerModule} from 'ngx-spinner';
     ValidSheetpfeComponent,
     NoteSheetpfeComponent,
     NgbdModalAdmin,
-    NgbdModalSite,
     NgbdModalDepartement,
     UploadSheetpfeComponent,
     NgbdModalSpecialite,
     NgbdModalEnseignant,
     NgbdModalDirecteur,
+    NgbdModalEtudiant,
+    NgbdModalSite
   ],
 })
 export class AppModule { }

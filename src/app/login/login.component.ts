@@ -52,7 +52,7 @@ export class LoginComponent implements OnInit {
     },
     ()=>{
       this.authService.getImage().subscribe(success => {
-        this.authService.broadcastImageChange(success);
+        if (success.size!==28)this.authService.broadcastImageChange(success);
       })
     }
     );

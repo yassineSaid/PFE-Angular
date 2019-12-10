@@ -16,4 +16,18 @@ export class DashboardService {
       })
     });
   }
+  getOffres(place:string): Observable<any[]> {
+    return this.http.get<any>(`https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json?location=`+place, {
+      headers: new HttpHeaders({
+        'origin': 'localhost'
+      })
+    });
+  }
+  getStats(id:number): Observable<any[]> {
+    return this.http.get<any>(`${Config.BASE_URL}ecole/statistiques/`+id, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      }), withCredentials: true
+    });
+  }
 }

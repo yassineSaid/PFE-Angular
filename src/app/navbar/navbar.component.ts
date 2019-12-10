@@ -37,6 +37,7 @@ export class NavbarComponent implements OnInit,OnDestroy {
       this.user=val;
     });
     this.authService.image.subscribe((image) => {
+      console.log(image.size);
       this.createImageFromBlob(image);
     })
     this.authService.getImage().subscribe((success)=>{
@@ -63,9 +64,9 @@ export class NavbarComponent implements OnInit,OnDestroy {
     let reader = new FileReader();
     reader.addEventListener("load", () => {
       this.image = reader.result.toString();
-      console.log(this.image)
+      console.log(image.size)
     }, false);
-  if (image) {
+  if (image && image.size!==28) {
       reader.readAsDataURL(image);
     }
   }

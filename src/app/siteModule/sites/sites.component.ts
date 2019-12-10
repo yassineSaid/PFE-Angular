@@ -2,10 +2,10 @@ import { Component, OnInit, Inject, Input } from '@angular/core';
 import { SitesService } from './sites.service';
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { AdminsService } from '../admins/admins.service';
-import { Error } from '../Models/error';
+import { AdminsService } from '../../admins/admins.service';
+import { Error } from '../../Models/error';
 import { LOCAL_STORAGE, WebStorageService } from 'ngx-webstorage-service';
-import { Site } from '../Models/site';
+import { Site } from '../../Models/site';
 import { Router } from '@angular/router';
 
 @Component({
@@ -20,22 +20,28 @@ export class SitesComponent implements OnInit {
 
   constructor(private sitesService: SitesService, private router: Router, private modalService: NgbModal, @Inject(LOCAL_STORAGE) private storage: WebStorageService) {
     if (storage.get("user").ecole !== null) {
-      sitesService.getAll(storage.get("user").ecole.id).subscribe((success) => {
-        this.sites = success;
-        this.loading = false;
-      })
+      this.getSites();
     }
     else {
       this.hasEcole = false;
       this.loading = false;
     }
   }
-
+  getSites(){
+    this.loading = true;
+    this.sitesService.getAll(this.storage.get("user").ecole.id).subscribe(success => {
+      this.sites = success;
+      this.loading = false;
+      this.sites.sort((a,b) => {
+        if (a.id>b.id) return 1;
+        else if (a.id<b.id) return -1;
+        else return 0;
+      })
+    })
+  }
   supprimer(site: Site) {
     this.sitesService.supprimer(site.id).subscribe((success) => {
-      this.sitesService.getAll(this.storage.get("user").ecole.id).subscribe(success => {
-        this.sites = success;
-      })
+      this.getSites();
     })
   }
 
@@ -48,11 +54,7 @@ export class SitesComponent implements OnInit {
     modal.componentInstance.update = false;
     modal.result.then((added) => {
       if (added === "added") {
-        this.loading = true;
-        this.sitesService.getAll(this.storage.get("user").ecole.id).subscribe(success => {
-          this.sites = success;
-          this.loading = false;
-        })
+        this.getSites();
       }
     })
   }
@@ -64,11 +66,7 @@ export class SitesComponent implements OnInit {
     modal.componentInstance.site = site;
     modal.result.then((added) => {
       if (added === "added") {
-        this.loading = true;
-        this.sitesService.getAll(this.storage.get("user").ecole.id).subscribe(success => {
-          this.sites = success;
-          this.loading = false;
-        })
+        this.getSites();
       }
     })
   }

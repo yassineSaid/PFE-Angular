@@ -53,7 +53,7 @@ export class ClassesComponent implements OnInit {
   }
 
   details(classe: Classe) {
-    this.router.navigate(['/classes/' + classe.id]);
+    this.router.navigate(['/etudiants/' + classe.id]);
   }
   goBack() {
     this.location.back();

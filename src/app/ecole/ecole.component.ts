@@ -70,7 +70,10 @@ export class EcoleComponent implements OnInit {
   }
   onSubmitDonnees() {
     this.loading = true;
-    this.ecoleService.ajouterDonnees(this.fileDataDonnees,this.adresse.value,this.nom.value).subscribe((success) => {
+    if (this.fileDataDonnees===null){
+      this.confirmer();
+    }
+    else this.ecoleService.ajouterDonnees(this.fileDataDonnees,this.adresse.value,this.nom.value).subscribe((success) => {
       console.log(success);
       this.storage.set("user", success);
       this.loading = false;
@@ -124,5 +127,20 @@ export class EcoleComponent implements OnInit {
 
   ngOnInit() {
   }
-
+  download() {
+    this.ecoleService.downloadFile().subscribe(response => {
+			let blob:any = new Blob([response], {type: 'application/ms-excel'});
+			const url= window.URL.createObjectURL(blob);
+      window.open(url);
+      const a         = document.createElement('a');
+        a.href        = url;
+        a.target      = '_blank';
+        a.download    = 'export.xlsx';
+        document.body.appendChild(a);
+        a.click();
+			//window.location.href = response.url;
+			//fileSaver.saveAs(blob, 'employees.json');
+		}), error => console.log('Error downloading the file'),
+                 () => console.info('File downloaded successfully');
+  }
 }
