@@ -87,7 +87,16 @@
   <div class="col-12 grid-margin">
     <div class="card">
       <div class="card-body">
-        <h5 class="card-title mb-4">Offres d'emplois en Europe</h5>
+        <h5 class="card-title mb-4">
+          Offres d'emplois en  
+          <select [(ngModel)]="place" #ctrl="ngModel" #mySelect
+          (change)='selectChangeHandler(mySelect.value)'>
+              <option value="europe" selected>Europe</option>
+              <option value="asia">Asie</option>
+              <option value="usa">Etats-unis</option>
+              <option value="canada">Canada</option>
+          </select>
+        </h5>
         <div class="spinner-border" role="status" *ngIf="loading">
           <span class="sr-only">Loading...</span>
         </div>

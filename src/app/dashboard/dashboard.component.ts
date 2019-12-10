@@ -32,6 +32,11 @@ export class DashboardComponent implements OnInit {
   stats: any;
   user: Admin;
   isAdmin = false;
+  place:string="europe";
+  selectChangeHandler (event: any) {
+    this.place = event;
+    this.getOffres(this.place);
+  }
   entierAleatoire(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
@@ -56,7 +61,12 @@ export class DashboardComponent implements OnInit {
         this.barChartData[0].data.push(e[1]);
       });
     });
-    this.dashboardService.getOffres().subscribe(data => {
+    this.getOffres(this.place);
+  }
+  getOffres(location:string){
+    this.loading=true;
+    this.offres=[];
+    this.dashboardService.getOffres(location).subscribe(data => {
       for (var i = 0; i < 5; i++) {
         var j = this.entierAleatoire(0, data.length);
         var offre = data[j];

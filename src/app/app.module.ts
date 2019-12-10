@@ -69,6 +69,7 @@ import { UploadSheetpfeComponent } from './sheetpfe/upload-sheetpfe/upload-sheet
 import { EtudiantsComponent, NgbdModalEtudiant } from './etudiants/etudiants.component';
 import { SiteModule } from './siteModule/siteModule.module';
 import { NgbdModalSite } from './siteModule/sites/sites.component';
+import { MatTableModule } from '@angular/material';
 
 
 
@@ -159,6 +160,8 @@ import { NgbdModalSite } from './siteModule/sites/sites.component';
     NgbModule,
     AngularMultiSelectModule,
     ChartsModule,
+    MatTableModule,
+    
     /*BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
