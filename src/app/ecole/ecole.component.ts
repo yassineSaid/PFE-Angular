@@ -70,7 +70,10 @@ export class EcoleComponent implements OnInit {
   }
   onSubmitDonnees() {
     this.loading = true;
-    this.ecoleService.ajouterDonnees(this.fileDataDonnees,this.adresse.value,this.nom.value).subscribe((success) => {
+    if (this.fileDataDonnees===null){
+      this.confirmer();
+    }
+    else this.ecoleService.ajouterDonnees(this.fileDataDonnees,this.adresse.value,this.nom.value).subscribe((success) => {
       console.log(success);
       this.storage.set("user", success);
       this.loading = false;

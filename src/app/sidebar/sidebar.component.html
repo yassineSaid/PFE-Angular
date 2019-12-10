@@ -1,28 +1,10 @@
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
-  <ul class="nav" >
-    <li class="nav-item nav-profile">
-      <div class="nav-link">
-        <div class="user-wrapper">
-          <div class="profile-image">
-            <img src="assets/images/faces/face1.jpg" alt="profile image">
-          </div>
-          <div class="text-wrapper">
-            <p class="profile-name">Richard V.Welsh</p>
-            <div>
-              <small class="designation text-muted">Manager</small>
-              <span class="status-indicator online"></span>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </li>
-
+  <ul class="nav">
     <span *ngFor="let item of items; let i=index">
       <li class="nav-item" *ngIf="item.roles.indexOf(user.role)!==-1 || item.roles==='All'">
         <a class="nav-link" routerLink="{{item.path}}" routerLinkActive="active" [queryParams]=item.queryParams>
           <i class="{{item.icon}}"></i>
-                 <span  >{{item.title}}</span>
+          <span>{{item.title}}</span>
         </a>
       </li>
     </span>
