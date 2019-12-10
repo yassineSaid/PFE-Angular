@@ -43,6 +43,7 @@ import { SitesComponent } from './sites/sites.component';
 import { SpecialitesComponent } from './specialites/specialites.component';
 import { ClassesComponent } from './classes/classes.component';
 import { EnseignantsComponent } from './enseignants/enseignants.component';
+import { EtudiantsComponent } from './etudiants/etudiants.component';
 
 
 
@@ -92,6 +93,8 @@ const routes: Routes = [
   { path: 'specialites', component: SpecialitesComponent },
   { path: 'classes/:id', component: ClassesComponent },
   { path: 'classes', component: ClassesComponent },
+  { path: 'etudiants/:id', component: EtudiantsComponent },
+  { path: 'etudiants', component: EtudiantsComponent },
   { path: 'sites', component: SitesComponent },
   { path: 'enseignants', component: EnseignantsComponent }
 ];

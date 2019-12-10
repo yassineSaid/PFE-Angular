@@ -17,12 +17,11 @@ export class EnseignantsService {
       }), withCredentials: true
     });
   }
-  ajouter(nom:string,prenom:string,email:string,password:string,id:number): Observable<Error> {
+  ajouter(nom:string,prenom:string,email:string,id:number): Observable<Error> {
     let obj = {
       "nom" : nom,
       "prenom" : prenom,
-      "email" : email,
-      "password" : password
+      "email" : email
     }
     return this.http.post<any>(`${Config.BASE_URL}enseignant/`+id,obj,{
       headers: new HttpHeaders({

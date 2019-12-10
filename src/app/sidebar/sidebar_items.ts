@@ -25,7 +25,7 @@ export const items = [
     {
         path: "/sites",
         title: "Sites",
-        icon: "menu-icon fa fa-institution",
+        icon: "menu-icon fa fa-building",
         roles: [Roles.Admin],
         queryParams: ""
     },
