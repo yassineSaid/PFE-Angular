@@ -1,6 +1,7 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {SheetService} from '../sheet.service';
+import {NgxSpinnerService} from 'ngx-spinner';
 
 @Component({
   selector: 'app-upload-sheetpfe',
@@ -12,7 +13,7 @@ export class UploadSheetpfeComponent implements OnInit {
   disabled: Boolean = true;
   fileToUpload: File = null;
   files: any[] = [];
-  constructor(public modal: NgbActiveModal, private sheetService: SheetService) { }
+  constructor(public modal: NgbActiveModal, private sheetService: SheetService, private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
   }
@@ -27,12 +28,15 @@ export class UploadSheetpfeComponent implements OnInit {
 
   uploadFileToActivity() {
     this.disabled = true;
+    this.spinner.show();
     this.sheetService.postFile(this.fileToUpload).subscribe(success => {
+      this.spinner.hide();
       if (success) {
         this.modal.close();
         this.passEntry.emit();
       }
     }, error => {
+      this.spinner.hide();
       console.log(error);
     });
   }

@@ -16,8 +16,8 @@
         <div class="card-body">
           <div class="alert alert-fill-success mb-5" role="alert" *ngIf="alert"><i class="mdi mdi-alert-circle"></i> Fichier import avec success. </div>
 
-          <button (click)="upload()" class="btn btn-primary mb-4" >Import Excel</button>
           <div class="nav-filter" *ngIf="user.role === 'DirecteurDesStages' && !param">
+            <button (click)="upload()" class="btn btn-primary mb-4">Import Excel</button>
             <div class="row grid-margin">
               <div class="col-sm-6 col-md-4 col-lg-3">
                 <select class="form-control" [(ngModel)]="etat" (change)="getSheetPFEs()">
@@ -88,7 +88,7 @@
               </tr>
               </thead>
               <tbody>
-              <tr *ngFor="let sheet of sheets">
+              <tr *ngFor="let sheet of sheets |  angularPaginator :{ itemsPerPage: 10, currentPage: p }">
                 <td *ngIf="user.role === 'Enseignant' && type === 'ALL' && param != '_modify'" class="text-warning" [innerText]="enseignantType(sheet)">
                 </td>
                 <td class="py-1">
@@ -110,7 +110,7 @@
                     <span *ngIf="param === 'waitRapporter'">Affecter Rapporteur</span>
                     <span *ngIf="param === 'waitNote'">Voir</span>
                   </button>
-                  <button class="btn btn-primary" [routerLink]="['.',sheet.id]" *ngIf="user.role === 'DirecteurDesStages' || user.role === 'Enseignant' ">Show</button>
+                  <button class="btn btn-primary" [routerLink]="['.',sheet.id]" *ngIf="user.role === 'DirecteurDesStages' || user.role === 'Enseignant' ">Voir</button>
                 </td>
               </tr>
               <tr *ngIf="sheets.length === 0" class="text-center">
@@ -125,10 +125,29 @@
               </tr>
               </tbody>
             </table>
+            <nav aria-label="Page navigation example" *ngIf="size > 0">
+              <ngb-pagination [collectionSize]="size" [(page)]="p" (pageChange)="p = $event" aria-label="Default pagination">
+                <ng-template ngbPaginationPrevious><i class="fa fa-angle-left"></i></ng-template>
+                <ng-template ngbPaginationNext><i class="fa fa-angle-right"></i></ng-template>
+              </ngb-pagination>
+            </nav>
           </div>
         </div>
       </div>
     </div>
+
+    <ngx-spinner bdColor="rgba(255,255,255,0.1)">
+      <div class="spinner-grow text-primary" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+      <div class="spinner-grow text-info" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+      <div class="spinner-grow text-primary" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </ngx-spinner>
+
   </ng-template>
 </div>
 

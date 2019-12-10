@@ -4,12 +4,13 @@
   </div>
 </div>
 <ng-template #found>
+
   <div class="card" *ngIf="internship && edit === false">
   <div class="card-body">
     <h4 class="card-title">Internship Agreement</h4>
   </div>
   <div class="card-body" *ngIf="user.role != 'Etudiant' ">
-    <h4 class="card-title">Student</h4>
+    <h4 class="card-title">Etudiant</h4>
     <p class="card-description">
       <a href="" class="text-info"> {{ internship.etudiant.prenom }} {{ internship.etudiant.nom }} </a>
     </p>
@@ -39,7 +40,18 @@
     </div>
   </div>
 </div>
-<app-add-internshipagreement  *ngIf="user.role === 'Etudiant' && edit || !internship" [internship]="internship" [edit]="edit" (hide)="hide($event)"></app-add-internshipagreement>
+<app-add-internshipagreement  *ngIf=" edit || (!internship && add)" [internship]="internship" [edit]="edit" (hide)="hide($event)"></app-add-internshipagreement>
+<ngx-spinner bdColor="rgba(255,255,255,0.1)">
+  <div class="spinner-grow text-primary" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+  <div class="spinner-grow text-info" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+  <div class="spinner-grow text-primary" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</ngx-spinner>
 
 </ng-template>
 

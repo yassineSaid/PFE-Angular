@@ -44,6 +44,7 @@ export class InternshipService {
 
   updateInternship(internship): Observable<boolean> {
     internship.etudiant = this.storage.get('user')
+    console.log(JSON.stringify(internship))
     return this.http.put<any>(`${Config.BASE_URL}agreemen`, JSON.stringify(internship), {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'

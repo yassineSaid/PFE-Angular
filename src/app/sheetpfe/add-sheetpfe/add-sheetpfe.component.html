@@ -70,4 +70,17 @@
         <button class="btn btn-primary mr-2" type="submit" (click)="addSheet()" [disabled]="sheetForm.invalid">Ajouter</button>
       </ng-template>
   </div>
+
+  <ngx-spinner bdColor="rgba(255,255,255,0.1)">
+    <div class="spinner-grow text-primary" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+    <div class="spinner-grow text-info" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+    <div class="spinner-grow text-primary" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </ngx-spinner>
+
 </div>

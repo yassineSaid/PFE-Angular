@@ -39,7 +39,7 @@
               </tr>
               </thead>
               <tbody>
-              <tr *ngFor="let internship of internships" [class.bg-secondary]="internship.pdf === null">
+              <tr *ngFor="let internship of internships  |  angularPaginator :{ itemsPerPage: 10, currentPage: p }" [class.bg-secondary]="internship.pdf === null">
                 <td>
                   {{ internship.etudiant.prenom }} {{ internship.etudiant.nom }}
                 </td>
@@ -63,10 +63,28 @@
               </tr>
               </tbody>
             </table>
+            <nav aria-label="Page navigation example" *ngIf="size > 0">
+              <ngb-pagination [collectionSize]="size" [(page)]="p" (pageChange)="p = $event" aria-label="Default pagination">
+                <ng-template ngbPaginationPrevious><i class="fa fa-angle-left"></i></ng-template>
+                <ng-template ngbPaginationNext><i class="fa fa-angle-right"></i></ng-template>
+              </ngb-pagination>
+            </nav>
           </div>
         </div>
       </div>
     </div>
   </ng-template>
+
+  <ngx-spinner bdColor="rgba(255,255,255,0.1)">
+    <div class="spinner-grow text-primary" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+    <div class="spinner-grow text-info" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+    <div class="spinner-grow text-primary" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </ngx-spinner>
 
 </div>

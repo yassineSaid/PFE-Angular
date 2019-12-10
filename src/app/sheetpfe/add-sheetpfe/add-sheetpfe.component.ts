@@ -7,6 +7,7 @@ import {LOCAL_STORAGE, WebStorageService} from 'ngx-webstorage-service';
 import {User} from '../../Models/user';
 import {SheetPFE} from '../../Models/sheet-pfe';
 import {InternshipService} from '../../internshipagreement/internship.service';
+import {NgxSpinnerService} from 'ngx-spinner';
 
 @Component({
   selector: 'app-add-sheetpfe',
@@ -25,7 +26,7 @@ export class AddSheetpfeComponent implements OnInit {
   selectedItems = [];
   settings = {};
 
-  constructor(private formBuilder: FormBuilder, private sheetService: SheetService,
+  constructor(private formBuilder: FormBuilder, private sheetService: SheetService, private spinner: NgxSpinnerService,
               private internshipService: InternshipService, @Inject(LOCAL_STORAGE) private storage: WebStorageService) {}
 
   ngOnInit() {
@@ -103,7 +104,9 @@ export class AddSheetpfeComponent implements OnInit {
 
   addSheet() {
     this.sheetForm.setErrors({'submit': true});
+    this.spinner.show();
     this.sheetService.addSheet(this.sheetForm.value).subscribe(data => {
+      this.spinner.hide();
       if (data) {
         this.hide.emit(data);
       }
@@ -111,7 +114,9 @@ export class AddSheetpfeComponent implements OnInit {
   }
   editSheet() {
     this.sheetForm.setErrors({'submit': true});
+    this.spinner.show();
     this.sheetService.updateSheet(this.sheetForm.value).subscribe(data => {
+      this.spinner.hide();
       if (data) {
         this.hide.emit(data);
       }

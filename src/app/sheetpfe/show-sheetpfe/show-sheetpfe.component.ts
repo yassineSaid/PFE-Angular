@@ -13,6 +13,7 @@ import {error} from 'util';
 import {el} from '@angular/platform-browser/testing/src/browser_util';
 import {Enseignantsheet} from '../../Models/enseignantsheet';
 import {NoteSheetpfeComponent} from '../note-sheetpfe/note-sheetpfe.component';
+import {NgxSpinnerService} from 'ngx-spinner';
 
 @Component({
   selector: 'app-show-sheetpfe',
@@ -20,7 +21,7 @@ import {NoteSheetpfeComponent} from '../note-sheetpfe/note-sheetpfe.component';
   styleUrls: ['./show-sheetpfe.component.scss']
 })
 export class ShowSheetpfeComponent implements OnInit {
-
+  add: Boolean = false;
   edit: Boolean = false;
   details: Boolean = false;
   user: User;
@@ -34,7 +35,7 @@ export class ShowSheetpfeComponent implements OnInit {
   exist_v: Boolean = false;
   enseignantsheet: Enseignantsheet;
   constructor(private modal: NgbModal, private sheetService: SheetService, private route: ActivatedRoute,
-              @Inject(LOCAL_STORAGE) private storage: WebStorageService) { }
+              @Inject(LOCAL_STORAGE) private storage: WebStorageService, private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => { this.sheet_id = params['id']; });
@@ -43,6 +44,7 @@ export class ShowSheetpfeComponent implements OnInit {
       if (this.sheet_id) {
         this.notFound = 'assets/images/404/404.png';
       } else {
+        this.spinner.show();
         this.sheetService.studentSheet(this.user.id).subscribe(data => {
           if (data) {
             this.sheet = data;
@@ -60,7 +62,11 @@ export class ShowSheetpfeComponent implements OnInit {
                 this.exist_v = true;
               }
             });
+          } else {
+            this.add = true;
           }
+          this.spinner.hide();
+
         });
       }
       this.sheetService.notifySheet('notificationetudiant', this.user.id).subscribe(data => {
@@ -71,7 +77,8 @@ export class ShowSheetpfeComponent implements OnInit {
       this.sheetService.changeVu().subscribe();
     }
     if (this.user.role === 'ChefDeDepartement') {
-        this.sheetService.sheet(this.sheet_id).subscribe(data => {
+      this.spinner.show();
+      this.sheetService.sheet(this.sheet_id).subscribe(data => {
           if (data.etat !== 'DEFAULT' || data.etat !== 'REFUSE' ) {
             this.sheet = data;
             this.sheet.enseignantsheet.forEach(es => {
@@ -86,8 +93,11 @@ export class ShowSheetpfeComponent implements OnInit {
           } else {
               this.notFound = 'assets/images/404/404.png';
           }
-        }, error =>  {
-          if (error.status === 404) {
+        this.spinner.hide();
+
+      }, error =>  {
+        this.spinner.hide();
+        if (error.status === 404) {
             this.notFound = 'assets/images/404/404.png';
           }
         } );
@@ -101,6 +111,7 @@ export class ShowSheetpfeComponent implements OnInit {
     }
 
     if (this.user.role === 'DirecteurDesStages') {
+      this.spinner.show();
       this.sheetService.sheet(this.sheet_id).subscribe(data => {
         if (data) {
           this.sheet = data;
@@ -114,7 +125,9 @@ export class ShowSheetpfeComponent implements OnInit {
             }
           });
         }
+        this.spinner.hide();
       }, error =>  {
+        this.spinner.hide();
         if (error.status === 404) {
           this.notFound = 'assets/images/404/404.png';
         }
@@ -129,7 +142,7 @@ export class ShowSheetpfeComponent implements OnInit {
     }
 
     if (this.user.role === 'Enseignant') {
-
+      this.spinner.show();
       this.sheetService.sheet(this.sheet_id).subscribe(data => {
         if (data) {
           data.enseignantsheet.forEach(es => {
@@ -153,8 +166,10 @@ export class ShowSheetpfeComponent implements OnInit {
             this.notFound = 'assets/images/404/404.png';
           }
         }
+        this.spinner.hide();
       }, error =>  {
-         if (error.status === 404) {
+        this.spinner.hide();
+        if (error.status === 404) {
            this.notFound = 'assets/images/404/404.png';
          }
       });
@@ -267,8 +282,10 @@ export class ShowSheetpfeComponent implements OnInit {
     this.sheetModify = false;
   }
   export() {
+    this.spinner.show();
     this.sheetService.export(this.sheet.id).subscribe(
       (data: Blob) => {
+        this.spinner.hide();
         const file = new Blob([data], {type: 'application/pdf'})
         const fileURL = URL.createObjectURL(file);
         window.open(fileURL);
@@ -280,6 +297,7 @@ export class ShowSheetpfeComponent implements OnInit {
         a.click();
       },
       (error) => {
+        this.spinner.hide();
         console.log('getPDF error: ',error);
       }
     );

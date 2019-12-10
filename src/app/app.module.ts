@@ -65,9 +65,11 @@ import { SpecialitesComponent, NgbdModalSpecialite } from './specialites/special
 import { TokenInterceptor } from './login/TokenInterceptor';
 import { ClassesComponent } from './classes/classes.component';
 import { EnseignantsComponent, NgbdModalEnseignant, NgbdModalDirecteur } from './enseignants/enseignants.component';
-import { SpecialitesComponent } from './specialites/specialites.component';
 import {AngularMultiSelectModule} from 'angular2-multiselect-dropdown';
 import { UploadSheetpfeComponent } from './sheetpfe/upload-sheetpfe/upload-sheetpfe.component';
+import {AngularPaginatorModule} from 'angular-paginator';
+import {NgxSpinnerModule} from 'ngx-spinner';
+
 
 
 
@@ -157,6 +159,8 @@ import { UploadSheetpfeComponent } from './sheetpfe/upload-sheetpfe/upload-sheet
     NgbModule,
     AngularMultiSelectModule,
     ChartsModule,
+    AngularPaginatorModule,
+    NgxSpinnerModule
     /*BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,

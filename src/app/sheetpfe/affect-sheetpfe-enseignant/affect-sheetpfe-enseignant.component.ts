@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import {SheetService} from '../sheet.service';
 import {Enseignant} from '../../Models/enseignant';
+import {NgxSpinnerService} from 'ngx-spinner';
 
 @Component({
   selector: 'app-affect-sheetpfe-enseignant',
@@ -19,7 +20,7 @@ export class AffectSheetpfeEnseignantComponent implements OnInit {
   enseignant: Enseignant;
   error: any;
   disabled: Boolean;
-  constructor(public modal: NgbActiveModal, private sheetService: SheetService) { }
+  constructor(public modal: NgbActiveModal, private sheetService: SheetService, private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
       if ( this.action === 'Affect') {
@@ -31,8 +32,8 @@ export class AffectSheetpfeEnseignantComponent implements OnInit {
          }
         } );
       }
-      this.sheetService.enseignantsheet(this.type , this.sheet.id).subscribe(data => {
-        if (data) {
+    this.sheetService.enseignantsheet(this.type , this.sheet.id).subscribe(data => {
+      if (data) {
           this.enseignants = data;
         }
       });
@@ -42,8 +43,11 @@ export class AffectSheetpfeEnseignantComponent implements OnInit {
       this.error = 'Choice ' + this.type;
     } else {
       this.disabled = true;
+      this.spinner.show();
       this.sheetService.affectenseignantsheet(this.type , this.sheet.id, this.enseignantID).subscribe(success => {
-          const obj = {
+        this.spinner.hide();
+
+        const obj = {
             'type': this.type,
             'enseignant': this.enseignant
           }
@@ -55,7 +59,9 @@ export class AffectSheetpfeEnseignantComponent implements OnInit {
 
   update() {
     this.disabled = true;
+    this.spinner.show();
     this.sheetService.updateenseignantsheet(this.type , this.sheet.id, this.enseignantID).subscribe(success => {
+      this.spinner.hide();
       const obj = {
         'type': this.type,
         'enseignant': this.enseignant

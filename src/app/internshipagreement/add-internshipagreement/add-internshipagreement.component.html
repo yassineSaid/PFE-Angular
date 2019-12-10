@@ -1,7 +1,7 @@
 <div class="card">
   <div class="card-body">
-    <h4 class="card-title">Add Internship Agreement</h4>
-    <form class="forms-sample ng-untouched ng-pristine ng-valid" [formGroup]="internshipForm">
+      <h4 class="card-title">Add Internship Agreement</h4>
+      <form class="forms-sample ng-untouched ng-pristine ng-valid" [formGroup]="internshipForm">
       <div class="form-group">
         <label for="date" [class.text-danger]="(endDate.invalid && endDate.touched) || (startDate.invalid && startDate.touched)">Date</label>
         <div class="row">
@@ -35,6 +35,17 @@
         <button class="btn btn-primary mr-2" type="submit" (click)="addInternship()" [disabled]="internshipForm.invalid">Submit</button>
       </ng-template>
     </form>
+      <ngx-spinner bdColor="rgba(255,255,255,0.1)">
+        <div class="spinner-grow text-primary" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+        <div class="spinner-grow text-info" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+        <div class="spinner-grow text-primary" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </ngx-spinner>
   </div>
 </div>
 

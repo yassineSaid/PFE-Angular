@@ -1,4 +1,4 @@
-import { Roles } from "../Models/roles";
+import {Roles} from '../Models/roles';
 
 export const items = [
     {
@@ -95,42 +95,42 @@ export const items = [
         path: "/sheet",
         title: "Fiche PFE",
         icon: "menu-icon fa fa-file-text-o",
-        roles: "All",
+        roles: [Roles.DirecteurDesStages, Roles.Enseignant, Roles.Etudiant],
         queryParams: ""
     },
     {
         path: "/sheet",
         title: "Fiche accepter",
         icon: "menu-icon fa fa-file-text-o",
-        roles: "All",
+        roles: [Roles.ChefDeDepartement],
         queryParams: { q: '_accepted' }
     },
     {
         path: "/sheet",
         title: "Attente d'encadreur",
         icon: "menu-icon fa fa-file-text-o",
-        roles: "All",
+        roles: [Roles.ChefDeDepartement],
         queryParams: { q: '_encadreur' }
     },
     {
         path: "/sheet",
         title: "Attente de rapporteur",
         icon: "menu-icon fa fa-file-text-o",
-        roles: "All",
+        roles: [Roles.ChefDeDepartement],
         queryParams: { q: '_rapporteur' }
     },
     {
         path: "/sheet",
         title: "Attente de note",
         icon: "menu-icon fa fa-file-text-o",
-        roles: "All",
+        roles: [Roles.ChefDeDepartement, Roles.Enseignant],
         queryParams: { q: '_note' }
     },
     {
         path: "/sheet",
         title: "Attente de planification",
         icon: "menu-icon fa fa-file-text-o",
-        roles: "All",
+        roles: [Roles.DirecteurDesStages],
         queryParams: { q: '_planning' }
     },
 
@@ -138,7 +138,7 @@ export const items = [
         path: "/sheet",
         title: "Modification majeur",
         icon: "menu-icon fa fa-file-text-o",
-        roles: "All",
+        roles: [Roles.Enseignant],
         queryParams: { q: '_modify' }
     },
 
@@ -153,13 +153,13 @@ export const items = [
         path: "etudiant/nosheet",
         title: "Etudiant sans fiche pfe",
         icon: "menu-icon fa fa-file-text-o",
-        roles: "All"
+        roles: [Roles.DirecteurDesStages]
     },
     {
         path: "/internship",
         title: "Convention de stage",
         icon: "menu-icon fa fa-address-card-o",
-        roles: "All",
+        roles: [Roles.DirecteurDesStages, Roles.Etudiant],
         queryParams: ""
     },
     {

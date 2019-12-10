@@ -3,6 +3,7 @@ import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {SheetService} from '../sheet.service';
 import {LOCAL_STORAGE, WebStorageService} from 'ngx-webstorage-service';
 import {not} from 'rxjs/internal-compatibility';
+import {NgxSpinnerService} from 'ngx-spinner';
 
 @Component({
   selector: 'app-valid-sheetpfe',
@@ -19,7 +20,7 @@ export class ValidSheetpfeComponent implements OnInit {
   error: any;
   disabled: Boolean = false;
   constructor(public modal: NgbActiveModal, private sheetService: SheetService,
-              @Inject(LOCAL_STORAGE) private storage: WebStorageService) { }
+              @Inject(LOCAL_STORAGE) private storage: WebStorageService, private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
   }
@@ -29,7 +30,9 @@ export class ValidSheetpfeComponent implements OnInit {
     } else {
       this.disabled = true;
       if (this.storage.get('user').role === 'DirecteurDesStages') {
+        this.spinner.show();
         this.sheetService.validsheetByDirecteur(this.sheet.id, this.type.toUpperCase()).subscribe(success => {
+          this.spinner.hide();
           let type = 'REFUSE';
           if (this.type === 'accepted') {
             type = 'ACCEPTED';
@@ -56,7 +59,10 @@ export class ValidSheetpfeComponent implements OnInit {
               this.sheetM_id = m.id;
             }
           });
+          this.spinner.show();
           this.sheetService.acceptesheetModify(this.sheetM_id, type, note).subscribe(success => {
+            this.spinner.hide();
+
             const obj = {
               'etat': type,
               'note': note
@@ -68,7 +74,9 @@ export class ValidSheetpfeComponent implements OnInit {
           if (this.type === 'accepted') {
             type = 'VALIDATE';
           }
+          this.spinner.show();
           this.sheetService.validsheetByEnseignant(this.sheet.id, type, note).subscribe(success => {
+            this.spinner.hide();
             const obj = {
               'etat': type,
               'note': note

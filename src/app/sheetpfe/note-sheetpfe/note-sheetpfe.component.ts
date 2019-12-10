@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {SheetService} from '../sheet.service';
+import {NgxSpinnerService} from 'ngx-spinner';
 
 @Component({
   selector: 'app-note-sheetpfe',
@@ -14,7 +15,7 @@ export class NoteSheetpfeComponent implements OnInit {
   note: any
   error: any;
   disabled: Boolean;
-  constructor(public modal: NgbActiveModal, private sheetService: SheetService) { }
+  constructor(public modal: NgbActiveModal, private sheetService: SheetService, private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
   }
@@ -31,7 +32,9 @@ export class NoteSheetpfeComponent implements OnInit {
       } else if (this.type === 'rapporteur') {
         type = 'addrapporteurnote';
       }
+      this.spinner.show();
       this.sheetService.noteSheet(type, this.note, this.sheet.id).subscribe(success => {
+        this.spinner.hide();
         this.passEntry.emit(this.note);
         this.modal.close();
       });
