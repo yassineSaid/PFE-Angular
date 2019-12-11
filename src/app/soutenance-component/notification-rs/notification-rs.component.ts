@@ -39,6 +39,7 @@ export class NotificationRSComponent implements OnInit {
   traiterNotificationConflit(idNotification){
     this.httpService.traiterNotification(idNotification).subscribe(
       data => {
+        this.httpService.envoiMail().subscribe();
         this.n = data;
         console.log(this.n);
         window.alert("notification Traiter");

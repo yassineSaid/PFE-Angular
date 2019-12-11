@@ -30,7 +30,7 @@
     <p class="card-description" *ngIf="user.role != 'Enseignant'">
       <a href="" class="text-info">{{ sheetM.entreprise.nameEntreprise }} </a>
     </p>
-    <p *ngIf="user.role != 'Enseignant'"><i class="fa fa-envelope-o"></i>{{ sheetM.entreprise.nameEntreprise }}</p>
+  
 
     <div class="form-group"  *ngIf="user.role === 'Enseignant'">
       <button type="button" class="btn btn-primary mr-2" (click)="valid('accepted')" >Accepted</button>

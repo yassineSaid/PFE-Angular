@@ -6,12 +6,12 @@
     <h3  class="card-header">Cette reclamation à été traiter par l'enseignant</h3>
     </div>
     <div *ngIf=" user.role === 'Enseignant'">
-      <h3  class="card-header">Cette reclamation à été traiter par l'administrateur</h3>
+      <h3  class="card-header">Cette reclamation à été traiter par le directeur de stages</h3>
     </div>
   </div>
   <div *ngIf="reclamation.length > 0">
   <div class="card-body grid-padding" *ngFor="let rec of reclamation" >
- {{idNotification}}
+
     <blockquote class="blockquote blockquote-info">
       <div>
         <h4 class="card-title"><strong>Text Reclamation :</strong></h4>

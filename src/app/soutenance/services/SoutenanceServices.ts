@@ -10,7 +10,7 @@ import { Soutenance } from '../entities/Soutenance';
     constructor(private httpClient:HttpClient) { }
     getSoutenance(){
       return this.httpClient.get<Soutenance[]>(
-          'http://localhost:9080/4twin3-osp-pfe-web/rest/soutenance'
+          'http://localhost:9080/4twin3-osp-pfe-web/rest/soutenance/soutenance'
       );}
 
       addSoutenance(Soutenance){
@@ -19,6 +19,6 @@ import { Soutenance } from '../entities/Soutenance';
         }
         return this.httpClient.post<Soutenance>(
             'http://localhost:9080/4twin3-osp-pfe-web/rest/soutenance'+Soutenance,httpOptions
-          
+
         )}
   }

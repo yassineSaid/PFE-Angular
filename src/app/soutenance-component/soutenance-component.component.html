@@ -1,11 +1,31 @@
 <div class="card">
+
+
+
+
+
   <div *ngIf="user.role === 'ChefDeDepartement' ||  user.role === 'DirecteurDesStages' || user.role === 'Admin' || user.role === 'SuperAdmin' || user.role === 'Enseignant'  ">
-    <div *ngIf="notification.length !== 0 || notifications.length !== 0 ">
+    <div *ngIf="notification.length !== 0 ">
       <app-notification-rs>
 
       </app-notification-rs>
     </div>
-    <div *ngIf="notification.length === 0 && notifications.length === 0">
+    <div *ngIf="notification.length === 0 ">
+
+
+      <div *ngIf="soutenance.length === 0">
+        <div class="card-body grid-padding">
+        <blockquote class="blockquote blockquote-info">
+          <h3 class="card-header">Suivi des notes soutenances</h3><br>
+          <h4 class="card-title"><strong>nombre de soutenance Notés :  {{stat[0]}} </strong> </h4>
+          <h4 class="card-title"><strong>la meilleur note : {{stat[2]}} </strong></h4>
+          <h4 class="card-title"><strong>la plus faible note :  {{stat[1]}} </strong></h4>
+          <h4 class="card-title"><strong>la moyenne des notes : {{stat[3]}} </strong></h4>
+        </blockquote>
+        </div>
+      </div>
+
+
     <div class="card-body grid-padding" *ngFor="let s of allsoutenance"  >
 
       <div *ngIf="s[5] === 0">
@@ -35,9 +55,9 @@
               <form [formGroup]="AddNote" *ngIf="submitted || ajout">
                 <input type="number" [value]="s[4]" formControlName="ids" #idS hidden>
                 <label class="card-title"><strong>Note jury 1 :</strong></label>
-                <input type="number" formControlName="note1" #note>
+                <input type="number" placeholder="note jury 1"  formControlName="note1" #note>
                 <label class="card-title"><strong>Note jury 2 :</strong></label>
-                <input type="number" formControlName="note2" #notee>
+                <input type="number" placeholder="note jury 2" formControlName="note2" #notee>
                 <button class="btn btn-inverse-info btn-fw grid-margin" type="submit"  (click)="ajouterNote(idS,note,notee)" [disabled]="AddNote.invalid">Confirmer</button>
 
               </form>
@@ -75,7 +95,7 @@
       <div *ngIf="t !== 0">
         <h4 class="card-title">La note de votre soutenance est :</h4>
         <p class="card-description" ><strong>{{t}}</strong>   </p>
-       <button class="btn btn-inverse-info btn-fw grid-margin" type="submit" (click)="notify()">Ajouter Reclamation</button>
+        <button class="btn btn-inverse-info btn-fw grid-margin" mat-raised-button (click)="openDialog()">Ajouter Reclamation</button>
         <button class="btn btn-inverse-info btn-fw grid-margin" type="submit" (click)="consulterRec()">Consulter Reclamation</button>
 
         <div *ngIf="click">

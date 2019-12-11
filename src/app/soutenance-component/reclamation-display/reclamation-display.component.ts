@@ -33,15 +33,19 @@ export class ReclamationDisplayComponent implements OnInit {
 
   deleteReclamation(id,idU)
   {
-   this.httpService.deleteReclamation(id,idU).subscribe( data => console.log("done"));
-  this.httpService.traiterNotification(this.idNotification).subscribe(
-    data => {
-      this.n = data;
-      console.log(this.n);
+    if (confirm("Avez vous vraiment traiter cette reclamation ? ")) {
+      this.httpService.deleteReclamation(id, idU).subscribe(data => console.log("done"));
+      this.httpService.traiterNotification(this.idNotification).subscribe(
+        data => {
+          this.n = data;
+          console.log(this.n);
+          window.location.replace('/soutenanceNonNote');
 
+
+        }
+      );
     }
-  );
-    window.location.replace('/soutenanceNonNote');
+
   }
 
 

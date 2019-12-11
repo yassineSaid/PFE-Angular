@@ -57,6 +57,12 @@ import { SoutenanceComponent } from './soutenance/soutenance.component';
 import { EtudiantnosheetComponent } from './sheetpfe/etudiantnosheet/etudiantnosheet.component';
 import { NotificationRSComponent } from './soutenance-component/notification-rs/notification-rs.component';
 
+import {ChartsModule} from 'ng2-charts';
+import { MatDialogModule } from '@angular/material/dialog';
+
+
+
+
 
 
 
@@ -124,6 +130,8 @@ import { NotificationRSComponent } from './soutenance-component/notification-rs/
     HttpClientModule,
     ReactiveFormsModule,
     NgbModule,
+    ChartsModule,
+    MatDialogModule,
     /*BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -144,7 +152,8 @@ import { NotificationRSComponent } from './soutenance-component/notification-rs/
     AffectSheetpfeEnseignantComponent,
     ValidSheetpfeComponent,
     NoteSheetpfeComponent,
-    NgbdModalAdmin
+    NgbdModalAdmin,
+    ReclamationComponent
   ],
 })
 export class AppModule { }

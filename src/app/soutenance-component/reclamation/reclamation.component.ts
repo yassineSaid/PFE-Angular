@@ -4,6 +4,9 @@ import {LOCAL_STORAGE, WebStorageService} from 'ngx-webstorage-service';
 import {Reclamation} from '../../Models/Reclamation';
 import {User} from '../../Models/user';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {noWhitespaceValidator} from '../../sheetpfe/validator';
+
+
 
 @Component({
   selector: 'app-reclamation',
@@ -23,7 +26,7 @@ export class ReclamationComponent implements OnInit {
   ngOnInit() {
     this.Reclamation = this.formBuilder.group(
       {
-        textRec: ['', [ Validators.required, Validators.minLength(15), Validators.maxLength(200)]],
+        textRec: ['', [ Validators.required, Validators.minLength(20) , noWhitespaceValidator , Validators.maxLength(200)]],
         etudiant: [''],
         soutenance: [''],
         dateAjout: ['']
@@ -50,6 +53,7 @@ export class ReclamationComponent implements OnInit {
 
 
   addReclamation() {
+    if (confirm("voulez vous vraiment ajouter une reclamation ?")) {
   this.httpService.ajouterReclamation(this.Reclamation.value).subscribe(
     success => {
       if (success) {
@@ -61,6 +65,7 @@ export class ReclamationComponent implements OnInit {
       }
     }
   );
+    }
   }
 
 

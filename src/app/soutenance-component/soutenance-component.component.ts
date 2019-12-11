@@ -5,6 +5,9 @@ import {User} from '../Models/user';
 import {Notification} from '../Models/notification';
 import {LOCAL_STORAGE, WebStorageService} from 'ngx-webstorage-service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { VERSION , MatDialog, MAT_DIALOG_DATA } from '@angular/material';
+import {ReclamationComponent} from './reclamation/reclamation.component';
+
 
 
 @Component({
@@ -15,9 +18,11 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 })
 export class SoutenanceComponentComponent implements OnInit {
 
+
   user: User;
   soutenance: Soutenance[];
   allsoutenance: Soutenance[];
+  stat: Soutenance[];
   note: Soutenance[];
   data: string;
   table: any[];
@@ -34,19 +39,13 @@ export class SoutenanceComponentComponent implements OnInit {
   notifications: Notification[];
 
 
-  constructor( private httpService: SoutenanceServiceService ,      @Inject(LOCAL_STORAGE) private storage: WebStorageService , private formBuilder: FormBuilder ) {
+  constructor( private httpService: SoutenanceServiceService ,      @Inject(LOCAL_STORAGE) private storage: WebStorageService , private formBuilder: FormBuilder , private dialog: MatDialog  ) {
 
     this.user = this.storage.get('user');
     this.httpService.getNotificationUser(this.user.id).subscribe(
       data => {
         this.notification = data;
         console.log(this.notification);
-      }
-    );
-    this.httpService.getAllNotification().subscribe(
-      data => {
-        this.notifications = data;
-        console.log(this.notifications);
       }
     );
     if (this.user.role === 'Admin' || this.user.role === 'Enseignant' || this.user.role === 'ChefDeDepartement' || this.user.role === 'DirecteurDesStages') {
@@ -58,6 +57,10 @@ export class SoutenanceComponentComponent implements OnInit {
       this.httpService.getAllSoutenance().subscribe(data => {
         this.allsoutenance = data;
         console.log(this.allsoutenance);
+      });
+      this.httpService.getStatSoutenance().subscribe(data => {
+        this.stat = data;
+        console.log(this.stat);
       });
     }
     if (this.user.role === 'Etudiant') {
@@ -180,6 +183,17 @@ export class SoutenanceComponentComponent implements OnInit {
   }
 
 
+
+  openDialog() {
+    let dialogRef  = this.dialog.open(ReclamationComponent , {
+      height: '500px',
+      width: '700px',
+
+    }) ;
+    dialogRef.afterClosed().subscribe( result => {
+      console.log(result);
+    });
+  }
 
 
 }

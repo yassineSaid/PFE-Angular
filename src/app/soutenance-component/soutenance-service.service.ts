@@ -5,7 +5,7 @@ import { Config } from '../Models/config';
 import {LOCAL_STORAGE, WebStorageService} from 'ngx-webstorage-service';
 import {Observable, observable} from 'rxjs';
 import {Reclamation} from '../Models/Reclamation';
-import {User} from "../Models/user";
+import {User} from '../Models/user';
 import {Notification} from '../Models/notification';
 
 
@@ -36,6 +36,11 @@ export class SoutenanceServiceService {
   getAllSoutenance()
   {
     return this.http.get<Soutenance[]>(`${Config.BASE_URL}soutenance/soutenance`);
+  }
+
+  getStatSoutenance()
+  {
+    return this.http.get<Soutenance[]>(`${Config.BASE_URL}soutenance/note/moyenne`);
   }
 
   getsoutenanceEtudiant(id: number)
@@ -89,6 +94,22 @@ export class SoutenanceServiceService {
   }
     console.log(obj);
     return this.http.post<any>(`${Config.BASE_URL}reclamation/ajout` , obj , {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
+  }
+
+  envoiMail()
+  {
+    const obj = {
+      'message': 'il ya un conflit dans la note que vous avez ajouté , la difference entre les deux notes des jurys est superieure à 3 , veuillez s il vous plait corriger cet erreur',
+      'toUserEmail': this.storage.get('user').email ,
+      'type': 'Approved',
+      'subject': 'Conflit Note'
+    }
+    console.log(obj);
+    return this.http.post<any>(`${Config.BASE_URL}mailsender` , obj , {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
