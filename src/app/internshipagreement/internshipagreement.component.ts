@@ -5,6 +5,7 @@ import {SheetService} from '../sheetpfe/sheet.service';
 import {LOCAL_STORAGE, WebStorageService} from 'ngx-webstorage-service';
 import {SheetPFE} from '../Models/sheet-pfe';
 import {InternshipService} from './internship.service';
+import {NgxSpinnerService} from 'ngx-spinner';
 
 @Component({
   selector: 'app-internshipagreement',
@@ -15,8 +16,11 @@ export class InternshipagreementComponent implements OnInit {
   user: User;
   internships: Internship[] = [];
   notFound: any;
-  email: any
-  constructor(private internshipService: InternshipService, @Inject(LOCAL_STORAGE) private storage: WebStorageService) { }
+  email: any;
+  p = 1;
+  size: number;
+  constructor(private internshipService: InternshipService, @Inject(LOCAL_STORAGE) private storage: WebStorageService,
+              private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
     this.user = this.storage.get('user');
@@ -37,7 +41,10 @@ export class InternshipagreementComponent implements OnInit {
       email = this.email;
     }
     this.internships = []
+    this.spinner.show();
     this.internshipService.internships(email).subscribe(data => {
+      this.spinner.hide();
+      this.size = data.length;
       if (data) {
         this.internships = data.reverse();
       }

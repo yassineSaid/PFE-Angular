@@ -10,6 +10,7 @@ import { User } from '../Models/user';
 export class AuthService {
   user: Subject<User> = new Subject();
   loggedIn: Subject<boolean> = new Subject();
+  image: Subject<any> = new Subject();
 
   constructor(private http: HttpClient) { }
 
@@ -37,5 +38,15 @@ export class AuthService {
   broadcastLoggedInChange(val: boolean) {
     this.loggedIn.next(val);
   }
-  
+  broadcastImageChange(image: any) {
+    this.image.next(image);
+  }
+  getImage(): Observable<Blob> {
+    return this.http.get<Blob>(`${Config.BASE_URL}ecole/image`, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Accept':'application/octet-stream'
+      }), withCredentials: true,responseType: "blob" as "json"
+    });
+  }
 }

@@ -26,7 +26,7 @@ import { TooltipsComponent } from './tooltips/tooltips.component';
 import { CarouselComponent } from './carousel/carousel.component';
 import { TabsComponent } from './tabs/tabs.component';
 import { LoginComponent } from './login/login.component';
-import { HttpClientModule, HttpClient} from '@angular/common/http';
+import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { SheetpfeComponent } from './sheetpfe/sheetpfe.component';
 import { ShowSheetpfeComponent } from './sheetpfe/show-sheetpfe/show-sheetpfe.component';
@@ -46,7 +46,7 @@ import { ForumComponent } from './forum/forum.component';
 import { CategorieComponent } from './categorie/categorie.component';
 import { ReponseComponent } from './reponse/reponse.component';
 import { AdminsComponent, NgbdModalAdmin } from './admins/admins.component';
-import {DatePipe} from '@angular/common';
+import { DatePipe } from '@angular/common';
 
 import { NoteSheetpfeComponent } from './sheetpfe/note-sheetpfe/note-sheetpfe.component';
 
@@ -56,6 +56,25 @@ import { ReclamationDisplayComponent } from './soutenance-component/reclamation-
 import { SoutenanceComponent } from './soutenance/soutenance.component';
 import { EtudiantnosheetComponent } from './sheetpfe/etudiantnosheet/etudiantnosheet.component';
 import { NotificationRSComponent } from './soutenance-component/notification-rs/notification-rs.component';
+import { ModifySheetpfeComponent } from './sheetpfe/modify-sheetpfe/modify-sheetpfe.component';
+import { ChartsModule } from 'ng2-charts';
+import { EcoleComponent } from './ecole/ecole.component';
+import { DepartementsComponent, NgbdModalDepartement } from './departements/departements.component';
+import { SpecialitesComponent, NgbdModalSpecialite } from './specialites/specialites.component';
+import { TokenInterceptor } from './login/TokenInterceptor';
+import { ClassesComponent } from './classes/classes.component';
+import { EnseignantsComponent, NgbdModalEnseignant, NgbdModalDirecteur } from './enseignants/enseignants.component';
+import {AngularMultiSelectModule} from 'angular2-multiselect-dropdown';
+import { UploadSheetpfeComponent } from './sheetpfe/upload-sheetpfe/upload-sheetpfe.component';
+import {AngularPaginatorModule} from 'angular-paginator';
+import {NgxSpinnerModule} from 'ngx-spinner';
+
+import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
+import { UploadSheetpfeComponent } from './sheetpfe/upload-sheetpfe/upload-sheetpfe.component';
+import { EtudiantsComponent, NgbdModalEtudiant } from './etudiants/etudiants.component';
+import { SiteModule } from './siteModule/siteModule.module';
+import { NgbdModalSite } from './siteModule/sites/sites.component';
+import { MatTableModule } from '@angular/material';
 
 import {ChartsModule} from 'ng2-charts';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -107,6 +126,11 @@ import { MatDialogModule } from '@angular/material/dialog';
     ReponseComponent,
     AdminsComponent,
     NgbdModalAdmin,
+    NgbdModalDepartement,
+    NgbdModalSpecialite,
+    NgbdModalEnseignant,
+    NgbdModalDirecteur,
+    NgbdModalEtudiant,
 
     ReclamationDisplayComponent,
 
@@ -116,7 +140,22 @@ import { MatDialogModule } from '@angular/material/dialog';
 
     SoutenanceComponent,
 
-    NotificationRSComponent
+    NotificationRSComponent,
+
+    ModifySheetpfeComponent,
+
+    EcoleComponent,
+
+    DepartementsComponent,
+
+    SpecialitesComponent,
+    UploadSheetpfeComponent,
+    ClassesComponent,
+
+    EnseignantsComponent,
+
+    EtudiantsComponent,
+    NgbdModalSite
 
   ],
 
@@ -130,8 +169,13 @@ import { MatDialogModule } from '@angular/material/dialog';
     HttpClientModule,
     ReactiveFormsModule,
     NgbModule,
-    ChartsModule,
     MatDialogModule,
+    AngularMultiSelectModule,
+    ChartsModule,
+    AngularPaginatorModule,
+    NgxSpinnerModule,
+    MatTableModule
+
     /*BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -145,7 +189,12 @@ import { MatDialogModule } from '@angular/material/dialog';
     HttpClient,
     FormBuilder,
     CookieService,
-    DatePipe
+    DatePipe,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent],
   entryComponents: [
@@ -153,7 +202,15 @@ import { MatDialogModule } from '@angular/material/dialog';
     ValidSheetpfeComponent,
     NoteSheetpfeComponent,
     NgbdModalAdmin,
-    ReclamationComponent
+    ReclamationComponent,
+    NgbdModalDepartement,
+    UploadSheetpfeComponent,
+    NgbdModalSpecialite,
+    NgbdModalEnseignant,
+    NgbdModalDirecteur,
+    NgbdModalEtudiant,
+    NgbdModalSite
+
   ],
 })
 export class AppModule { }

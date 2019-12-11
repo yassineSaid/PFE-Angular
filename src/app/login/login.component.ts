@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
   error: boolean=false;
+  loading: boolean=false;
 
   constructor(private cookiesService: CookieService , private formBuilder: FormBuilder , private authService: AuthService , private router: Router, @Inject(LOCAL_STORAGE) private storage: WebStorageService) {
     if (this.cookiesService.check('token')){
@@ -33,6 +34,7 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
+    this.error=false;
     this.authService.login(this.Form.email.value , this.Form.password.value).subscribe(success => {
       if (success) {
         this.error=false;
@@ -47,6 +49,11 @@ export class LoginComponent implements OnInit {
     },
     error => {
       this.error=true;
+    },
+    ()=>{
+      this.authService.getImage().subscribe(success => {
+        if (success.size!==28)this.authService.broadcastImageChange(success);
+      })
     }
     );
   }

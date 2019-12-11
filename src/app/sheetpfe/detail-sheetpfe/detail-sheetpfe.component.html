@@ -1,5 +1,5 @@
 <div class="details-sheet"  *ngFor="let sheetM of sheet.sheetPFEModifications">
-  <blockquote class="blockquote blockquote-info" *ngIf="sheetM.etat === 'DEFAULT'">
+  <blockquote class="blockquote blockquote-info">
     <p class="date-update">Modifier le : <span class="text-info">{{ sheetM.created}}</span></p>
     <h4 class="card-title">Titre</h4>
     <p class="card-description"> {{ sheetM.title }} </p>
@@ -25,17 +25,14 @@
       <li *ngFor="let categorie of sheetM.categories"> {{ categorie.name}} </li>
     </ul>
 
-
-    <h4 class="card-title" *ngIf="user.role != 'Enseignant'">Entreprise</h4>
-    <p class="card-description" *ngIf="user.role != 'Enseignant'">
-      <a href="" class="text-info">{{ sheetM.entreprise.nameEntreprise }} </a>
+    <h4 class="card-title">Entreprise</h4>
+    <p class="card-description">
+      <a href="" class="text-info">{{ sheetM.entreprise?.nameEntreprise }} </a>
     </p>
-  
-
-    <div class="form-group"  *ngIf="user.role === 'Enseignant'">
-      <button type="button" class="btn btn-primary mr-2" (click)="valid('accepted')" >Accepted</button>
-      <button type="button" class="btn btn-primary mr-2" (click)="valid('request')">Request</button>
-    </div>
+    <p>{{ sheetM.entreprise?.adresse }} {{ sheetM.entreprise?.pays }}</p>
+    <p ><i class="fa fa-envelope-o"></i> {{ sheetM.entreprise?.nameEntreprise }}</p>
   </blockquote>
+
+
 </div>
 
