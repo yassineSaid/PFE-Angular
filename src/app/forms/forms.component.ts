@@ -36,16 +36,16 @@ export class FormsComponent implements OnInit {
       .map(term => term.length > 1 ? []
         : states.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10));
 
-  @ViewChild('instance') instance: NgbTypeahead;
-  focus$ = new Subject<string>();
+/*   @ViewChild('instance') instance: NgbTypeahead;
+ */  focus$ = new Subject<string>();
   click$ = new Subject<string>();
 
   focusSearch = (text$: Observable<string>) =>
     text$
       .debounceTime(200).distinctUntilChanged()
       .merge(this.focus$)
-      .merge(this.click$.filter(() => !this.instance.isPopupOpen()))
-      .map(term => (term === '' ? states : states.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1)).slice(0, 10));
+/*       .merge(this.click$.filter(() => !this.instance.isPopupOpen()))
+ */      .map(term => (term === '' ? states : states.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1)).slice(0, 10));
 
 
   ngOnInit() {

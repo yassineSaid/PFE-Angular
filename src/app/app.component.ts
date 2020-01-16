@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AuthService } from './login/auth.service';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
+import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-root',
@@ -11,6 +12,7 @@ import { Router } from '@angular/router';
 export class AppComponent {
   title = 'star-admin-angular';
   loggedIn: boolean=false;
+  faCoffee = faCoffee;
 
   constructor(private authService:AuthService, private cookieService:CookieService, private router:Router){
     if (cookieService.check('token')){

@@ -1,0 +1,18 @@
+<div class="card">
+<div *ngIf="!ok">
+          <form [formGroup]="Reclamation" >
+            <label class="card-title" ><strong>Text Reclamation : </strong></label>
+            <br>
+           <textarea id="textRec"  formControlName="textRec"></textarea>
+            <br>
+            <input  id="etudiant"   formControlName="etudiant" hidden>
+            <input  id="soutenance"  formControlName="soutenance" hidden >
+            <input  id="dateAjout" type="Date"  formControlName="dateAjout"  hidden>
+            <button  class="btn btn-inverse-info btn-fw grid-margin" type="submit" (click)="addReclamation()" >Ajouter</button>
+          </form>
+</div>
+  <div *ngIf="ok">
+    <label class="card-title" ><strong>Vous Avez deja ajouté  une reclamation , la direction le traitera dans quelques jours </strong></label>
+  </div>
+</div>
+

@@ -5,7 +5,6 @@ import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule, FormBuilder } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import {FullCalendarModule} from 'primeng/fullcalendar';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -40,10 +39,63 @@ import { AddInternshipagreementComponent } from './internshipagreement/add-inter
 import { ShowInternshipagreementComponent } from './internshipagreement/show-internshipagreement/show-internshipagreement.component';
 import { ValidSheetpfeComponent } from './sheetpfe/valid-sheetpfe/valid-sheetpfe.component';
 import { NotifySheetpfeComponent } from './sheetpfe/notify-sheetpfe/notify-sheetpfe.component';
+
+import { SoutenanceComponentComponent } from './soutenance-component/soutenance-component.component';
+import { ReclamationComponent } from './soutenance-component/reclamation/reclamation.component';
+import {ChartModule} from 'primeng/chart';
+
 import { ForumComponent } from './forum/forum.component';
+import { CategorieComponent } from './categorie/categorie.component';
+import { ReponseComponent } from './reponse/reponse.component';
 import { AdminsComponent, NgbdModalAdmin } from './admins/admins.component';
 import {DatePipe} from '@angular/common';
-import { SoutenanceComponent } from './soutenance/soutenance.component';
+import { NoteSheetpfeComponent } from './sheetpfe/note-sheetpfe/note-sheetpfe.component';
+
+import { ReclamationDisplayComponent } from './soutenance-component/reclamation-display/reclamation-display.component';
+
+import {FullCalendarModule} from 'primeng/fullcalendar';
+
+import { SoutenanceComponent, DialogOverviewExampleDialog } from './soutenance/soutenance.component';
+
+import {
+  MatAutocompleteModule,
+  MatBadgeModule,
+  MatBottomSheetModule,
+  MatButtonModule,
+  MatButtonToggleModule,
+  MatCardModule,
+  MatCheckboxModule,
+  MatChipsModule,
+  MatDatepickerModule,
+  MatDialogModule,
+  MatDividerModule,
+  MatExpansionModule,
+  MatGridListModule,
+  MatIconModule,
+  MatInputModule,
+  MatListModule,
+  MatMenuModule,
+  MatNativeDateModule,
+  MatPaginatorModule,
+  MatProgressBarModule,
+  MatProgressSpinnerModule,
+  MatRadioModule,
+  MatRippleModule,
+  MatSelectModule,
+  MatSidenavModule,
+  MatSliderModule,
+  MatSlideToggleModule,
+  MatSnackBarModule,
+  MatSortModule,
+  MatStepperModule,
+  MatTableModule,
+  MatTabsModule,
+  MatToolbarModule,
+  MatTooltipModule,
+  MatTreeModule,
+} from '@angular/material';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { StatsComponent } from './stats/stats.component';
 
 
 
@@ -81,11 +133,24 @@ import { SoutenanceComponent } from './soutenance/soutenance.component';
     ShowInternshipagreementComponent,
     ValidSheetpfeComponent,
     NotifySheetpfeComponent,
+    SoutenanceComponentComponent,
+    ReclamationComponent,
     ForumComponent,
+    NoteSheetpfeComponent,
+    CategorieComponent,
+    ReponseComponent,
     AdminsComponent,
     NgbdModalAdmin,
-    SoutenanceComponent
-  ],
+    ReclamationDisplayComponent,
+    SoutenanceComponent,
+    
+    DialogOverviewExampleDialog,
+    StatsComponent
+    
+    
+    
+    
+ ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -96,7 +161,46 @@ import { SoutenanceComponent } from './soutenance/soutenance.component';
     HttpClientModule,
     ReactiveFormsModule,
     NgbModule,
-    FullCalendarModule
+    FullCalendarModule,MatAutocompleteModule,
+    MatBadgeModule,
+    MatBottomSheetModule,
+    MatButtonModule,
+    MatButtonToggleModule,
+    MatCardModule,
+    MatCheckboxModule,
+    MatChipsModule,
+    MatStepperModule,
+    MatDatepickerModule,
+    MatDialogModule,
+    MatDividerModule,
+    MatExpansionModule,
+    MatGridListModule,
+    MatIconModule,
+    MatInputModule,
+    MatListModule,
+    MatMenuModule,
+    MatNativeDateModule,
+    MatPaginatorModule,
+    MatProgressBarModule,
+    MatProgressSpinnerModule,
+    MatRadioModule,
+    MatRippleModule,
+    MatSelectModule,
+    MatSidenavModule,
+    MatSliderModule,
+    MatSlideToggleModule,
+    MatSnackBarModule,
+    MatSortModule,
+    MatTableModule,
+    MatTabsModule,
+    MatToolbarModule,
+    MatTooltipModule,
+    MatTreeModule,
+    FontAwesomeModule,
+    ChartModule,
+
+    
+    
   ],
   providers: [
     HttpClient,
@@ -108,7 +212,9 @@ import { SoutenanceComponent } from './soutenance/soutenance.component';
   entryComponents: [
     AffectSheetpfeEnseignantComponent,
     ValidSheetpfeComponent,
-    NgbdModalAdmin
+    NoteSheetpfeComponent,
+    NgbdModalAdmin,
+    DialogOverviewExampleDialog
   ],
 })
 export class AppModule { }

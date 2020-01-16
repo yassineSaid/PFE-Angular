@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {Internship} from '../Models/internship';
+import {User} from '../Models/user';
 
 @Component({
   selector: 'app-internshipagreement',
@@ -6,10 +8,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./internshipagreement.component.scss']
 })
 export class InternshipagreementComponent implements OnInit {
-
   constructor() { }
 
   ngOnInit() {
+
   }
 
 }

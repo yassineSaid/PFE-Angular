@@ -106,6 +106,12 @@ export const items = [
         roles: "All",
         queryParams: { q: '_planning' }
     },
+  {
+    path: "/soutenanceNonNote",
+    title: "soutenance",
+    icon: "menu-icon fa fa-file-text-o",
+    roles: "All"
+  },
     {
         path: "/internship",
         title: "Internship agreement",
@@ -162,6 +168,12 @@ export const items = [
         roles: "All",
         queryParams: ""
     },
+  {
+    path: "/categorie",
+    title: "Categorie",
+    icon: "menu-icon mdi mdi-content-copy",
+    roles: "All",
+  },
     {
         path: "/forum",
         title: "Forum",
@@ -178,7 +190,7 @@ export const items = [
     {
         path: "/soutenance",
         title: "Soutenance",
-        icon: "menu-icon mdi mdi-format-italic",
+        icon: "menu-icon fa fa-file-text-o",
         roles: "All",
         queryParams: ""
     },
