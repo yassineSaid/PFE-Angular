@@ -8,13 +8,16 @@
     <div class="col-lg-12" *ngIf="user.role === 'Etudiant'">
      <app-show-sheetpfe></app-show-sheetpfe>
     </div>
-    <div class="col-lg-12" *ngIf="user.role != 'Etudiant'" >
+    <div class="col-lg-12" *ngIf="user.role != 'Etudiant'">
       <div class="card">
         <div class="card-body">
-          <h4 class="card-title">List Sheet PFE</h4>
+          <h4 class="card-title">List Fiches PFE</h4>
         </div>
         <div class="card-body">
+          <div class="alert alert-fill-success mb-5" role="alert" *ngIf="alert"><i class="mdi mdi-alert-circle"></i> Fichier import avec success. </div>
+
           <div class="nav-filter" *ngIf="user.role === 'DirecteurDesStages' && !param">
+            <button (click)="upload()" class="btn btn-primary mb-4">Import Excel</button>
             <div class="row grid-margin">
               <div class="col-sm-6 col-md-4 col-lg-3">
                 <select class="form-control" [(ngModel)]="etat" (change)="getSheetPFEs()">
@@ -48,9 +51,9 @@
               <div class="col-sm-6 col-md-4 col-lg-3">
                 <select class="form-control" [(ngModel)]="type" (change)="getSheetPFEs()">
                   <option value="ALL">ALL</option>
-                  <option value="VALIDATEUR">To Validated</option>
-                  <option value="ENCADREUR">To Encadred</option>
-                  <option value="RAPPORTEUR">To reported</option>
+                  <option value="VALIDATEUR">À Validé</option>
+                  <option value="ENCADREUR">À Encadré</option>
+                  <option value="RAPPORTEUR">À reporté</option>
                 </select>
               </div>
               <div class="col-sm-6 col-md-4 col-lg-3">
@@ -60,18 +63,18 @@
                 <input type="month" class="form-control" [(ngModel)]="toyear" (change)="getSheetPFEs()">
               </div>
             </div>
-            <button class="btn btn-inverse-info btn-fw grid-margin" type="button" (click)="reset()">Reset</button>
+            <button class="btn btn-inverse-info btn-fw grid-margin" type="button" (click)="reset()">Réinitialiser</button>
           </div>
           <div class="table-responsive">
             <table class="table table-striped">
               <thead>
               <tr>
-                <th *ngIf="user.role === 'Enseignant' && type === 'ALL'"></th>
+                <th *ngIf="user.role === 'Enseignant' && type === 'ALL' && param != '_modify'"></th>
                 <th>
-                  Sheet PFE
+                  Fiche PFE
                 </th>
                 <th>
-                  Student
+                  Etudiant
                 </th>
                 <th>
                   Entreprise
@@ -85,8 +88,8 @@
               </tr>
               </thead>
               <tbody>
-              <tr *ngFor="let sheet of sheets">
-                <td *ngIf="user.role === 'Enseignant' && type === 'ALL'" class="text-warning" [innerText]="enseignantType(sheet)">
+              <tr *ngFor="let sheet of sheets |  angularPaginator :{ itemsPerPage: 10, currentPage: p }">
+                <td *ngIf="user.role === 'Enseignant' && type === 'ALL' && param != '_modify'" class="text-warning" [innerText]="enseignantType(sheet)">
                 </td>
                 <td class="py-1">
                   {{ sheet.title }}
@@ -102,25 +105,49 @@
                 </td>
                 <td>
                   <button class="btn btn-primary" [routerLink]="['.',sheet.id]" *ngIf="user.role === 'ChefDeDepartement'">
-                    <span *ngIf="param === 'accepted'">Affect Validator </span>
-                    <span *ngIf="param === 'waitEncadreur'">Affect Encadreur</span>
-                    <span *ngIf="param === 'waitRapporter'">Affect Rapporteur</span>
-                    <span *ngIf="param === 'waitNote'">Show</span>
+                    <span *ngIf="param === 'accepted'">Affecter Validateur </span>
+                    <span *ngIf="param === 'waitEncadreur'">Affecter Encadreur</span>
+                    <span *ngIf="param === 'waitRapporter'">Affecter Rapporteur</span>
+                    <span *ngIf="param === 'waitNote'">Voir</span>
                   </button>
-                  <button class="btn btn-primary" [routerLink]="['.',sheet.id]" *ngIf="user.role === 'DirecteurDesStages' || user.role === 'Enseignant' ">Show</button>
+                  <button class="btn btn-primary" [routerLink]="['.',sheet.id]" *ngIf="user.role === 'DirecteurDesStages' || user.role === 'Enseignant' ">Voir</button>
                 </td>
               </tr>
               <tr *ngIf="sheets.length === 0" class="text-center">
-                <td colspan="5" >
-                  There are no sheets
+                <td colspan="6" *ngIf="user.role === 'Enseignant' && type === 'ALL' && param != '_modify'; else cols5" >
+                  Il n’y a pas de fichies
                 </td>
+                <ng-template #cols5>
+                  <td colspan="5">
+                    Il n’y a pas de fichies
+                  </td>
+                </ng-template>
               </tr>
               </tbody>
             </table>
+            <nav aria-label="Page navigation example" *ngIf="size > 0">
+              <ngb-pagination [collectionSize]="size" [(page)]="p" (pageChange)="p = $event" aria-label="Default pagination">
+                <ng-template ngbPaginationPrevious><i class="fa fa-angle-left"></i></ng-template>
+                <ng-template ngbPaginationNext><i class="fa fa-angle-right"></i></ng-template>
+              </ngb-pagination>
+            </nav>
           </div>
         </div>
       </div>
     </div>
+
+    <ngx-spinner bdColor="rgba(255,255,255,0.1)">
+      <div class="spinner-grow text-primary" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+      <div class="spinner-grow text-info" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+      <div class="spinner-grow text-primary" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </ngx-spinner>
+
   </ng-template>
 </div>
 

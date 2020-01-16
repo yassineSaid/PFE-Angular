@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {ValidSheetpfeComponent} from '../valid-sheetpfe/valid-sheetpfe.component';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {SheetService} from '../sheet.service';
+import {SheetPFE} from '../../Models/sheet-pfe';
 
 @Component({
   selector: 'app-detail-sheetpfe',
@@ -7,9 +11,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DetailSheetpfeComponent implements OnInit {
 
-  constructor() { }
+  @Input() sheet;
+
+  constructor(private modal: NgbModal, private sheetService: SheetService) { }
 
   ngOnInit() {
+
   }
+
 
 }

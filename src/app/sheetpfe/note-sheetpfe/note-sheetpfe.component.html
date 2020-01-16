@@ -8,9 +8,21 @@
       <input type="number" class="form-control" [(ngModel)]="note" [class.border-danger]="error" (input)="changeNote()">
       <span class="text-small text-danger" *ngIf="error"> {{ error }} </span>
     </div>
-    <button type="button"  class="btn btn-primary mr-2" (click)="add()" [disabled]="disabled">Submit</button>
-    <button type="button" class="btn btn-light" (click)="modal.dismiss('cancel click')">Cancel</button>
+    <button type="button"  class="btn btn-primary mr-2" (click)="add()" [disabled]="disabled">Enregistrer</button>
+    <button type="button" class="btn btn-light" (click)="modal.dismiss('cancel click')">Annuler</button>
   </div>
+  <ngx-spinner bdColor="rgba(255,255,255,0.1)">
+    <div class="spinner-grow text-primary" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+    <div class="spinner-grow text-info" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+    <div class="spinner-grow text-primary" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </ngx-spinner>
 </div>
+
 
 

@@ -13,6 +13,7 @@ import {error} from 'util';
 import {el} from '@angular/platform-browser/testing/src/browser_util';
 import {Enseignantsheet} from '../../Models/enseignantsheet';
 import {NoteSheetpfeComponent} from '../note-sheetpfe/note-sheetpfe.component';
+import {NgxSpinnerService} from 'ngx-spinner';
 
 @Component({
   selector: 'app-show-sheetpfe',
@@ -20,12 +21,13 @@ import {NoteSheetpfeComponent} from '../note-sheetpfe/note-sheetpfe.component';
   styleUrls: ['./show-sheetpfe.component.scss']
 })
 export class ShowSheetpfeComponent implements OnInit {
-
+  add: Boolean = false;
   edit: Boolean = false;
   details: Boolean = false;
   user: User;
   sheet: SheetPFE;
-  notify: PfeNotification[];
+  sheetModify: Boolean = false;
+  notify: PfeNotification[] = [];
   sheet_id: any;
   notFound: any;
   exist_e: Boolean = false;
@@ -33,18 +35,24 @@ export class ShowSheetpfeComponent implements OnInit {
   exist_v: Boolean = false;
   enseignantsheet: Enseignantsheet;
   constructor(private modal: NgbModal, private sheetService: SheetService, private route: ActivatedRoute,
-              @Inject(LOCAL_STORAGE) private storage: WebStorageService) { }
+              @Inject(LOCAL_STORAGE) private storage: WebStorageService, private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
-    this.route.params.subscribe(params => { this.sheet_id = +params['id']; });
+    this.route.params.subscribe(params => { this.sheet_id = params['id']; });
     this.user = this.storage.get('user');
     if (this.user.role === 'Etudiant') {
       if (this.sheet_id) {
         this.notFound = 'assets/images/404/404.png';
       } else {
+        this.spinner.show();
         this.sheetService.studentSheet(this.user.id).subscribe(data => {
           if (data) {
             this.sheet = data;
+            data.sheetPFEModifications.forEach(m => {
+              if (m.etat === 'DEFAULT') {
+                this.sheetModify = true;
+              }
+            });
             this.sheet.enseignantsheet.forEach(es => {
               if (es.type === 'ENCADREUR') {
                 this.exist_e = true;
@@ -54,17 +62,23 @@ export class ShowSheetpfeComponent implements OnInit {
                 this.exist_v = true;
               }
             });
+          } else {
+            this.add = true;
           }
+          this.spinner.hide();
+
         });
       }
-      this.sheetService.notifySheet(this.user.id).subscribe(data => {
+      this.sheetService.notifySheet('notificationetudiant', this.user.id).subscribe(data => {
         if (data) {
-          this.notify = Array.from(data.filter(n => n.vu === 0).values());
+          this.notify = Array.from(data.filter(n => n.sendby !== 'Etudiant' && n.vu === 0).values());
         }
       });
+      this.sheetService.changeVu().subscribe();
     }
     if (this.user.role === 'ChefDeDepartement') {
-        this.sheetService.sheet(this.sheet_id).subscribe(data => {
+      this.spinner.show();
+      this.sheetService.sheet(this.sheet_id).subscribe(data => {
           if (data.etat !== 'DEFAULT' || data.etat !== 'REFUSE' ) {
             this.sheet = data;
             this.sheet.enseignantsheet.forEach(es => {
@@ -79,14 +93,25 @@ export class ShowSheetpfeComponent implements OnInit {
           } else {
               this.notFound = 'assets/images/404/404.png';
           }
-        }, error =>  {
-          if (error.status === 404) {
+        this.spinner.hide();
+
+      }, error =>  {
+        this.spinner.hide();
+        if (error.status === 404) {
             this.notFound = 'assets/images/404/404.png';
           }
         } );
+        this.sheetService.notifySheet('notificationenseignant', this.user.id).subscribe(data => {
+          if (data) {
+            this.notify = Array.from(data.filter(n => n.sendby === 'Etudiant' && n.vu === 0).values());
+          }
+        });
+        this.sheetService.changeVu().subscribe();
+
     }
 
     if (this.user.role === 'DirecteurDesStages') {
+      this.spinner.show();
       this.sheetService.sheet(this.sheet_id).subscribe(data => {
         if (data) {
           this.sheet = data;
@@ -100,19 +125,34 @@ export class ShowSheetpfeComponent implements OnInit {
             }
           });
         }
+        this.spinner.hide();
       }, error =>  {
+        this.spinner.hide();
         if (error.status === 404) {
           this.notFound = 'assets/images/404/404.png';
         }
        });
+        this.sheetService.notifySheet('notificationenseignant', this.user.id).subscribe(data => {
+          if (data) {
+            this.notify = Array.from(data.filter(n => n.sendby === 'Etudiant' && n.vu === 0).values());
+          }
+        });
+        this.sheetService.changeVu().subscribe();
+
     }
 
     if (this.user.role === 'Enseignant') {
+      this.spinner.show();
       this.sheetService.sheet(this.sheet_id).subscribe(data => {
         if (data) {
           data.enseignantsheet.forEach(es => {
             if (es.enseignant.id === this.user.id ) {
               this.sheet = data;
+              data.sheetPFEModifications.forEach(m => {
+                if (m.etat === 'DEFAULT') {
+                  this.sheetModify = true;
+                }
+              });
             }
             if (es.type === 'ENCADREUR') {
               this.exist_e = true;
@@ -126,11 +166,19 @@ export class ShowSheetpfeComponent implements OnInit {
             this.notFound = 'assets/images/404/404.png';
           }
         }
+        this.spinner.hide();
       }, error =>  {
-         if (error.status === 404) {
+        this.spinner.hide();
+        if (error.status === 404) {
            this.notFound = 'assets/images/404/404.png';
          }
       });
+      this.sheetService.notifySheet('notificationenseignant', this.user.id).subscribe(data => {
+        if (data) {
+          this.notify = Array.from(data.filter(n => n.sendby === 'Etudiant' && n.vu === 0).values());
+        }
+      });
+      this.sheetService.changeVu().subscribe();
     }
   }
 
@@ -164,8 +212,9 @@ export class ShowSheetpfeComponent implements OnInit {
     modalRef.componentInstance.type = type;
     modalRef.componentInstance.sheet = this.sheet;
     modalRef.componentInstance.passEntry.subscribe((receivedEntry) => {
-        this.sheet.etat = receivedEntry.etat;
-        this.sheet.note = receivedEntry.note;
+      this.notify = [];
+      this.sheet.etat = receivedEntry.etat;
+      this.sheet.note = receivedEntry.note;
     });
 
   }
@@ -176,7 +225,16 @@ export class ShowSheetpfeComponent implements OnInit {
   showDetails() {
    this.details = this.details === true ? false : true ;
   }
-  hide() {
+  hide(sheet) {
+    sheet.sheetPFEModifications.forEach(m => {
+      if (m.etat === 'DEFAULT') {
+        this.sheetModify = true;
+      }
+    });
+    if ( this.sheetModify === false) {
+      this.sheet = sheet;
+    }
+    this.notify = [];
     this.edit = false;
   }
   updateEnseignant(type) {
@@ -218,7 +276,31 @@ export class ShowSheetpfeComponent implements OnInit {
       }
     });
   }
-  setSheet(sheet) {
-    this.sheet = sheet;
+
+
+  hideDetails() {
+    this.sheetModify = false;
   }
+  export() {
+    this.spinner.show();
+    this.sheetService.export(this.sheet.id).subscribe(
+      (data: Blob) => {
+        this.spinner.hide();
+        const file = new Blob([data], {type: 'application/pdf'})
+        const fileURL = URL.createObjectURL(file);
+        window.open(fileURL);
+        const a         = document.createElement('a');
+        a.href        = fileURL;
+        a.target      = '_blank';
+        a.download    = 'FichePFE.pdf';
+        document.body.appendChild(a);
+        a.click();
+      },
+      (error) => {
+        this.spinner.hide();
+        console.log('getPDF error: ',error);
+      }
+    );
+  }
+
 }

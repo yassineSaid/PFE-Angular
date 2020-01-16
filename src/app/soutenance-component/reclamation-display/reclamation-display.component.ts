@@ -3,6 +3,8 @@ import {SoutenanceServiceService} from '../soutenance-service.service';
 import {LOCAL_STORAGE, WebStorageService} from 'ngx-webstorage-service';
 import {Reclamation} from '../../Models/Reclamation';
 import {User} from '../../Models/user';
+import {ActivatedRoute} from '@angular/router';
+import {Notification} from '../../Models/notification';
 
 @Component({
   selector: 'app-reclamation-display',
@@ -11,10 +13,12 @@ import {User} from '../../Models/user';
 })
 export class ReclamationDisplayComponent implements OnInit {
 
+  idNotification: any;
   user: User;
   reclamation: Reclamation[];
   mareclamation: Reclamation[];
-  constructor( private httpService: SoutenanceServiceService ,    @Inject(LOCAL_STORAGE) private storage: WebStorageService) {
+  n:  Notification = new Notification();
+  constructor( private httpService: SoutenanceServiceService ,    @Inject(LOCAL_STORAGE) private storage: WebStorageService ,  private route: ActivatedRoute) {
     this.user = this.storage.get('user');
     this.httpService.getAllReclamation().subscribe(
       data => {
@@ -29,12 +33,24 @@ export class ReclamationDisplayComponent implements OnInit {
 
   deleteReclamation(id,idU)
   {
-   this.httpService.deleteReclamation(id,idU).subscribe( data => console.log("done"));
-    window.location.replace('/soutenanceNonNote');
+    if (confirm("Avez vous vraiment traiter cette reclamation ? ")) {
+      this.httpService.deleteReclamation(id, idU).subscribe(data => console.log("done"));
+      this.httpService.traiterNotification(this.idNotification).subscribe(
+        data => {
+          this.n = data;
+          console.log(this.n);
+          window.location.replace('/soutenanceNonNote');
+
+
+        }
+      );
+    }
+
   }
 
 
   ngOnInit() {
+    this.route.params.subscribe(params => { this.idNotification = +params['idNotification']; });
   }
 
 }

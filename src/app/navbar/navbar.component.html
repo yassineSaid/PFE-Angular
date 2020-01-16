@@ -1,10 +1,7 @@
 <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
   <div class="text-center navbar-brand-wrapper d-flex align-items-top justify-content-center">
-    <a class="navbar-brand brand-logo" href="index.html">
-      <img src="assets/images/logo.svg" alt="logo" />
-    </a>
-    <a class="navbar-brand brand-logo-mini" href="index.html">
-      <img src="assets/images/logo-mini.svg" alt="logo" />
+    <a class="navbar-brand brand-logo" href="/dashboard" *ngIf="image!==null">
+      <img [src]="show()" alt="logo"/>
     </a>
   </div>
   <div class="navbar-menu-wrapper d-flex align-items-center">
@@ -25,57 +22,12 @@
     </ul>
     <ul class="navbar-nav navbar-nav-right">
       <li class="nav-item dropdown" ngbDropdown>
-        <a class="nav-link count-indicator dropdown-toggle" id="sheetNotify" ngbDropdownToggle>
-          <i class="mdi mdi-file-document-box"></i>
-          <span class="count">7</span>
-        </a>
-        <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" ngbDropdownMenu aria-labelledby="sheetNotify">
-          <div class="dropdown-item">
-            <p class="mb-0 font-weight-normal float-left">You have 7 unread mails
-            </p>
-            <span class="badge badge-info badge-pill float-right cursor-pointer" routerLink="sheet/notify">View all</span>
-          </div>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item preview-item">
-            <div class="preview-item-content flex-grow">
-              <h6 class="preview-subject font-weight-medium">Sheet PFE
-                <span class="float-right font-weight-light small-text">1 Minutes ago</span>
-              </h6>
-              <p class="font-weight-light small-text">
-                Update sheet
-              </p>
-            </div>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item preview-item cursor-pointer" routerLink="sheet/1">
-            <div class="preview-item-content flex-grow">
-              <h6 class="preview-subject font-weight-medium">Tim Cook
-                <span class="float-right font-weight-light small-text">15 Minutes ago</span>
-              </h6>
-              <p class="font-weight-light small-text">
-                New product launch
-              </p>
-            </div>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item preview-item">
-            <div class="preview-item-content flex-grow">
-              <h6 class="preview-subject  font-weight-medium"> Johnson
-                <span class="float-right font-weight-light small-text">18 Minutes ago</span>
-              </h6>
-              <p class="font-weight-light small-text">
-                Upcoming board meeting
-              </p>
-            </div>
-          </a>
-        </div>
-      </li>
-      <li class="nav-item dropdown" ngbDropdown>
         <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" ngbDropdownToggle>
           <i class="mdi mdi-file-document-box"></i>
           <span class="count">7</span>
         </a>
-        <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" ngbDropdownMenu aria-labelledby="messageDropdown">
+        <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" ngbDropdownMenu
+          aria-labelledby="messageDropdown">
           <div class="dropdown-item">
             <p class="mb-0 font-weight-normal float-left">You have 7 unread mails
             </p>
@@ -128,56 +80,33 @@
       <li class="nav-item dropdown" ngbDropdown>
         <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" ngbDropdownToggle>
           <i class="mdi mdi mdi-bell"></i>
-          <span class="count">4</span>
+          <span class="count">{{nombre}}</span>
         </a>
-        <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" ngbDropdownMenu aria-labelledby="notificationDropdown">
+        <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" ngbDropdownMenu
+          aria-labelledby="notificationDropdown">
           <a class="dropdown-item">
-            <p class="mb-0 font-weight-normal float-left">You have 4 new notifications
+            <p class="mb-0 font-weight-normal float-left">You have {{ nombre }} new notifications
             </p>
-            <span class="badge badge-pill badge-warning float-right">View all</span>
+
+            <span class="badge badge-pill badge-warning float-right" routerLink="soutenanceNonNote">View all</span>
           </a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item preview-item">
-            <div class="preview-thumbnail">
-              <div class="preview-icon bg-success">
-                <i class="mdi mdi-alert-circle-outline mx-0"></i>
+          <div *ngFor="let notif of notification">
+            <a class="dropdown-item preview-item" routerLink="soutenanceNonNote">
+              <div class="preview-thumbnail">
+                <div class="preview-icon bg-success">
+                  <i class="mdi mdi-alert-circle-outline mx-0"></i>
+                </div>
               </div>
-            </div>
-            <div class="preview-item-content">
-              <h6 class="preview-subject font-weight-medium">Application Error</h6>
-              <p class="font-weight-light small-text">
-                Just now
-              </p>
-            </div>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item preview-item">
-            <div class="preview-thumbnail">
-              <div class="preview-icon bg-warning">
-                <i class="mdi mdi-tune-vertical mx-0"></i>
+              <div class="preview-item-content">
+                <h6 class="preview-subject font-weight-medium">{{ notif[1]}}</h6>
+                <p class="font-weight-light small-text">
+                  Today
+                </p>
+
               </div>
-            </div>
-            <div class="preview-item-content">
-              <h6 class="preview-subject font-weight-medium">Settings</h6>
-              <p class="font-weight-light small-text">
-                Private message
-              </p>
-            </div>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item preview-item">
-            <div class="preview-thumbnail">
-              <div class="preview-icon bg-info">
-                <i class="mdi mdi-email-outline mx-0"></i>
-              </div>
-            </div>
-            <div class="preview-item-content">
-              <h6 class="preview-subject font-weight-medium">New user registration</h6>
-              <p class="font-weight-light small-text">
-                2 days ago
-              </p>
-            </div>
-          </a>
+            </a>
+          </div>
         </div>
       </li>
       <li class="nav-item dropdown d-none d-xl-inline-block" ngbDropdown>
@@ -214,7 +143,8 @@
         </div>
       </li>
     </ul>
-    <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" (click)="toggleOffcanvas()">
+    <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
+      (click)="toggleOffcanvas()">
       <span class="mdi mdi-menu"></span>
     </button>
   </div>

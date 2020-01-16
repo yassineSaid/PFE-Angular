@@ -1,9 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
 import { AdminsService } from './admins.service';
 import { Admin } from '../Models/admin';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Error } from '../Models/error';
+import { EventEmitter } from 'events';
 
 @Component({
   selector: 'app-admins',
@@ -26,7 +27,15 @@ export class AdminsComponent implements OnInit {
   openForm() {
     const modal = this.modalService.open(NgbdModalAdmin);
     //modal.componentInstance.update=true;
-
+    modal.result.then((added) => {
+      if (added === "added") {
+        this.loading = true;
+        this.adminsService.getAll().subscribe(success => {
+          this.admins = success;
+          this.loading = false;
+        })
+      }
+    })
   }
 
 }
@@ -84,12 +93,12 @@ export class NgbdModalAdmin {
   //@Input() update:Boolean;
   //@Input() admin:Admin;
   adminForm: FormGroup;
-  nomErrors:Error[]=[];
-  prenomErrors:Error[]=[];
-  emailErrors:Error[]=[];
-  passwordErrors:Error[]=[];
-  errors:Error[]=[];
-  loading=false;
+  nomErrors: Error[] = [];
+  prenomErrors: Error[] = [];
+  emailErrors: Error[] = [];
+  passwordErrors: Error[] = [];
+  errors: Error[] = [];
+  loading = false;
   constructor(public modal: NgbActiveModal, private formBuilder: FormBuilder, private adminsService: AdminsService) {
     this.initForm();
   }
@@ -117,23 +126,23 @@ export class NgbdModalAdmin {
     return this.adminForm.get("password");
   }
   confirmer() {
-    this.loading=true;
+    this.loading = true;
     this.adminsService.ajouter(this.nom.value, this.prenom.value, this.email.value, this.password.value).subscribe(
       success => {
         console.log(success);
-        this.modal.dismiss();
+        this.modal.close("added");
       },
       error => {
         console.log(error);
-        this.errors=error.error;
-        this.nomErrors=this.errors.filter(e=>e.propertyPath==="nom");
-        this.prenomErrors=this.errors.filter(e=>e.propertyPath==="prenom");
-        this.emailErrors=this.errors.filter(e=>e.propertyPath==="email");
-        this.passwordErrors=this.errors.filter(e=>e.propertyPath==="plainPassword");
-        this.loading=false;
+        this.errors = error.error;
+        this.nomErrors = this.errors.filter(e => e.propertyPath === "nom");
+        this.prenomErrors = this.errors.filter(e => e.propertyPath === "prenom");
+        this.emailErrors = this.errors.filter(e => e.propertyPath === "email");
+        this.passwordErrors = this.errors.filter(e => e.propertyPath === "plainPassword");
+        this.loading = false;
       },
       () => {
-        this.loading=false;
+        this.loading = false;
       }
     )
   }

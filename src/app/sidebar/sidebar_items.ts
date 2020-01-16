@@ -1,4 +1,4 @@
-import { Roles } from "../Models/roles";
+import {Roles} from '../Models/roles';
 
 export const items = [
     {
@@ -12,8 +12,35 @@ export const items = [
         path: "/admins",
         title: "Administrateurs",
         icon: "menu-icon fa fa-user-o",
-        roles: Roles.SuperAdmin,
+        roles: [Roles.SuperAdmin],
         queryParams: ""
+    },
+    {
+        path: "/ecole",
+        title: "Ecole",
+        icon: "menu-icon fa fa-institution",
+        roles: [Roles.Admin],
+        queryParams: ""
+    },
+    {
+        path: "/sites",
+        title: "Sites",
+        icon: "menu-icon fa fa-building",
+        roles: [Roles.Admin],
+        queryParams: ""
+    },
+    {
+        path: "/enseignants",
+        title: "Enseignants",
+        icon: "menu-icon fa fa-user-o",
+        roles: [Roles.Admin],
+        queryParams: ""
+    },
+    {
+        path: '/soutenanceNonNote',
+        title: 'Suivi',
+        icon: 'menu-icon fa fa-file-text-o',
+        roles: 'All'
     },
     {
         path: "/forms",
@@ -66,57 +93,73 @@ export const items = [
     },
     {
         path: "/sheet",
-        title: "Sheet PFE",
+        title: "Fiche PFE",
         icon: "menu-icon fa fa-file-text-o",
-        roles: "All",
+        roles: [Roles.DirecteurDesStages, Roles.Enseignant, Roles.Etudiant],
         queryParams: ""
     },
     {
         path: "/sheet",
-        title: "Accepted",
+        title: "Fiche accepter",
         icon: "menu-icon fa fa-file-text-o",
-        roles: "All",
+        roles: [Roles.ChefDeDepartement],
         queryParams: { q: '_accepted' }
     },
     {
         path: "/sheet",
-        title: "Encadreur assignment",
+        title: "Attente d'encadreur",
         icon: "menu-icon fa fa-file-text-o",
-        roles: "All",
+        roles: [Roles.ChefDeDepartement],
         queryParams: { q: '_encadreur' }
     },
     {
         path: "/sheet",
-        title: "Rapporteur assignment",
+        title: "Attente de rapporteur",
         icon: "menu-icon fa fa-file-text-o",
-        roles: "All",
+        roles: [Roles.ChefDeDepartement],
         queryParams: { q: '_rapporteur' }
     },
     {
         path: "/sheet",
-        title: "Note",
+        title: "Attente de note",
         icon: "menu-icon fa fa-file-text-o",
-        roles: "All",
+        roles: [Roles.ChefDeDepartement, Roles.Enseignant],
         queryParams: { q: '_note' }
     },
     {
         path: "/sheet",
-        title: "Defense planning",
+        title: "Attente de planification",
         icon: "menu-icon fa fa-file-text-o",
-        roles: "All",
+        roles: [Roles.DirecteurDesStages],
         queryParams: { q: '_planning' }
     },
-  {
-    path: "/soutenanceNonNote",
-    title: "soutenance",
-    icon: "menu-icon fa fa-file-text-o",
-    roles: "All"
-  },
+
+    {
+        path: "/sheet",
+        title: "Modification majeur",
+        icon: "menu-icon fa fa-file-text-o",
+        roles: [Roles.Enseignant],
+        queryParams: { q: '_modify' }
+    },
+
+    {
+      path: '/soutenanceNonNote',
+      title: 'Suivi',
+      icon: 'menu-icon fa fa-file-text-o',
+      roles: 'All'
+    },
+
+    {
+        path: "etudiant/nosheet",
+        title: "Etudiant sans fiche pfe",
+        icon: "menu-icon fa fa-file-text-o",
+        roles: [Roles.DirecteurDesStages]
+    },
     {
         path: "/internship",
-        title: "Internship agreement",
+        title: "Convention de stage",
         icon: "menu-icon fa fa-address-card-o",
-        roles: "All",
+        roles: [Roles.DirecteurDesStages, Roles.Etudiant],
         queryParams: ""
     },
     {
@@ -168,12 +211,12 @@ export const items = [
         roles: "All",
         queryParams: ""
     },
-  {
-    path: "/categorie",
-    title: "Categorie",
-    icon: "menu-icon mdi mdi-content-copy",
-    roles: "All",
-  },
+    {
+        path: "/categorie",
+        title: "Categorie",
+        icon: "menu-icon mdi mdi-content-copy",
+        roles: "All",
+    },
     {
         path: "/forum",
         title: "Forum",

@@ -27,7 +27,7 @@ import { TooltipsComponent } from './tooltips/tooltips.component';
 import { CarouselComponent } from './carousel/carousel.component';
 import { TabsComponent } from './tabs/tabs.component';
 import { LoginComponent } from './login/login.component';
-import { HttpClientModule, HttpClient} from '@angular/common/http';
+import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { SheetpfeComponent } from './sheetpfe/sheetpfe.component';
 import { ShowSheetpfeComponent } from './sheetpfe/show-sheetpfe/show-sheetpfe.component';
@@ -49,13 +49,15 @@ import { CategorieComponent } from './categorie/categorie.component';
 import { ReponseComponent } from './reponse/reponse.component';
 import { AdminsComponent, NgbdModalAdmin } from './admins/admins.component';
 import {DatePipe} from '@angular/common';
+
+
 import { NoteSheetpfeComponent } from './sheetpfe/note-sheetpfe/note-sheetpfe.component';
 
 import { ReclamationDisplayComponent } from './soutenance-component/reclamation-display/reclamation-display.component';
 
 import {FullCalendarModule} from 'primeng/fullcalendar';
 
-import { SoutenanceComponent, DialogOverviewExampleDialog } from './soutenance/soutenance.component';
+import {  DialogOverviewExampleDialog } from './soutenance/soutenance.component';
 
 import {
   MatAutocompleteModule,
@@ -67,7 +69,6 @@ import {
   MatCheckboxModule,
   MatChipsModule,
   MatDatepickerModule,
-  MatDialogModule,
   MatDividerModule,
   MatExpansionModule,
   MatGridListModule,
@@ -88,7 +89,6 @@ import {
   MatSnackBarModule,
   MatSortModule,
   MatStepperModule,
-  MatTableModule,
   MatTabsModule,
   MatToolbarModule,
   MatTooltipModule,
@@ -96,6 +96,33 @@ import {
 } from '@angular/material';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { StatsComponent } from './stats/stats.component';
+import { SoutenanceComponent } from './soutenance/soutenance.component';
+import { EtudiantnosheetComponent } from './sheetpfe/etudiantnosheet/etudiantnosheet.component';
+import { NotificationRSComponent } from './soutenance-component/notification-rs/notification-rs.component';
+import { ModifySheetpfeComponent } from './sheetpfe/modify-sheetpfe/modify-sheetpfe.component';
+
+import { EcoleComponent } from './ecole/ecole.component';
+import { DepartementsComponent, NgbdModalDepartement } from './departements/departements.component';
+import { SpecialitesComponent, NgbdModalSpecialite } from './specialites/specialites.component';
+import { TokenInterceptor } from './login/TokenInterceptor';
+import { ClassesComponent } from './classes/classes.component';
+import { EnseignantsComponent, NgbdModalEnseignant, NgbdModalDirecteur } from './enseignants/enseignants.component';
+import {AngularMultiSelectModule} from 'angular2-multiselect-dropdown';
+import { UploadSheetpfeComponent } from './sheetpfe/upload-sheetpfe/upload-sheetpfe.component';
+import {AngularPaginatorModule} from 'angular-paginator';
+import {NgxSpinnerModule} from 'ngx-spinner';
+
+
+import { EtudiantsComponent, NgbdModalEtudiant } from './etudiants/etudiants.component';
+import { SiteModule } from './siteModule/siteModule.module';
+import { NgbdModalSite } from './siteModule/sites/sites.component';
+import { MatTableModule } from '@angular/material';
+
+import {ChartsModule} from 'ng2-charts';
+import { MatDialogModule } from '@angular/material/dialog';
+
+
+
 
 
 
@@ -151,6 +178,37 @@ import { StatsComponent } from './stats/stats.component';
     
     
  ],
+    NgbdModalDepartement,
+    NgbdModalSpecialite,
+    NgbdModalEnseignant,
+    NgbdModalDirecteur,
+    NgbdModalEtudiant,
+
+    ReclamationDisplayComponent,
+
+    SoutenanceComponent,
+
+    EtudiantnosheetComponent,
+
+    NotificationRSComponent,
+
+    ModifySheetpfeComponent,
+
+    EcoleComponent,
+
+    DepartementsComponent,
+
+    SpecialitesComponent,
+    UploadSheetpfeComponent,
+    ClassesComponent,
+
+    EnseignantsComponent,
+
+    EtudiantsComponent,
+    NgbdModalSite,
+
+  ],
+
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -201,12 +259,32 @@ import { StatsComponent } from './stats/stats.component';
 
     
     
+    MatDialogModule,
+    AngularMultiSelectModule,
+    ChartsModule,
+    AngularPaginatorModule,
+    NgxSpinnerModule,
+    MatTableModule
+
+    /*BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    CommonModule,
+    ToastrModule.forRoot({
+      timeOut: 10000,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true, }),*/
   ],
   providers: [
     HttpClient,
     FormBuilder,
     CookieService,
-    DatePipe
+    DatePipe,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent],
   entryComponents: [
@@ -214,7 +292,16 @@ import { StatsComponent } from './stats/stats.component';
     ValidSheetpfeComponent,
     NoteSheetpfeComponent,
     NgbdModalAdmin,
-    DialogOverviewExampleDialog
+    DialogOverviewExampleDialog,
+    ReclamationComponent,
+    NgbdModalDepartement,
+    UploadSheetpfeComponent,
+    NgbdModalSpecialite,
+    NgbdModalEnseignant,
+    NgbdModalDirecteur,
+    NgbdModalEtudiant,
+    NgbdModalSite
+
   ],
 })
 export class AppModule { }
